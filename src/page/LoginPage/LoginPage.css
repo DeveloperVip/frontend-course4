@@ -1,0 +1,139 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #4b2354;
+    /* Màu nền tím đậm */
+}
+
+/* .login-container {
+    display: flex;
+    justify-content: space-between;
+    
+    align-items: center;
+    
+    width: 100%;
+  
+    max-width: 1200px;
+    
+    padding: 0 20px;
+    
+  
+    
+} */
+
+.login-box,
+.teack-box {
+    flex: 1;
+    /* Phần tử sẽ chiếm hết không gian có sẵn */
+   height: 500px;
+    box-sizing: border-box;
+    /* Đảm bảo padding được tính vào kích thước */
+    
+}
+.other-options {
+    background-color: #b0b9ce;
+    
+  
+    text-align: center;
+    
+}
+.other-options button {
+    background-color: #d6afe7;
+    color: purple;
+}
+.login-box p{
+    text-align: center;
+    
+}
+.login-box {
+    background-color: white;
+
+    
+    width: 600px;
+    height: 500px;
+    /* Đường viền cong */
+    
+  
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Đổ bóng */
+    border-radius: 8px 0 0 8px;
+    
+}
+.login-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* Khoảng cách giữa các nút */
+}
+
+.login-btn {
+    display: flex;
+    width: 450px;
+    align-items: center;
+    padding: 10px 20px;
+   
+   
+    box-sizing: border-box;
+    
+}
+.aicons {
+    display: flex;
+    /* Sử dụng Flexbox để các phần tử con trong .aicons hiển thị trên cùng một hàng */
+    justify-content: space-around;
+    /* Căn các phần tử con đều nhau theo chiều ngang */
+    align-items: center;
+    /* Căn các phần tử con vào giữa theo chiều dọc */
+    padding: 10px;
+    /* Điều chỉnh padding nếu cần thiết */
+    
+}
+
+.aicons p {
+    margin: 0;
+    /* Loại bỏ margin mặc định của thẻ p */
+}
+
+.aicons>* {
+    margin: 0 5px;
+    /* Khoảng cách giữa các biểu tượng */
+}
+.login-btn > *:last-child {
+  margin-left: 210px; /* Khoảng cách giữa chữ và icon */
+
+}
+.google {
+    background-color: #db4437;
+    color: white;
+    text-align: left;
+}
+
+.email {
+    background-color: #4688f1;
+    color: white;
+    text-align: left;
+}
+
+.facebook {
+    background-color: #3b5998;
+    color: white;
+    text-align: left;
+}
+
+.teack-box {
+   
+}
+.teack-box img {
+   width: 300px;
+   height: 100%;
+
+}
+.logo2 {
+    max-width: 100%;
+    /* Ảnh sẽ không vượt quá kích thước phần tử cha */
+    height: auto;
+    /* Đảm bảo tỷ lệ khung hình không bị thay đổi */
+}
