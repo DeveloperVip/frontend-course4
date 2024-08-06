@@ -1,4 +1,3 @@
-import React from "react";
 import "./LoginPage.css";
 import { VscArrowRight } from "react-icons/vsc";
 import { FcGoogle } from "react-icons/fc";
@@ -13,7 +12,7 @@ const LoginPage = () => {
       <div className="login-box">
         <h2 style={{ fontSize: "33px" }}>Chào mừng đến với Quizizz</h2>
         <h3>Tạo tài khoản miễn phí trong 2 bước</h3>
-        <button className="login-btn google">
+        <button className="login-btn google" >
           <FcGoogle /> Tiếp tục với Google <VscArrowRight />
         </button>
         <button className="login-btn email">
