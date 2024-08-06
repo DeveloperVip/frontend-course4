@@ -1,139 +1,158 @@
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}   
+.topa{
+    display: flex;
+    
+}
+
+.topa img.a {
+    height: 55px;
+   
+    position: absolute;
+    
+    top: 0px;
+    
+    left: 0px;
+    
+}
+
+
+
+
+body,
+html {
+    height: 100%;
+    width: 100%;
     font-family: Arial, sans-serif;
+    
+}
+
+body {
+    
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    margin: 0;
+    background: purple;
+}
+
+.login-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #4b2354;
-    /* Màu nền tím đậm */
-}
-
-/* .login-container {
-    display: flex;
-    justify-content: space-between;
-    
-    align-items: center;
-    
-    width: 100%;
-  
     max-width: 1200px;
     
-    padding: 0 20px;
+    margin: 20px;
     
-  
-    
-} */
+}
 
-.login-box,
-.teack-box {
-    flex: 1;
-    /* Phần tử sẽ chiếm hết không gian có sẵn */
-   height: 500px;
-    box-sizing: border-box;
-    /* Đảm bảo padding được tính vào kích thước */
-    
-}
-.other-options {
-    background-color: #b0b9ce;
-    
-  
-    text-align: center;
-    
-}
-.other-options button {
-    background-color: #d6afe7;
-    color: purple;
-}
-.login-box p{
-    text-align: center;
-    
-}
 .login-box {
     background-color: white;
-
-    
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
     width: 600px;
     height: 500px;
-    /* Đường viền cong */
+    border-radius: 8px 0 0 8px
     
-  
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    /* Đổ bóng */
-    border-radius: 8px 0 0 8px;
+    
+    
     
 }
-.login-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    /* Khoảng cách giữa các nút */
+.login-box h2{
+    color: black;
+    font-size: 30px;
+}
+.login-image-container {
+   
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 500px;
+    
 }
 
-.login-btn {
-    display: flex;
-    width: 450px;
-    align-items: center;
-    padding: 10px 20px;
-   
-   
-    box-sizing: border-box;
-    
+.login-image {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    border-radius: 0 8px 8px 0
+
 }
-.aicons {
-    display: flex;
-    /* Sử dụng Flexbox để các phần tử con trong .aicons hiển thị trên cùng một hàng */
-    justify-content: space-around;
-    /* Căn các phần tử con đều nhau theo chiều ngang */
-    align-items: center;
-    /* Căn các phần tử con vào giữa theo chiều dọc */
+
+.login-button {
+    display: block;
+    width: 100%;
     padding: 10px;
-    /* Điều chỉnh padding nếu cần thiết */
-    
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
-.aicons p {
-    margin: 0;
-    /* Loại bỏ margin mặc định của thẻ p */
-}
-
-.aicons>* {
-    margin: 0 5px;
-    /* Khoảng cách giữa các biểu tượng */
-}
-.login-btn > *:last-child {
-  margin-left: 210px; /* Khoảng cách giữa chữ và icon */
-
-}
 .google {
-    background-color: #db4437;
+    background-color: #4285f4;
     color: white;
-    text-align: left;
 }
 
 .email {
-    background-color: #4688f1;
+    background-color: #fbbc05;
     color: white;
-    text-align: left;
 }
 
 .facebook {
     background-color: #3b5998;
     color: white;
-    text-align: left;
 }
 
-.teack-box {
-   
+.microsoft,
+.phone,
+.apple,
+.others {
+    background-color: #e0e0e0;
+    color: #333;
 }
-.teack-box img {
-   width: 300px;
-   height: 100%;
 
+.login-divider {
+    margin: 20px 0;
+    color: #888;
 }
-.logo2 {
-    max-width: 100%;
-    /* Ảnh sẽ không vượt quá kích thước phần tử cha */
-    height: auto;
-    /* Đảm bảo tỷ lệ khung hình không bị thay đổi */
+
+.other-login-options {
+    display: flex;
+    justify-content: space-between;
+}
+
+.register-link {
+    margin-top: 20px;
+    color: #4285f4;
+}
+
+.register-link a {
+    color: #4285f4;
+    text-decoration: none;
+}
+
+@media (max-width: 1200px) {
+    .login-container {
+        flex-direction: column;
+    }
+
+    .login-box {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .login-image-container {
+        width: 100%;
+    }
+
+    .login-image {
+        width: 100%;
+    }
 }
