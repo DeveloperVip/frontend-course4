@@ -1,0 +1,29 @@
+.slide-preview{
+    transition: all .5s ease-in-out;
+}
+.v-popper--has-tooltip{
+    background-color: transparent;
+    background-image: none;
+}
+.slide-preview-container {
+    width: 12.5rem;
+    height: 7rem;
+}
+.bg-red-faded {
+    --tw-bg-opacity: 1;
+    background-color: rgba(252, 219, 227, var(--tw-bg-opacity));
+}
+.z-1{
+    z-index: 1;
+}
+.bg-light-10\% {
+    background-color: #ffffff1a;
+}
+.bg-dark-2 {
+    --tw-bg-opacity: 1;
+    background-color: rgba(34, 34, 34, var(--tw-bg-opacity));
+}
+.bg-dark-3 {
+    --tw-bg-opacity: 1;
+    background-color: rgba(66, 66, 66, var(--tw-bg-opacity));
+}

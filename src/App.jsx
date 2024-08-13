@@ -1,16 +1,42 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LoginPage from "./page/LoginPage/LoginPage";
-import MainPage from "./page/MainPage/MainPage";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import { publicRoutes } from "./routes/routes.js";
+import PublicRoutes from "./routes/publicRoutes/publicRoutes.jsx";
+import Layout from "./components/Layout/Layout.jsx";
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/main" element={<MainPage />} />
+        <Route element={<PublicRoutes />}>
+          {publicRoutes.map((item, index) => {
+            const Component = item.component
+            if (item.layout)
+              return (
+                <Route element={<Layout />} key={index}>
+                  <Route
+                    path={item.path}
+                    element={
+                      <Component />
+                    }
+                    key={index}
+                  />
+                  </Route>
+              );
+            return (
+              <Route
+                path={item.path}
+                element={<Component />}
+                key={index}
+              />
+            );
+          })}{" "}
+        </Route>
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 
