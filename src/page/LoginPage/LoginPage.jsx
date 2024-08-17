@@ -1,7 +1,13 @@
 // import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
+import { FaFacebook } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
+import { FaGoogle } from "react-icons/fa";
 
+import { BsMicrosoft } from "react-icons/bs";
+import { FaPhoneSquareAlt } from "react-icons/fa";
+import { SiApple } from "react-icons/si";
 const LoginPage = () => {
   const navigate = useNavigate();
 
@@ -13,7 +19,6 @@ const LoginPage = () => {
   return (
     <div className="topa">
       <img src="/1a.png" alt="logo Visual" className="a" />
-      
 
       <div className="login-container">
         <div className="login-box">
@@ -22,18 +27,21 @@ const LoginPage = () => {
             onClick={() => handleLogin("Google")}
             className="login-button google"
           >
+            <FaGoogle />
             Tiếp tục với Google
           </button>
           <button
             onClick={() => handleLogin("Email")}
             className="login-button email"
           >
+            <MdEmail />
             Tiếp tục với Email
           </button>
           <button
             onClick={() => handleLogin("Facebook")}
             className="login-button facebook"
           >
+            <FaFacebook />
             Tiếp tục với Facebook
           </button>
           <div className="login-divider">hoặc tiếp tục với</div>
@@ -42,19 +50,19 @@ const LoginPage = () => {
               onClick={() => handleLogin("Microsoft")}
               className="login-button microsoft"
             >
-              Microsoft
+              <BsMicrosoft />
             </button>
             <button
               onClick={() => handleLogin("Phone")}
               className="login-button phone"
             >
-              Phone
+              <FaPhoneSquareAlt />
             </button>
             <button
               onClick={() => handleLogin("Apple")}
               className="login-button apple"
             >
-              Apple
+              <SiApple />
             </button>
             <button
               onClick={() => handleLogin("Others")}

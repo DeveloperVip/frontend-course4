@@ -8,6 +8,7 @@ import PublicRoutes from "./routes/publicRoutes/publicRoutes.jsx";
 import Layout from "./components/Layout/Layout.jsx";
 
 function App() {
+  
   return (
     <BrowserRouter>
       <Routes>

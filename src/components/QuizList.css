@@ -2,15 +2,14 @@
     display: flex;
     flex-wrap: wrap;
     /* Cho phép các phần tử xuống hàng khi không còn đủ không gian */
-    gap: 10px;
+    gap: 20px;
     /* Khoảng cách giữa các phần tử */
     justify-content: center;
     /* Căn giữa các phần tử trong hàng */
 }
 
 .quiz-item {
-    flex: 1 1 calc(25% - 10px);
-    /* Mỗi item chiếm khoảng 25% chiều rộng container trừ đi khoảng cách */
+     
     box-sizing: border-box;
     /* Đảm bảo padding và border không làm tăng kích thước tổng cộng */
     text-align: center;
@@ -21,7 +20,7 @@
 .quiz-image {
     width: 100%;
     /* Kích thước chiều rộng của ảnh chiếm toàn bộ phần tử chứa */
-    height: 50px;
+    height: 200px;
     /* Để chiều cao tự động giữ tỷ lệ */
    
 }
