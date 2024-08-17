@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./RegisterPage.css";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../../services/axios";
 const Register = () => {
   const navigate= useNavigate();
   const initialValue = {
@@ -18,7 +18,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(state);
-    const data = await axios.post("http://localhost:8000/user/create-user", {
+    const data = await axiosInstance.post("/user/create-user", {
       ...state,
     });
     console.log("🚀 ~ handleSubmit ~ data:", data)

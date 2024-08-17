@@ -1,0 +1,62 @@
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #090909cc;
+  transition: opacity 0.3s ease;
+}
+
+.modal-container {
+  height: fit-content;
+  max-height: calc(100vh - 62px);
+}
+
+.modal-body {
+  z-index: 10002;
+}
+
+.modal-content {
+  max-height: calc(100vh - 262px);
+}
+
+.profile-layout {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: max-content 100%;
+  grid-gap: 16px;
+  width: 100%;
+  min-width: 1280px;
+}
+
+.main-content {
+  grid-area: content;
+}
+
+.bg-light-1 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(242, 242, 242, var(--tw-bg-opacity));
+}
+.edit-btn {
+  position: absolute !important;
+}
+.bg-light {
+  --tw-bg-opacity: 1;
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+}
+.bg-light-2 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(249, 249, 249, var(--tw-bg-opacity));
+}
+.memesets-layout.desktop {
+  grid-gap: 16px;
+}
+.memesets-layout {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: max-content;
+  width: 100%;
+}

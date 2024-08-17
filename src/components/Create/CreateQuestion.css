@@ -1,0 +1,67 @@
+.bg-purple {
+    --tw-bg-opacity: 1;
+    background-color: rgba(70, 26, 66, var(--tw-bg-opacity));
+}
+.bg-dark-6 {
+    --tw-bg-opacity: 1;
+    background-color: rgba(229, 229, 229, var(--tw-bg-opacity));
+}
+#question-editor-container #question-editor-main {
+    display: grid;
+    grid-area: main;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: max-content minmax(0px, 1fr);
+    height: 100%;
+    gap: 0px 16px;
+    width: 100%;
+}
+#question-editor-container #question-editor-main #question-editor-content-inner {
+    align-self: center;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+    width: 100%;
+    overflow: auto;
+    max-width: 1280px;
+    margin: auto;
+}
+.bg-brand-a {
+    --tw-bg-opacity: 1;
+    background-color: rgba(45, 112, 174, var(--tw-bg-opacity));
+}
+.bg-brand-b {
+    --tw-bg-opacity: 1;
+    background-color: rgba(45, 157, 166, var(--tw-bg-opacity));}
+.bg-brand-c {
+    --tw-bg-opacity: 1;
+    background-color: rgba(239, 169, 41, var(--tw-bg-opacity));}
+
+.bg-brand-d {
+    --tw-bg-opacity: 1;
+    background-color: rgba(213, 84, 109, var(--tw-bg-opacity));
+}
+.bg-brand-e {
+    --tw-bg-opacity: 1;
+    background-color: rgba(154, 66, 146, var(--tw-bg-opacity));
+}
+.text-light-3 {
+    --tw-text-opacity: 1;
+    color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+.bg-light-20\% {
+    background-color: #fff3;
+}
+.bg-light-3 {
+    --tw-bg-opacity: 1;
+    background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+}
+.z-on-overlay {
+    z-index: 10005;
+}
+.dropdown-limit[data-v-6f5fb931] {
+    max-height: 70vh;
+}
+.text-dark-2 {
+    --tw-text-opacity: 1;
+    color: rgba(34, 34, 34, var(--tw-text-opacity));
+}
