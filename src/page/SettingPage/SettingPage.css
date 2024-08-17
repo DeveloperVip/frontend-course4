@@ -1,0 +1,18 @@
+.settings-layout-desktop {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-gap: 16px;
+  width: 100%;
+  max-width: 1280px;
+}
+.main-content {
+  grid-area: content;
+}
+.settings-layout-desktop .settings-container.desktop {
+  grid-column: 4 / 10;
+}
+.settings-container {
+  border-top: 6px solid #381535;
+  box-shadow: 0 1px 3px #0000001a, 0 4px 6px #0000001c;
+}

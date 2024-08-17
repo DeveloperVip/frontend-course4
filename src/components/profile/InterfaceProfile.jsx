@@ -1,5 +1,5 @@
 // import React from 'react'
-import { FaBook, FaGraduationCap, FaShare } from "react-icons/fa6";
+import { FaBook, FaCamera, FaGraduationCap, FaShare } from "react-icons/fa6";
 import { FaRegEdit } from "react-icons/fa";
 import EditProfile from "./EditProfile";
 import MemeProfile from "./MemeProfile";
@@ -7,6 +7,9 @@ import LibraryProfile from "./LibraryProfile";
 import Collections from "./Collections";
 import { useState } from "react";
 const InterfaceProfile = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  console.log("🚀 ~ InterfaceProfile ~ isModalOpen:", isModalOpen)
+  const [selectedImage, setSelectedImage] = useState(null);
   const [change, setChange] = useState(1);
   const arrayTitle = ["Thư viện", "Bộ sưu tập", "Bộ Meme"];
   const handleChange = (e) => {
@@ -52,8 +55,8 @@ const InterfaceProfile = () => {
               <div className="flex justify-between p-6 relative">
                 <div className="flex">
                   <div className="w-32 h-32 relative bg-light-1 rounded-full flex justify-center items-center overflow-hidden">
-                    <div className="w-full h-full relative cursor-pointer">
-                      <div className="vi-image w-full h-full object-cover v-image">
+                    <div className="w-full h-full relative cursor-pointer z-50 hover:z-10 hover:hidden">
+                      <div className="vi-image w-full h-full object-cover v-image ">
                         <img
                           src="https://cf.quizizz.com/avatars/images/eyes4-nose7-mouth6-9A4292.png?w=200&h=200"
                           alt="Quiz image"
@@ -63,17 +66,19 @@ const InterfaceProfile = () => {
                       </div>
                     </div>
                     <div
-                      className="absolute flex flex-col justify-center items-center w-full h-full rounded-full overflow-hidden bg-dark-50%"
-                      style={{ display: "none" }}
+                      className="absolute flex flex-col justify-center items-center w-full h-full rounded-full overflow-hidden bg-dark-50% z-30"
+                      
                     >
-                      <i
+                      <FaCamera
                         className="fas fa-camera text-light"
                         style={{ fontSize: "36px" }}
                       />
                       <input
                         className="absolute inset-0 opacity-0 cursor-pointer w-full h-full rounded-full"
                         type="file"
-                        accept="image/*"
+                        onChange={(event) => {
+                          setSelectedImage(event.target.files[0]);
+                        }}
                       />
                     </div>
                   </div>
@@ -152,6 +157,7 @@ const InterfaceProfile = () => {
                     className="transition-colors duration-200 ease-in-out flex items-center justify-center px-4 py-1 text-sm font-semibold h-8 bg-light-3 border border-solid border-dark-6 text-dark-2 hover:bg-light-2 active:bg-light-1 rounded min-w-max"
                     aria-label="Edit Profile"
                     type="button"
+                    onClick={()=>setIsModalOpen(true)}
                   >
                     <FaRegEdit className="mr-2" style={{ fontSize: "12px" }} />
                     <span className="title" title="Edit Profile">
@@ -199,7 +205,8 @@ const InterfaceProfile = () => {
         <div id="app-body-teleport" className="z-20 absolute" />
       </div>
 
-      <EditProfile />
+      {isModalOpen? <EditProfile isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>:null}
+
     </div>
   );
 };

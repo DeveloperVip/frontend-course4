@@ -1,37 +1,99 @@
-import { FaUserEdit } from 'react-icons/fa'
-import { FaCaretDown } from 'react-icons/fa6'
+import { useState } from "react";
+import { FaUserEdit } from "react-icons/fa";
+import { FaCaretDown } from "react-icons/fa6";
 
-const EditProfile = () => {
+const EditProfile = ({isModalOpen,setIsModalOpen}) => {
+ 
+  const classLevels = [
+    "Lớp 1",
+    "Lớp 2",
+    "Lớp 3",
+    "Lớp 4",
+    "Lớp 5",
+    "Lớp 6",
+    "Lớp 7",
+    "Lớp 8",
+    "Lớp 9",
+    "Lớp 10",
+    "Lớp 11",
+    "Lớp 12",
+    "Đại học",
+    "Phát triển chuyên môn",
+    "Đào tạo nghề",
+  ];
+  const subjects = [
+    "Toán học",
+    "Văn học",
+    "Tiếng Anh",
+    "Vật lý",
+    "Hóa học",
+    "Sinh học",
+    "Lịch sử",
+    "Địa lý",
+    "Giáo dục công dân",
+    "Tin học",
+    "Thể dục",
+    "Nghệ thuật",
+    "Công nghệ",
+    "Âm nhạc",
+    "Mỹ thuật",
+    "Kỹ năng sống",
+  ];
+
+  // State để lưu trữ các mục đã chọn
+  const [selectedClasses, setSelectedClasses] = useState([]);
+  const [selectedSubjects, setSelectedSubjects] = useState([]);
+
+  // Hàm để chọn lớp
+  const handleClassSelection = (item) => {
+    setSelectedClasses((prevSelected) => {
+      // Nếu lớp đã được chọn thì bỏ chọn
+      if (prevSelected.includes(item)) {
+        return prevSelected.filter((selectedItem) => selectedItem !== item);
+      } else {
+        // Nếu lớp chưa được chọn thì thêm vào danh sách
+        return [...prevSelected, item];
+      }
+    });
+  };
+
+  // Hàm để chọn môn học
+  const handleSubjectSelection = (item) => {
+    setSelectedSubjects((prevSelected) => {
+      // Nếu môn học đã được chọn thì bỏ chọn
+      if (prevSelected.includes(item)) {
+        return prevSelected.filter((selectedItem) => selectedItem !== item);
+      } else {
+        // Nếu môn học chưa được chọn thì thêm vào danh sách
+        return [...prevSelected, item];
+      }
+    });
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div
-      data-v-9172539d
-      data-v-287c5438
       data-cy="modal-mask"
       translate="no"
       tabIndex={0}
       data-testid="modal-container"
-      className="modal-mask fixed top-0 left-0 h-screen w-screen bg-slate-400 z-overlay flex justify-center items-center pt-6 px-6 edit-profile-modal hidden"
+      className={`modal-mask fixed top-0 left-0 h-screen w-screen bg-slate-400 z-overlay flex justify-center items-center pt-6 px-6 edit-profile-modal ${isModalOpen?"":"hidden"}`}
       //   grades={13}
     >
       <div
-        data-v-8961280e
-        data-v-9172539d
         className="z-on-overlay modal-anim max-w-2xl p-6 pt-2 bg-white modal-container relative rounded-lg"
         data-cy="modal-container"
         type="default"
       >
-        <div
-          data-v-c8ed74a3
-          data-v-9172539d
-          className="modal-body relative rounded-lg bg-light-3 py-4"
-        >
-          <div
-            data-v-c8ed74a3
-            className="close-btn z-10 absolute top-1 right-0"
-          >
-            <button
+        <div className="modal-body relative rounded-lg bg-light-3 py-4">
+          <div className="close-btn z-10 absolute top-1 right-0">
+          <button
               type="button"
               className="transition-colors duration-200 ease-in-out flex flex items-center justify-center w-10 h-10 bg-transparent text-dark hover:bg-dark-10% active:bg-dark rounded-full transparent-floating-dark relative min-w-max"
+              onClick={closeModal} // Gán hàm đóng modal vào nút
             >
               <span className="sr-only">Đóng menu</span>
               {/* Heroicon name: outline/x */}
@@ -52,18 +114,10 @@ const EditProfile = () => {
               </svg>
             </button>
           </div>
-          <div
-            data-v-1ff992ab
-            data-v-9172539d
-            className="relative modal-header mb-4 px-4"
-          >
-            <div data-v-1ff992ab className="flex items-center"></div>
+          <div className="relative modal-header mb-4 px-4">
+            <div className="flex items-center"></div>
           </div>
-          <div
-            data-v-be5e7323
-            data-v-9172539d
-            className="px-4 modal-content overflow-y-auto"
-          >
+          <div className="px-4 modal-content overflow-y-auto">
             <div className="flex items-center">
               <div className="relative w-10 h-10 rounded-full bg-lilac-faded flex-grow flex-shrink-0">
                 <FaUserEdit className="w-10 h-10" />
@@ -123,18 +177,6 @@ const EditProfile = () => {
                         role="listbox"
                       >
                         <li
-                          id={16}
-                          data-cy=":"
-                          data-testid="title-select-edit-profile-modal-select-box-option-0"
-                          className="flex cursor-pointer border-b border-transparent p-2 hover:bg-dark"
-                          role="option"
-                          aria-selected="false"
-                        >
-                          <div className="text-dark-2">
-                            <div className="text-sm font-semibold">--</div>
-                          </div>
-                        </li>
-                        <li
                           id={17}
                           data-cy=":Mr."
                           data-testid="title-select-edit-profile-modal-select-box-option-1"
@@ -156,42 +198,6 @@ const EditProfile = () => {
                         >
                           <div className="text-dark">
                             <div className="text-sm font-semibold">Ms.</div>
-                          </div>
-                        </li>
-                        <li
-                          id={19}
-                          data-cy=":Mrs."
-                          data-testid="title-select-edit-profile-modal-select-box-option-3"
-                          className="flex cursor-pointer border-b border-transparent p-2 hover:bg-dark"
-                          role="option"
-                          aria-selected="false"
-                        >
-                          <div className="text-dark">
-                            <div className="text-sm font-semibold">Mrs.</div>
-                          </div>
-                        </li>
-                        <li
-                          id={20}
-                          data-cy=":Dr."
-                          data-testid="title-select-edit-profile-modal-select-box-option-4"
-                          className="flex cursor-pointer border-b border-transparent p-2 hover:bg-dark"
-                          role="option"
-                          aria-selected="false"
-                        >
-                          <div className="text-dark">
-                            <div className="text-sm font-semibold">Dr.</div>
-                          </div>
-                        </li>
-                        <li
-                          id={21}
-                          data-cy=":Mx."
-                          data-testid="title-select-edit-profile-modal-select-box-option-5"
-                          className="flex cursor-pointer border-transparent p-2 hover:bg-dark"
-                          role="option"
-                          aria-selected="false"
-                        >
-                          <div className="text-dark">
-                            <div className="text-sm font-semibold">Mx.</div>
                           </div>
                         </li>
                       </ul>
@@ -290,171 +296,25 @@ const EditProfile = () => {
               role="listbox"
               aria-multiselectable="true"
             >
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark hover:text-dark rounded-full selector relative min-w-max"
-                aria-label="1st"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="1st">
-                  Lớp 1
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark hover:text-dark rounded-full selector relative min-w-max"
-                aria-label="2nd"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="2nd">
-                  Lớp 2
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark hover:text-dark rounded-full selector relative min-w-max"
-                aria-label="3rd"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="3rd">
-                  Lớp 3
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark hover:text-dark rounded-full selector relative min-w-max"
-                aria-label="4th"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="4th">
-                  Lớp 4
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark hover:text-dark rounded-full selector relative min-w-max"
-                aria-label="5th"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="5th">
-                  Lớp 5
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark hover:text-dark rounded-full selector relative min-w-max"
-                aria-label="6th"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="6th">
-                  Lớp 6
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full selector relative min-w-max"
-                aria-label="7th"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="7th">
-                  Lớp 7
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full selector relative min-w-max"
-                aria-label="8th"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="8th">
-                  Lớp 8
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full selector relative min-w-max"
-                aria-label="9th"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="9th">
-                  Lớp 9
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full selector relative min-w-max"
-                aria-label="10th"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="10th">
-                  Lớp 10
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full selector relative min-w-max"
-                aria-label="11th"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="11th">
-                  Lớp 11
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full selector relative min-w-max"
-                aria-label="12th"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="12th">
-                  Lớp 12
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-lilac text-light-3 hover:bg-lilac-light rounded-full selector relative min-w-max"
-                aria-label="University"
-                type="button"
-                role="option"
-                aria-selected="true"
-              >
-                <span className="title" title="University">
-                  Đại học
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full selector relative min-w-max"
-                aria-label="Professional Development"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="Professional Development">
-                  Phát triển chuyên môn
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full selector relative min-w-max"
-                aria-label="Vocational training"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="Vocational training">
-                  Đào tạo nghề
-                </span>
-              </button>
+              {classLevels.map((item, index) => (
+                <button
+                  key={index}
+                  className={`transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 rounded-full selector relative min-w-max ${
+                    selectedClasses.includes(item)
+                      ? "bg-purple-500 text-white"
+                      : "bg-light-1 text-dark"
+                  }`}
+                  aria-label={item}
+                  type="button"
+                  role="option"
+                  aria-selected={selectedClasses.includes(item)}
+                  onClick={() => handleClassSelection(item)}
+                >
+                  <span className="title" title={item}>
+                    {item}
+                  </span>
+                </button>
+              ))}
             </div>
 
             <div className="inline-block text-xs text-dark mt-4 mb-2">
@@ -465,180 +325,25 @@ const EditProfile = () => {
               role="listbox"
               aria-multiselectable="true"
             >
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-lilac text-light-3 hover:bg-lilac-light rounded-full min-w-max"
-                aria-label="Mathematics"
-                type="button"
-                role="option"
-                aria-selected="true"
-              >
-                <span className="title" title="Mathematics">
-                  Toán  
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-lilac text-light-3 hover:bg-lilac-light rounded-full min-w-max"
-                aria-label="English"
-                type="button"
-                role="option"
-                aria-selected="true"
-              >
-                <span className="title" title="English">
-                  Tiếng Anh
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full min-w-max"
-                aria-label="World Languages"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="World Languages">
-                  Ngôn ngữ thế giới
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full min-w-max"
-                aria-label="Science"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="Science">
-                  Khoa học
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full min-w-max"
-                aria-label="Physics"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="Physics">
-                  Vật lý
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-lilac text-light-3 hover:bg-lilac-light rounded-full min-w-max"
-                aria-label="Chemistry"
-                type="button"
-                role="option"
-                aria-selected="true"
-              >
-                <span className="title" title="Chemistry">
-                  Hóa học
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full min-w-max"
-                aria-label="Biology"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="Biology">
-                  Sinh vật học
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full min-w-max"
-                aria-label="Social Studies"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="Social Studies">
-                  Khoa học xã hội
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full min-w-max"
-                aria-label="Geography"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="Geography">
-                  Địa lý
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full min-w-max"
-                aria-label="History"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="History">
-                  Lịch sử
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full min-w-max"
-                aria-label="Arts"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="Arts">
-                  Mỹ thuật
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-lilac text-light-3 hover:bg-lilac-light rounded-full min-w-max"
-                aria-label="Computers"
-                type="button"
-                role="option"
-                aria-selected="true"
-              >
-                <span className="title" title="Computers">
-                  Máy tính
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full min-w-max"
-                aria-label="Physical Ed"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="Physical Ed">
-                  Giáo dục thể chất
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full min-w-max"
-                aria-label="Fun"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="Fun">
-                  Hài 
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-light-1 text-dark-2 hover:text-dark rounded-full min-w-max"
-                aria-label="Professional Development"
-                type="button"
-                role="option"
-                aria-selected="false"
-              >
-                <span className="title" title="Professional Development">
-                  Phát triển chuyên môn
-                </span>
-              </button>
-              <button
-                className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 text-lilac hover:text-lilac-light active:text-lilac-dark bg-light-3 rounded-full min-w-max -mr-2"
-                aria-label="more..."
-                type="button"
-              >
-                <span className="title" title="more...">
-                  v.v
-                </span>
-              </button>
+              {subjects.map((item, index) => (
+                <button
+                  key={index}
+                  className={`transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 rounded-full min-w-max ${
+                    selectedSubjects.includes(item)
+                      ? "bg-purple-500 text-white"
+                      : "bg-lilac text-dark"
+                  }`}
+                  aria-label={item}
+                  type="button"
+                  role="option"
+                  aria-selected={selectedSubjects.includes(item)}
+                  onClick={() => handleSubjectSelection(item)}
+                >
+                  <span className="title" title={item}>
+                    {item}
+                  </span>
+                </button>
+              ))}
             </div>
 
             <div className="inline-block text-xs text-dark mt-4 mb-2 font-semibold">
@@ -647,10 +352,6 @@ const EditProfile = () => {
             <div className="relative w-full">
               <div className="relative">
                 <input
-                  id
-                  aria-describedby="input-error-message"
-                  aria-invalid="false"
-                  aria-required="false"
                   type="text"
                   className="focus:outline-none h-10 w-full py-2 text-sm placeholder-sm remove-number-selector pl-3 border border-solid border-dark rounded bg-light-3 text-dark-2 placeholder-dark-5 pr-2"
                   placeholder="Tên tổ chức"
@@ -688,7 +389,7 @@ const EditProfile = () => {
                   </span>
                 </button>
                 <button
-                  className="transition-colors duration-200 ease-in-out flex items-center justify-center px-4 py-1 text-sm font-semibold h-8 bg-lilac text-light-3 hover:bg-lilac-light active:bg-lilac-dark rounded min-w-max"
+                  className="transition-colors duration-200 ease-in-out flex items-center justify-center px-4 py-1 text-sm font-semibold h-8 bg-lilac text-dark hover:bg-lilac-light active:bg-lilac-dark rounded min-w-max"
                   aria-label="Save Changes"
                   type="button"
                 >
@@ -702,7 +403,7 @@ const EditProfile = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default EditProfile
+export default EditProfile;

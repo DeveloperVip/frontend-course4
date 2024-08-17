@@ -1,48 +1,43 @@
-import { useState } from "react";
 import "./TypeOfQuestion.css"
 
-const TypeOfQuestionx = () => {
-  const [click, setClick] = useState("single");
+const ToggleButton = ({ isActive, onClick, ariaLabel, title, children }) => (
+  <button
+    className={`transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 rounded relative min-w-max transform flex-1 ${
+      isActive ? "bg-light-20% text-white" : "bg-transparent text-light-3 hover:bg-slate-500"
+    }`}
+    aria-label={ariaLabel}
+    type="button"
+    onClick={onClick}
+    translate="no"
+  >
+    <span className="title" title={title}>
+      {children}
+    </span>
+  </button>
+);
 
-  const handleClick = (value) => {
-    setClick(value);
-  };
-
+const TypeOfQuestionx = ({ selectType, currentType }) => {
   return (
     <span
       className="bg-dark-50% p-0.5 text-light-66% flex md:w-fit rounded gap-0.5 w-full my-2"
       data-testid="mcq-editor-question-type-toggle"
     >
-      <button
-        data-v-1c8df6a0
-        className={`transition-colors duration-200 ease-in-out flex flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 transparent bg-light-20% text-light-3 hover:bg-slate-500 rounded transparent relative min-w-max transform flex-1 ${click === "single" ? "bg-light-20% text-white" : "bg-transparent"}`}
-        aria-label="Single correct answer"
-        type="button"
-        translate="no"
-        data-testid="toggle-button-group-btn-1-button"
-        onClick={() => handleClick("single")}
+      <ToggleButton
+        isActive={currentType === "single"}
+        onClick={() => selectType("single")}
+        ariaLabel="Single correct answer"
+        title="Single correct answer"
       >
-        <span data-v-1c8df6a0 className="title" title="Single correct answer">
-          Một câu trả lời đúng
-        </span>
-      </button>
-      <button
-        data-v-1c8df6a0
-        className={`transition-colors duration-200 ease-in-out flex flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-transparent text-light text-light-3 hover:bg-light-20% hover:bg-slate-500 rounded transparent-floating-light relative min-w-max transform flex-1 ${click === "multiple" ? "bg-light-20% text-white" : "bg-transparent"}`}
-        aria-label="Multiple correct answers"
-        type="button"
-        translate="no"
-        data-testid="toggle-button-group-btn-2-button"
-        onClick={() => handleClick("multiple")}
+        Một câu trả lời đúng
+      </ToggleButton>
+      <ToggleButton
+        isActive={currentType === "multiple"}
+        onClick={() => selectType("multiple")}
+        ariaLabel="Multiple correct answers"
+        title="Multiple correct answers"
       >
-        <span
-          data-v-1c8df6a0
-          className="title"
-          title="Multiple correct answers"
-        >
-          Nhiều lựa chọn đúng
-        </span>
-      </button>
+        Nhiều lựa chọn đúng
+      </ToggleButton>
     </span>
   );
 };
