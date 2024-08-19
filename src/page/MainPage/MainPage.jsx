@@ -2,118 +2,101 @@ import React from "react";
 import QuizList from "../../components/QuizList";
 import quizzes from "../../quizzes";
 import "./MainPage.css";
-import { VscArchive } from "react-icons/vsc";
-import { HiOutlinePlusCircle } from "react-icons/hi";
-import { FaAddressBook } from "react-icons/fa6";
-import { IoIosSettings } from "react-icons/io";
-import { MdLogout } from "react-icons/md";
+import { FaComputer } from "react-icons/fa6";
+import { MdLanguage } from "react-icons/md";
 import { FaBell } from "react-icons/fa6";
-import { FaStar } from "react-icons/fa6";
-import { GoArrowRight } from "react-icons/go";
-function MainPage() {
-  const filterByCategory = (category) =>
-    quizzes.filter((quiz) => quiz.category === category);
+
+import Footer from "../../components/footer/Footer";
+import { FaFolderOpen, FaSearch } from "react-icons/fa";
+import { BiMath } from "react-icons/bi";
+import { SiStudyverse } from "react-icons/si";
+import Dashboard from "../../components/Dashboard/Dashboard";
+
+// Component tái sử dụng cho danh sách quiz
+const QuizSection = ({ icon: Icon, title, category }) => {
+  const filteredQuizzes = quizzes.filter((quiz) => quiz.category === category);
 
   return (
+    <div>
+      <h2 className="pb-3 font-semibold text-dark-2 text-xl flex items-center gap-4">
+        <Icon className="flex justify-center" />
+        {title}
+      </h2>
+      <QuizList quizzes={filteredQuizzes} />
+    </div>
+  );
+};
+
+function MainPage() {
+  return (
     <div className="flex font-bold ">
-      <div className="h-screen bg-white text-black w-64 text-center">
-        <img src="/1a.png" alt="logo Visual" className="a" />
-        <button className="bg-purple-600 text-white w-52 ">
-          <HiOutlinePlusCircle /> Tạo mới
-        </button>
-        <h2 className="ah">
-          <VscArchive />
-          Khám phá
-        </h2>
-        <h2>
-          <FaAddressBook />
-          Báo cáo
-        </h2>
-        <h2>
-          <IoIosSettings />
-          Cài đặt
-        </h2>
+      <Dashboard />
+      <div className="h-screen overflow-auto text-black bg-gray-50 flex-1 ">
+        <div className="bg-purple-200 p-3 px-10">
+          <div className="flex justify-between relative ">
+            <div className="absolute h-full flex justify-center items-center ml-3">
+              <FaSearch />
+            </div>
+            <input
+              type="text"
+              placeholder="Tìm trong thư viện Quizizz .."
+              className="bg-white text-black w-8/12 h-14 rounded-full pl-9 shadow-2xl"
+              style={{ paddingLeft: "30px" }}
+            />
 
-        <input
-          type="checkbox"
-          id="toggle-content"
-          className="toggle-checkbox"
-        />
-        <label htmlFor="toggle-content" className="toggle-button"></label>
-
-        <div className="additional-content">
-          <h2>
-            <FaAddressBook />
-            Meme
-          </h2>
-          <h2>
-            <FaAddressBook />
-            Bộ sưu tập
-          </h2>
-          <h2>
-            <FaAddressBook />
-            Hồ sơ{" "}
-          </h2>
-          <h2>
-            <MdLogout />
-            Đăng xuất
-          </h2>
+            <div className="flex justify-center gap-3 ">
+              <select className="stt h-full rounded-lg text-center bg-purple-600 text-white shadow-2xl">
+                <option value="1" className="bg-white text-black">Thư viện</option>
+                <option value="2" className="bg-white text-black">Thư viện của tôi </option>
+                <option value="3" className="bg-white text-black">Báo cáo</option>
+              </select>
+              <button className="bell bg-gray-400 h-full rounded-full">
+                <FaBell />
+              </button>
+            </div>
+          </div>
+          <h1 className="text-dark-80% font-semibold flex flex-col items-center text-center mt-24">
+            <span className="text-xl">Hi adasd 👋</span>
+            <span className="text-2xl">Chúng ta học gì hôm nay ?</span>
+          </h1>
+          <div className="flex justify-center items-center ">
+            <div className="w-3/5 mt-4 z-30 relative ">
+              <div className="absolute h-full flex items-center ml-5 ">
+                <FaSearch />
+              </div>
+              <input
+                type="text"
+                placeholder="Tìm kiếm quiz về bất kỳ chủ đề nào"
+                className="w-full h-16 bg-white text-black pl-14 rounded-full shadow-2xl "
+              ></input>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="h-screen overflow-auto text-black bg-gray-50 flex-1">
-        <input
-          type="text"
-          placeholder="Tìm trong thư viện Quizizz .."
-          className="bg-white text-black w-8/12 h-14 ml-3  />"
-        />
 
-        <select className="stt h-14">
-          <option value="1">Thư viện</option>
-          <option value="2">Thư viện của tôi </option>
-          <option value="3">Báo cáo</option>
-        </select>
-        <button className="thuvien h-14 bg-purple-300 text-purple-900">
-          Thư viện
-        </button>
-        <button className="bell bg-gray-400 ">
-          <FaBell />
-        </button>
-
-        <h1 className="text-center mt-24">Bạn sẽ dạy gì hôm nay?</h1>
-        <input
-          type="text"
-          placeholder="Tìm kiếm qui về bất kỳ chủ đề nào"
-          className="w-9/12 h-16 bg-white text-black pl-14 ml-48 mt-12  "
-        ></input>
-
-        <h2 className=" flex">
-          <FaStar className="bg-yellow-300 " />
-          Khởi động vui vẻ
-        </h2>
-        <QuizList quizzes={filterByCategory("Khởi động vui vẻ")} />
-
-        <h2 className=" flex">
-          <FaStar className="bg-yellow-300" />
-          Toán
-        </h2>
-        <QuizList quizzes={filterByCategory("Toán")} />
-
-        <h2 className=" flex">
-          <FaStar className="bg-yellow-300" />
-          Tiếng Anh và Ngôn ngữ
-        </h2>
-        <QuizList quizzes={filterByCategory("Tiếng Anh và Ngôn ngữ")} />
-
-        <h2 className=" flex">
-          <FaStar className="bg-yellow-300" />
-          Khoa học
-        </h2>
-        <QuizList quizzes={filterByCategory("Khoa học")} />
-        <h2 className=" flex">
-          <FaStar className="bg-yellow-300" />
-          Khoa học máy tính và kỹ năng
-        </h2>
-        <QuizList quizzes={filterByCategory("Khoa học máy tính và kỹ năng")} />
+        <div className="w-full p-4 md:px-32 md:py-6 h-fit md:mx-auto">
+          <QuizSection
+            icon={FaFolderOpen}
+            title="Khởi động vui vẻ"
+            category="Khởi động vui vẻ"
+          />
+          <QuizSection icon={BiMath} title="Toán" category="Toán" />
+          <QuizSection
+            icon={MdLanguage}
+            title="Tiếng Anh và Ngôn ngữ"
+            category="Tiếng Anh và Ngôn ngữ"
+          />
+          <QuizSection
+            icon={SiStudyverse}
+            title="Khoa học"
+            category="Khoa học"
+          />
+          <QuizSection
+            icon={FaComputer}
+            title="Khoa học máy tính và kỹ năng"
+            category="Khoa học máy tính và kỹ năng"
+          />
+        </div>
+        <Footer />
       </div>
     </div>
   );

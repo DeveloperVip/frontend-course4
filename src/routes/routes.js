@@ -33,14 +33,15 @@ const publicRoutes = [
   // {path:"/sidebarlib",component:SidebarLib},
   // {path:"/section",component:CreateByMe}
   {path:"/library",component:LibraryPage},
-  {path:"/content",component:AllMyContent}
-];
-
-const privateRoutes = [
   {
     path: "/home",
     component: MainPage,
   },
+  {path:"/content",component:AllMyContent}
+];
+
+const privateRoutes = [
+  
   {
     path: "/",
   },

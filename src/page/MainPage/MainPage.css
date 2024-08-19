@@ -154,10 +154,3 @@ background-color: white;
     background-color: white;
 }
 
-.toggle-checkbox:checked+.toggle-button::after {
-    content: 'Ẩn';
-}
-
-.toggle-checkbox:not(:checked)+.toggle-button::after {
-    content: ' Thêm';
-}
