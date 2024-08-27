@@ -53,7 +53,7 @@ const publicRoutes = [
   // {path:"/section",component:CreateByMe}
   { path: "/library/:id", component: LibraryPage,layout:Layout },
   {
-    path: "/home",
+    path: "/",
     component: MainPage,layout:Layout
   },
   { path: "/presentation/:id", component: LessonPage, layout: Layout },
@@ -64,9 +64,9 @@ const publicRoutes = [
 ];
 
 const privateRoutes = [
-  {
-    path: "/",
-  },
+  // {
+  //   path: "/",
+  // },
 ];
 
 export { publicRoutes, privateRoutes };
