@@ -78,7 +78,7 @@ const Dashboard = () => {
           <SidebarButton
             icon={VscArchive}
             label="Khám phá"
-            direction="/home"
+            direction="/"
             isActive={activeButton === "/home"}
             onClick={() => setActiveButton("/home")}
           />
