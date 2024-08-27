@@ -4,7 +4,7 @@ import { FaCaretDown, FaFloppyDisk } from "react-icons/fa6";
 import { BsClock } from "react-icons/bs";
 import { LuTags } from "react-icons/lu";
 import { useState } from "react";
-import usePreviousRoute from "../../hook/usePreviousRoute";
+import usePreviousRoute from "../../hook/usePreviousRoute.jsx";
 import { useNavigate } from "react-router-dom";
 
 const HeaderCreateQuestion = ({lesson,selectedPoint, setSelectedPoint ,selectedTime ,setSelectedTime,handleSubmit}) => {

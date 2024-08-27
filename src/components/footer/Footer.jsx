@@ -1,9 +1,9 @@
 // import React from "react";
-import FooterSection from "./FooterSection"; // Đường dẫn component
-import { LogoSection } from "./LogoSection";
-import { AppDownloadSection } from "./AppDownloadSection";
-import { LegalSection } from "./LegalSection";
-import { SocialSection } from "./SocialSection";
+import FooterSection from "./FooterSection.jsx"; // Đường dẫn component
+import { LogoSection } from "./LogoSection.jsx";
+import { AppDownloadSection } from "./AppDownloadSection.jsx";
+import { LegalSection } from "./LegalSection.jsx";
+import { SocialSection } from "./SocialSection.jsx";
 
 const Footer = () => {
   const sections = [

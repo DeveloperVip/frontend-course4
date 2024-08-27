@@ -2,10 +2,10 @@ import { useState } from "react";
 import "./RegisterPage.css";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../services/axios";
-import Input from "../../components/Input/Input";
+import Input from "../../components/Input/Input.jsx";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { yupRegister } from "./yupRegister";
+import { yupRegister } from "./yupRegister.jsx";
 import { APIUser } from "../../services/API/APIUser.jsx";
 const Register = () => {
   const navigate= useNavigate();

@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import "../CreateLesson.css";
 // import { FaPlay, FaPlus, FaRegCopy, FaRegTrashAlt, FaStream,  FaRegCheckSquare } from "react-icons/fa6";
-import { AiOutlineCloudUpload } from "react-icons/ai";
-import { IoSettings } from "react-icons/io5";
-import SlidePreview from "./SlidePreview";
+// import { AiOutlineCloudUpload } from "react-icons/ai";
+// import { IoSettings } from "react-icons/io5";
+// import SlidePreview from "./SlidePreview";
 import Header from "./Header.jsx";
 import Sidebar from "./Sidebar.jsx";
-import BottomToolbar from "./BottomToolbar.jsx";
+// import BottomToolbar from "./BottomToolbar.jsx";
 import MainContent from "./MainContent.jsx";
 // import { VisibleSettingContext } from "../../../contexts/isVisibleSettingContext.jsx";
 import SettingLesson from "../../Setting/SettingLesson.jsx";

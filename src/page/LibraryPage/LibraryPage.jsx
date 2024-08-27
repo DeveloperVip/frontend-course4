@@ -1,9 +1,9 @@
 // import React from "react";
 import "./LibraryPage.css";
-import SidebarLib from "../../components/Library/Sidebar/SidebarLib";
-import CreateByMe from "../../components/Library/Section/CreateByMe";
-import AllMyContent from "../../components/Library/Section/AllMyContent";
-import HeaderSection from "../../components/Library/Section/HeaderSection";
+import SidebarLib from "../../components/Library/Sidebar/SidebarLib.jsx";
+import CreateByMe from "../../components/Library/Section/CreateByMe.jsx";
+import AllMyContent from "../../components/Library/Section/AllMyContent.jsx";
+import HeaderSection from "../../components/Library/Section/HeaderSection.jsx";
 import { useParams } from "react-router-dom";
 
 const LibraryPage = () => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaStream, FaRegCopy, FaRegTrashAlt } from "react-icons/fa";
-import SlidePreview from "./SlidePreview";
-import BottomToolbar from "./BottomToolbar";
+import SlidePreview from "./SlidePreview.jsx";
+import BottomToolbar from "./BottomToolbar.jsx";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const Sidebar = ({ slides, onDuplicate, onDelete, onMove, handleAddSlide }) => {

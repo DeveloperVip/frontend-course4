@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./StartGame.css";
-import StartGameHeader from "./StartGameHeader";
+import StartGameHeader from "./StartGameHeader.jsx";
 
 const StartGame = () => {
   const options = ["mẹ", "con", "cha", "muốn"];

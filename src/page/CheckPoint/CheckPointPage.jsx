@@ -1,6 +1,6 @@
 import React from "react";
-import CheckPointHeader from "../../components/Interface/CheckPoint/CheckPointHeader";
-import CheckPointItem from "../../components/Interface/CheckPoint/CheckPointItem";
+import CheckPointHeader from "../../components/Interface/CheckPoint/CheckPointHeader.jsx";
+import CheckPointItem from "../../components/Interface/CheckPoint/CheckPointItem.jsx";
 
 const CheckPointPage = () => {
   return (

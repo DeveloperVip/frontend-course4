@@ -1,15 +1,15 @@
 // import React from "react";
-import QuizList from "../../components/Interface/Quizz/QuizList";
-import quizzes from "../../quizzes";
+import QuizList from "../../components/Interface/Quizz/QuizList.jsx";
+import quizzes from "../../quizzes.jsx";
 import "./MainPage.css";
 import { FaComputer } from "react-icons/fa6";
 import { MdLanguage } from "react-icons/md";
-import Footer from "../../components/footer/Footer";
+// import Footer from "../../components/footer/Footer";
 import { FaFolderOpen, FaSearch } from "react-icons/fa";
 import { BiMath } from "react-icons/bi";
 import { SiStudyverse } from "react-icons/si";
-import Dashboard from "../../components/Dashboard/Dashboard";
-import Header from "../../components/Header/Header";
+// import Dashboard from "../../components/Dashboard/Dashboard";
+// import Header from "../../components/Header/Header";
 
 // Component tái sử dụng cho danh sách quiz
 const QuizSection = ({ icon: Icon, title, category }) => {

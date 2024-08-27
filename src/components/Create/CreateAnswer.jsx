@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BiTrash } from "react-icons/bi";
 import { FaCheckCircle, FaRegCheckSquare, FaTrashAlt } from "react-icons/fa";
 import { FaImage, FaPlus } from "react-icons/fa6";
-import { APIUpload } from "../../services/API/APIUpload";
+import { APIUpload } from "../../services/API/APIUpload.jsx";
 
 const CreateAnswer = ({
   typeAnswer,

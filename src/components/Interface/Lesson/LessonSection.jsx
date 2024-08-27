@@ -1,7 +1,7 @@
 import React from "react";
-import StartOrAssign from "./StartOrAssign";
-import HeaderSlider from "./HeaderSlider";
-import Slider from "./Slider";
+import StartOrAssign from "./StartOrAssign.jsx";
+import HeaderSlider from "./HeaderSlider.jsx";
+import Slider from "./Slider.jsx";
 
 const LessonSection = () => {
   return (

@@ -5,7 +5,7 @@ import {
   FaChevronLeft,
   FaChevronRight,
 } from "react-icons/fa";
-import { actions, dateOptions, days, weekDays } from "../../utils/Initial";
+import { actions, dateOptions, days, weekDays } from "../../utils/Initial.jsx";
 
 const ReportHeader = () => {
   // State to manage the visibility of dropdown menus

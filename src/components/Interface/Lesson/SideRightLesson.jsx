@@ -1,5 +1,5 @@
 import React from 'react'
-import ItemLesson from './ItemLesson'
+import ItemLesson from './ItemLesson.jsx'
 
 const SideRightLesson = () => {
   return (

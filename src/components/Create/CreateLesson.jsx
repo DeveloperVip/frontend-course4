@@ -7,11 +7,11 @@ import {
   FaStream,
 } from "react-icons/fa";
 
-import CreateQuestion from "./CreateQuestion";
+import CreateQuestion from "./CreateQuestion.jsx";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { IoSettings } from "react-icons/io5";
 import { useState } from "react";
-import SettingLesson from "../Setting/SettingLesson";
+import SettingLesson from "../Setting/SettingLesson.jsx";
 
 const CreateLesson = () => {
   const [visiable,setVisiable] = useState(false)

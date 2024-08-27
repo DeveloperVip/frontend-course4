@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { FaBook, FaEye, FaGraduationCap, FaTimes } from "react-icons/fa";
-import SelectBox from "./SelectBox";
-import { grades, subjects, visibility } from "../../utils/Initial";
+import SelectBox from "./SelectBox.jsx";
+import { grades, subjects, visibility } from "../../utils/Initial.jsx";
 import { IoSparkles } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { VisibleSettingContext } from "../../contexts/visiableSettingContext";
+import { VisibleSettingContext } from "../../contexts/visiableSettingContext.jsx";
 
 const SettingLesson = () => {
   const {isVisible,hide} = useContext(VisibleSettingContext)

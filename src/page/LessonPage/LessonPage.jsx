@@ -1,6 +1,6 @@
 import "./LessonPage.css"
-import LessonHeader from "../../components/Interface/Lesson/LessonHeader";
-import LessonSection from "../../components/Interface/Lesson/LessonSection";
+import LessonHeader from "../../components/Interface/Lesson/LessonHeader.jsx";
+import LessonSection from "../../components/Interface/Lesson/LessonSection.jsx";
 import SideRightLesson from "../../components/Interface/Lesson/SideRightLesson.jsx"
 import { useParams } from "react-router-dom";
 

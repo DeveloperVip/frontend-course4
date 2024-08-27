@@ -8,7 +8,7 @@ import { FaGoogle } from "react-icons/fa";
 import { BsMicrosoft } from "react-icons/bs";
 import { FaPhoneSquareAlt } from "react-icons/fa";
 import { SiApple } from "react-icons/si";
-import LoginEmail from "./LoginEmail";
+// import LoginEmail from "./LoginEmail";
 const LoginPage = () => {
   const navigate = useNavigate();
 

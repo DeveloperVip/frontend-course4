@@ -1,7 +1,7 @@
 import React from 'react'
-import ReportHeader from '../../components/Report/ReportHeader'
-import ReportSection from '../../components/Report/ReportSection'
-import Pagination from '../../components/Pagination/Pagination'
+import ReportHeader from '../../components/Report/ReportHeader.jsx'
+import ReportSection from '../../components/Report/ReportSection.jsx'
+import Pagination from '../../components/Pagination/Pagination.jsx'
 
 const ReportPage = () => {
   return (

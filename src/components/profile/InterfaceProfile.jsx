@@ -1,11 +1,12 @@
 // import React from 'react'
 import { FaBook, FaCamera, FaGraduationCap, FaShare } from "react-icons/fa6";
 import { FaRegEdit } from "react-icons/fa";
-import EditProfile from "./EditProfile";
-import MemeProfile from "./MemeProfile";
-import LibraryProfile from "./LibraryProfile";
-import Collections from "./Collections";
+import EditProfile from "./EditProfile.jsx";
+import MemeProfile from "./MemeProfile.jsx";
+import LibraryProfile from "./LibraryProfile.jsx";
+import Collections from "./Collections.jsx";
 import { useState } from "react";
+
 const InterfaceProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); 
   console.log("🚀 ~ InterfaceProfile ~ isModalOpen:", isModalOpen)

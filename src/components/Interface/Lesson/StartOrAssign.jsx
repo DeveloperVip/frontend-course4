@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaChalkboardTeacher, FaClock } from 'react-icons/fa';
-import SetTimeLesson from './SetTimeLesson'; // Import SetTimeLesson component
+import SetTimeLesson from './SetTimeLesson.jsx'; // Import SetTimeLesson component
 
 const StartOrAssign = () => {
   const [selectedLesson, setSelectedLesson] = useState(null);

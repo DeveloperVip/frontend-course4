@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaTimes, FaEye } from "react-icons/fa";
 import "./Preview.css";
-import { initialAnswers } from "../../utils/Initial";
+import { initialAnswers } from "../../utils/Initial.jsx";
 import { useNavigate } from "react-router-dom";
 
 const Preview = () => {
