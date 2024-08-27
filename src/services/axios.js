@@ -1,6 +1,15 @@
 import axios from "axios";
+// const config = {
+//   headers: {
+//     "Access-Control-Allow-Origin": "*",
+//     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+//   },
+//   credentials: 'include',
+//   https://backend-course-4.onrender.com
+//https://backend-course-4.vercel.app/
+// };
 const axiosInstance = axios.create({
-  baseURL: "https://backend-course-4.onrender.com",
+  baseURL: "https://backend-course-4.vercel.app/"
 });
 axiosInstance.interceptors.request.use(
   function (config) {

@@ -1,17 +1,20 @@
 import axiosInstance from "../axios";
 
 export const APIUser = {
-  APILogin: async (userName, password) => {
+  APILogin: async (info) => {
     const response = await axiosInstance.post("/user/login", {
-      userName,
-      password,
+      ...info
     });
     console.log(response.data);
+    return response.data
   },
   APIRegistor: async (state) => {
-    const data = await axiosInstance.post("/user/create-user", {
+    console.log(state);
+    
+    const response = await axiosInstance.post("/user/create-user", {
       ...state,
     });
-    console.log("🚀 ~ handleSubmit ~ data:", data);
+    console.log("🚀 ~ handleSubmit ~ data:", response.data);
+    return response.data;
   },
 };

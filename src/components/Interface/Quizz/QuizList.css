@@ -1,0 +1,32 @@
+.quiz-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* Cho phép các phần tử xuống hàng khi không còn đủ không gian */
+    gap: 20px;
+    /* Khoảng cách giữa các phần tử */
+    justify-content: center;
+    /* Căn giữa các phần tử trong hàng */
+}
+
+.quiz-item {
+     
+    box-sizing: border-box;
+    /* Đảm bảo padding và border không làm tăng kích thước tổng cộng */
+    text-align: center;
+    /* Căn giữa văn bản */
+    --tw-ring-color: rgba(9, 9, 9, .1);   
+}
+.text-tn {
+    letter-spacing: .015em;
+    font-size: .625rem;
+    line-height: 1rem;
+}
+
+.quiz-image {
+    width: 100%;
+    /* Kích thước chiều rộng của ảnh chiếm toàn bộ phần tử chứa */
+    height: 200px;
+    /* Để chiều cao tự động giữ tỷ lệ */
+   
+}
+

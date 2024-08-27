@@ -1,20 +1,24 @@
 import React, { useState } from "react";
 import { FaTimes, FaEye } from "react-icons/fa";
 import "./Preview.css";
+import { initialAnswers } from "../../utils/Initial";
+import { useNavigate } from "react-router-dom";
 
 const Preview = () => {
+  const navigate = useNavigate()
   const [isOpen, setIsOpen] = useState(true);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
 
-  const initialAnswers = [
-    { id: 1, brand: "brand-a", content: "Answer 1", image: null, correct: true },
-    { id: 2, brand: "brand-b", content: "Answer 2", image: null, correct: false },
-    { id: 3, brand: "brand-c", content: "Answer 3", image: null, correct: false },
-    { id: 4, brand: "brand-d", content: "Answer 4", image: null, correct: false },
-  ];
+  // const initialAnswers = [
+  //   { id: 1, brand: "brand-a", content: "Answer 1", image: null, correct: true },
+  //   { id: 2, brand: "brand-b", content: "Answer 2", image: null, correct: false },
+  //   { id: 3, brand: "brand-c", content: "Answer 3", image: null, correct: false },
+  //   { id: 4, brand: "brand-d", content: "Answer 4", image: null, correct: false },
+  // ];
 
   const closePreview = () => {
     setIsOpen(false);
+    navigate(-1)
   };
 
   const toggleCorrectAnswer = () => {
@@ -38,11 +42,11 @@ const Preview = () => {
                 className="flex items-center far fa-check-square"
                 style={{ fontSize: 18 }}
               />
-              <span className="ml-2 text-sm">Multiple Choice</span>
+              <span className="ml-2 text-sm">Nhiều đáp án</span>
             </div>
           </div>
           <span className="px-4 py-2 bg-light-10% rounded-lg absolute left-1/2 -ml-20">
-            Participants view
+          Chế độ xem người tham gia
           </span>
           <button
             className="transition-colors duration-200 ease-in-out flex items-center justify-center w-9 h-9 transparent bg-light-20% text-light-3 hover:bg-light-33% active:bg-light-10% rounded-lg relative min-w-max is-nudge-on v-popper--has-tooltip"
@@ -75,30 +79,30 @@ const Preview = () => {
 
                       <div className="px-2 pt-3 pb-2 h-full flex-1">
                         <div className="text-light-20% h-full w-full flex justify-center items-center text-2xl">
-                          <span>Question Text</span>
+                          <span>Câu hỏi</span>
                         </div>
                       </div>
                     </div>
                   </section>
                   <div className="options-container flex flex-col md:flex-row w-full h-3/6 gap-2">
                     <div className="grid md:grid-flow-col md:auto-cols-fr w-full h-full gap-2">
-                      {initialAnswers.map((answer) => (
+                      {initialAnswers.map((answer,index) => (
                         <div
                           key={answer.id}
-                          className={`question-option relative rounded-lg h-full max-h-full overflow-y-auto overflow-x-hidden flex flex-row-reverse md:flex-col bg-${answer.brand} p-1 gap-2 group ${
+                          className={`question-option relative rounded-lg h-full max-h-full overflow-y-auto overflow-x-hidden flex flex-row-reverse md:flex-col bg-brand-${index} p-1 gap-2 group ${
                             showCorrectAnswer
-                              ? answer.correct
+                              ? answer.isTrue
                                 ? "bg-green-500 opacity-100"
                                 : "opacity-50"
                               : "opacity-100"
                           }`}
                         >
-                          {answer.image ? (
+                          {answer.secure_url ? (
                             <div className="relative">
                               <img
                                 alt="not found"
                                 width={"250px"}
-                                src={URL.createObjectURL(answer.image)}
+                                src={answer.secure_url}
                               />
                             </div>
                           ) : (
@@ -156,7 +160,7 @@ const Preview = () => {
               />
 
               <span className="title" title="Show answers">
-                Show Correct Answer
+                Xem đáp án đúng
               </span>
             </button>
           </div>
@@ -191,7 +195,7 @@ const Preview = () => {
                 <span className="title" title />
               </button>
               <div className="text-light-50% text-xxs opacity-25">
-                <span>Next</span>
+                <span>Tiếp</span>
               </div>
             </div>
           </div>

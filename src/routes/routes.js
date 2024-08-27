@@ -1,21 +1,37 @@
-import CreateLesson from "../components/Create/CreateLesson.jsx";
+// import CreateLesson from "../components/Create/CreateLesson.jsx";
+import Collection from "../components/Collection/Collection.jsx";
 import CreateQuestion from "../components/Create/CreateQuestion.jsx";
+import CreateLesson from "../components/Create/Lesson/CreateLesson.jsx";
 import Preview from "../components/Create/Preview.jsx";
+// import QuizHeader from "../components/Interface/Lesson/LessonHeader.jsx";
+// import LessonSection from "../components/Interface/Lesson/LessonSection.jsx";
+import StartGame from "../components/Interface/StartGame/StartGame.jsx";
+import Layout from "../components/Layout/Layout.jsx";
 import AllMyContent from "../components/Library/Section/AllMyContent.jsx";
-import CreateByMe from "../components/Library/Section/CreateByMe.jsx";
-import SidebarLib from "../components/Library/Sidebar/SidebarLib.jsx";
+import SettingLesson from "../components/Setting/SettingLesson.jsx";
+// import ReportHeader from "../components/Report/ReportHeader.jsx";
+// import ReportSection from "../components/Report/ReportSection.jsx";
+// import CreateByMe from "../components/Library/Section/CreateByMe.jsx";
+// import SidebarLib from "../components/Library/Sidebar/SidebarLib.jsx";
+import CheckPointPage from "../page/CheckPoint/CheckPointPage.jsx";
+import LessonPage from "../page/LessonPage/LessonPage.jsx";
 import LibraryPage from "../page/LibraryPage/LibraryPage.jsx";
+import LoginEmail from "../page/LoginPage/LoginEmail.jsx";
 import LoginPage from "../page/LoginPage/LoginPage.jsx";
 import MainPage from "../page/MainPage/MainPage.jsx";
 import ProfilePage from "../page/ProfilePage/ProfilePage.jsx";
 import Register from "../page/RegisterPage/RegisterPage.jsx";
+import ReportPage from "../page/Report/ReportPage.jsx";
 import SettingPage from "../page/SettingPage/SettingPage.jsx";
 
 const publicRoutes = [
   {
     path: "/login",
     component: LoginPage,
-    layout: true,
+  },
+  {
+    path: "/login/email",
+    component: LoginEmail,
   },
   {
     path: "/register",
@@ -24,24 +40,30 @@ const publicRoutes = [
   {
     path: "/profile",
     component: ProfilePage,
+    layout: Layout,
   },
   { path: "/create", component: CreateQuestion },
   { path: "/createLesson", component: CreateLesson },
   // {path:"/profile/editProfile",component:EditProfile}
-  {path:"/setting",component:SettingPage},
-  {path:"/preview",component:Preview},
+  { path: "/setting", component: SettingPage, layout: Layout },
+  { path: "/preview", component: Preview },
+  {path:"/all-my-content",component:AllMyContent},
+  {path:"/collection",component:Collection, layout:Layout   },
   // {path:"/sidebarlib",component:SidebarLib},
   // {path:"/section",component:CreateByMe}
-  {path:"/library",component:LibraryPage},
+  { path: "/library/:id", component: LibraryPage,layout:Layout },
   {
     path: "/home",
-    component: MainPage,
+    component: MainPage,layout:Layout
   },
-  {path:"/content",component:AllMyContent}
+  { path: "/presentation/:id", component: LessonPage, layout: Layout },
+  {path:"/startGame",component:StartGame},
+  {path:"/checkPoint",component:CheckPointPage,layout:Layout},
+  {path:"/report",component:ReportPage,layout:Layout},
+  {path:"/test", component:SettingLesson}
 ];
 
 const privateRoutes = [
-  
   {
     path: "/",
   },

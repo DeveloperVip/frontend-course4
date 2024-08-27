@@ -10,8 +10,16 @@ const InterfaceProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); 
   console.log("🚀 ~ InterfaceProfile ~ isModalOpen:", isModalOpen)
   const [selectedImage, setSelectedImage] = useState(null);
-  const [change, setChange] = useState(1);
+  const [change, setChange] = useState(0);
   const arrayTitle = ["Thư viện", "Bộ sưu tập", "Bộ Meme"];
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setSelectedImage(imageUrl);
+    }
+  };
+
   const handleChange = (e) => {
     switch (e.currentTarget.id) {
       case "Thư viện":
@@ -20,6 +28,8 @@ const InterfaceProfile = () => {
         return setChange(1);
       case "Bộ Meme":
         return setChange(2);
+      default:
+        return;
     }
   };
 
@@ -27,7 +37,7 @@ const InterfaceProfile = () => {
     <div className="">
       <div
         id="app-body-container"
-        className="flex bg-light-1 main-content justify-center overflow-auto "
+        className="flex bg-light-1 main-content justify-center "
       >
         <div className="profile-layout h-full md:p-8">
           <div className="col-span-full">
@@ -55,19 +65,22 @@ const InterfaceProfile = () => {
               <div className="flex justify-between p-6 relative">
                 <div className="flex">
                   <div className="w-32 h-32 relative bg-light-1 rounded-full flex justify-center items-center overflow-hidden">
-                    <div className="w-full h-full relative cursor-pointer z-50 hover:z-10 hover:hidden">
-                      <div className="vi-image w-full h-full object-cover v-image ">
+                    <div className="w-full h-full relative cursor-pointer z-50 hover:z-0 hover:hidden">
+                      <div className="vi-image w-full h-full object-cover v-image">
                         <img
-                          src="https://cf.quizizz.com/avatars/images/eyes4-nose7-mouth6-9A4292.png?w=200&h=200"
-                          alt="Quiz image"
-                          className="lazy-img rounded-inherit object-cover w-full h-full"
+                          src={
+                            selectedImage 
+                              ? selectedImage 
+                              : "https://cf.quizizz.com/avatars/images/eyes4-nose7-mouth6-9A4292.png?w=200&h=200"
+                          }
+                          alt="Profile"
+                          className="lazy-img rounded-full object-cover w-full h-full"
                           loading="lazy"
                         />
                       </div>
                     </div>
                     <div
                       className="absolute flex flex-col justify-center items-center w-full h-full rounded-full overflow-hidden bg-dark-50% z-30"
-                      
                     >
                       <FaCamera
                         className="fas fa-camera text-light"
@@ -76,9 +89,7 @@ const InterfaceProfile = () => {
                       <input
                         className="absolute inset-0 opacity-0 cursor-pointer w-full h-full rounded-full"
                         type="file"
-                        onChange={(event) => {
-                          setSelectedImage(event.target.files[0]);
-                        }}
+                        onChange={handleImageUpload}
                       />
                     </div>
                   </div>

@@ -21,7 +21,7 @@ const QuizCard = ({ id, title, imageUrl, label, items, category, status, author,
                     <div className="flex h-4 gap-2">
                       {isDraft && (
                         <div className="lozenge items-center inline-flex text-tn font-semibold rounded-full px-1.5 uppercase bg-red-faded text-red">
-                          DRAFT
+                          Nháp
                         </div>
                       )}
                     </div>
@@ -54,12 +54,12 @@ const QuizCard = ({ id, title, imageUrl, label, items, category, status, author,
                       <div className="flex items-center font-normal text-dark-4">
                         <a href={`/profile/${author.id}`} className="mr-2 hover:underline max-w-20 userName">{author.name}</a>
                         <div className="mr-2 h-0.5 w-0.5 flex justify-center items-center rounded-full bg-dark-4 max-w-20"></div>
-                        <div className="time">{timeAgo} ago</div>
+                        <div className="time">{timeAgo} trước</div>
                       </div>
                     </div>
                     <div className="flex text-dark-2 gap-2">
-                      <button className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-dark-5% active:bg-dark-10% text-dark-2 hover:text-dark-3 rounded other relative min-w-max" aria-label={isDraft ? 'Continue editing' : 'Share'}>
-                        <span className="title" title={isDraft ? 'Continue editing' : 'Share'}>{isDraft ? 'Continue editing' : 'Share'}</span>
+                      <button className="transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 bg-dark-5% active:bg-dark-10% text-dark-2 hover:text-dark-3 rounded other relative min-w-max" aria-label={isDraft ? 'Tiếp tục sửa' : 'Chia sẻ'}>
+                        <span className="title" title={isDraft ? 'Continue editing' : 'Share'}>{isDraft ? 'Tiếp tục sửa' : 'Chia sẻ'}</span>
                         <i className="flex items-center far fa-share ml-2" style={{ fontSize: '11px' }}></i>
                       </button>
                     </div>
@@ -82,14 +82,14 @@ const AllMyContent = () => {
       imageUrl: 'https://cf.quizizz.com/img/logos/new/logo_placeholder_sm.webp?w=200&h=200',
       label: 'lesson',
       items: '1 Slide',
-      category: 'University',
+      category: 'Đại học',
       status: 'lesson',
       author: {
         id: '669faed55135824a6a3cab69',
         name: 'adasd wfwfa',
         imageUrl: 'https://cf.quizizz.com/avatars/images/eyes4-nose7-mouth6-9A4292.png?w=90&h=90'
       },
-      timeAgo: '2 hours',
+      timeAgo: '2 Tiếng',
       isDraft: false
     },
     // Add more quiz data as needed

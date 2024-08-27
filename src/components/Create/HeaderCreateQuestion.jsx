@@ -7,12 +7,11 @@ import { useState } from "react";
 import usePreviousRoute from "../../hook/usePreviousRoute";
 import { useNavigate } from "react-router-dom";
 
-const HeaderCreateQuestion = ({lesson}) => {
+const HeaderCreateQuestion = ({lesson,selectedPoint, setSelectedPoint ,selectedTime ,setSelectedTime,handleSubmit}) => {
   const { goBack } = usePreviousRoute();
   const navigate = useNavigate()
   const [click, setClick] = useState("none");
-  const [selectedPoint, setSelectedPoint] = useState(1); // Default point selection
-  const [selectedTime, setSelectedTime] = useState("30 giây"); // Default time selection
+  
 
   const handleClick = (e) => {
     if (e === click) setClick("");
@@ -50,7 +49,7 @@ const HeaderCreateQuestion = ({lesson}) => {
 
   return (
     <header className={`w-full font-open-sans ${lesson?"bg-purple-600":"bg-white"} flex items-center gap-2 py-2 px-4 h-14`} >
-      <button
+      <div
         className="transition-colors duration-200 p-0 ease-in-out flex items-center justify-center w-8 h-8 bg-dark-5% active:bg-dark-10% text-dark-2 hover:text-dark-3 rounded relative min-w-max"
         aria-label="Back"
         onClick={()=>navigate("/profile")}
@@ -59,7 +58,7 @@ const HeaderCreateQuestion = ({lesson}) => {
           className="flex items-center fas fa-chevron-left"
           style={{ fontSize: 12 }}
         />
-      </button>
+      </div>
       <div className="relative flex-grow flex-shrink-0 max-w-55">
         <div className="dropdown flex relative rounded">
           <button className="w-full flex rounded font-semibold items-center whitespace-nowrap py-2 pl-2 pr-1 text-xs h-8 cursor-pointer bg-dark-5% text-dark-2 hover:text-dark-3">
@@ -76,7 +75,7 @@ const HeaderCreateQuestion = ({lesson}) => {
       <div className="flex items-center gap-2">
         <div className={`relative`} onClick={() => handleClick("point")}>
           <div className="dropdown flex relative rounded">
-            <button className="w-full flex rounded font-semibold items-center whitespace-nowrap py-2 pl-2 pr-1 text-xs h-8 cursor-pointer bg-dark-5% text-dark-2 hover:text-dark-3">
+            <div className="w-full flex rounded font-semibold items-center whitespace-nowrap py-2 pl-2 pr-1 text-xs h-8 cursor-pointer bg-dark-5% text-dark-2 hover:text-dark-3">
               <IoCheckmark
                 className="flex items-center far fa-check mr-2"
                 style={{ fontSize: 12 }}
@@ -89,7 +88,7 @@ const HeaderCreateQuestion = ({lesson}) => {
                   style={{ fontSize: 12 }}
                 />
               </div>
-            </button>
+            </div>
             <div style={{ display: click === "point" ? "block" : "none" }}>
               <div
                 tabIndex={-1}
@@ -101,17 +100,16 @@ const HeaderCreateQuestion = ({lesson}) => {
                   {pointArray.map((item, index) => {
                     return (
                       <li
-                        data-v-6f5fb931
                         className="text-sm text-dark-2 font-semibold"
                         key={index}
                       >
                         <button
-                          data-v-6f5fb931
+                          
                           type="button"
                           className={`px-2 py-1 w-full  ${selectedPoint === item ? "bg-purple-300": ""} hover:bg-purple-100 hover:text-purple-400 bg-purple-100-faded text-lilac font-semibold`}
                           onClick={() => handlePoint(item)}
                         >
-                          {item}&nbsp;<span data-v-6f5fb931>điểm</span>
+                          {item}&nbsp;<span >điểm</span>
                         </button>
                       </li>
                     );
@@ -123,7 +121,7 @@ const HeaderCreateQuestion = ({lesson}) => {
         </div>
         <div className="relative" onClick={() => handleClick("time")}>
           <div className="dropdown flex relative rounded">
-            <button className="w-full flex rounded font-semibold items-center whitespace-nowrap py-2 pl-2 pr-1 text-xs h-8 cursor-pointer bg-dark-5% text-dark-2 hover:text-dark-3">
+            <div className="w-full flex rounded font-semibold items-center whitespace-nowrap py-2 pl-2 pr-1 text-xs h-8 cursor-pointer bg-dark-5% text-dark-2 hover:text-dark-3">
               <BsClock
                 className="flex items-center far fa-clock mr-2"
                 style={{ fontSize: 12 }}
@@ -136,7 +134,7 @@ const HeaderCreateQuestion = ({lesson}) => {
                   style={{ fontSize: 12 }}
                 />
               </div>
-            </button>
+            </div>
             <div style={{ display: click === "time" ? "block" : "none" }}>
               <div
                 tabIndex={-1}
@@ -144,16 +142,16 @@ const HeaderCreateQuestion = ({lesson}) => {
                 className="list bg-light-3 h-min shadow-soft-high rounded z-on-overlay mt-2 left-0 w-full top-full origin-top z-on-overlay"
                 style={{ position: "absolute" }}
               >
-                <ul data-v-6f5fb931 data-v-9da8a38e>
+                <ul  >
                   {timeArray.map((item, index) => {
                     return (
                       <li
-                        data-v-6f5fb931
+                        
                         className="text-sm text-dark-2"
                         key={index}
                       >
                         <button
-                          data-v-6f5fb931
+                          
                           type="button"
                           className={`px-2 py-1 w-full ${selectedTime === item ? "bg-purple-300": ""} hover:bg-purple-100 hover:text-purple-400 font-semibold`}
                           onClick={() => handleTime(item)}
@@ -175,7 +173,7 @@ const HeaderCreateQuestion = ({lesson}) => {
           />
           <span>Tiêu chuẩn thẻ</span>
         </button>
-        <button className="transition-colors duration-200 p-0 ease-in-out flex items-center justify-center px-4 py-1.5 text-xs font-semibold h-8 bg-purple-500 text-white hover:bg-purple-400 active:bg-purple rounded">
+        <button onClick={handleSubmit} className="transition-colors duration-200 p-0 ease-in-out flex items-center justify-center px-4 py-1.5 text-xs font-semibold h-8 bg-purple-500 text-white hover:bg-purple-400 active:bg-purple rounded">
           <FaFloppyDisk
             className="flex items-center fas fa-floppy-disk mr-2"
             style={{ fontSize: 12 }}

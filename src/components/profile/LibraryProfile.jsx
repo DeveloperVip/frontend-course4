@@ -24,14 +24,14 @@ const LibraryProfile = () => {
         <button 
           className="transition-colors duration-200 ease-in-out flex items-center justify-center px-6 py-2 text-lg font-semibold h-9 bg-lilac hover:bg-lilac-light active:bg-lilac-dark rounded-lg mx-2"
           aria-label="Create a Quiz"
-          onClick={()=>navigate("/profile/create")}
+          onClick={()=>navigate("/create")}
         >
           Tạo một câu đố
         </button>
         <button 
           className="transition-colors duration-200 ease-in-out flex items-center justify-center px-6 py-2 text-lg font-semibold h-9 bg-light-3 border border-solid border-dark-6 text-dark-2 hover:bg-light-2 active:bg-light-1 rounded-lg mx-2"
           aria-label="Create a Lesson"
-          onClick={()=>navigate("/profile/createLesson")}
+          onClick={()=>navigate("/createLesson")}
         >
           Tạo một bài học
         </button>

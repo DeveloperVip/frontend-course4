@@ -43,7 +43,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="w-full py-8 mt-auto bg-light-3">
+    <footer className="w-full py-8  bg-light-3 ">
       <div className="px-4 mx-auto max-w-7xl md:px-10">
         <div className="flex flex-col justify-between w-full">
           {/* Logo và App Download */}

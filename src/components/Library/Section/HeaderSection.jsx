@@ -46,12 +46,12 @@ const Dropdown = ({ title, icon, options, onOptionSelect }) => {
 };
 
 const HeaderSection = () => {
-  const [activeTab, setActiveTab] = useState('published');
-  const [selectedFilter, setSelectedFilter] = useState('All');
-  const [sortOrder, setSortOrder] = useState('Most Recent');
+  const [activeTab, setActiveTab] = useState('Đã published');
+  const [selectedFilter, setSelectedFilter] = useState('Tất cả');
+  const [sortOrder, setSortOrder] = useState('Gần đây nhất');
 
-  const filterOptions = ['All', 'Published', 'Draft'];
-  const sortOptions = ['Most Recent', 'Oldest'];
+  const filterOptions = ['Tất cả', 'Đã published'];
+  const sortOptions = ['Gần đây nhất', 'Cũ'];
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -79,16 +79,9 @@ const HeaderSection = () => {
               }`}
               onClick={() => handleTabClick('published')}
             >
-              <span>Published (1)</span>
+              <span>Đã Published (1)</span>
             </div>
-            <div
-              className={`px-2 pt-2 pb-1.5 border-b-2 font-semibold text-dark-4 text-xs text-center cursor-pointer ${
-                activeTab === 'draft' ? 'border-b-lilac text-lilac' : 'border-b-transparent'
-              }`}
-              onClick={() => handleTabClick('draft')}
-            >
-              <span>Drafts (13)</span>
-            </div>
+            
           </div>
           <div className="flex">
             <Dropdown

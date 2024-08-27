@@ -1,16 +1,15 @@
-import React from "react";
-import QuizList from "../../components/QuizList";
+// import React from "react";
+import QuizList from "../../components/Interface/Quizz/QuizList";
 import quizzes from "../../quizzes";
 import "./MainPage.css";
 import { FaComputer } from "react-icons/fa6";
 import { MdLanguage } from "react-icons/md";
-import { FaBell } from "react-icons/fa6";
-
 import Footer from "../../components/footer/Footer";
 import { FaFolderOpen, FaSearch } from "react-icons/fa";
 import { BiMath } from "react-icons/bi";
 import { SiStudyverse } from "react-icons/si";
 import Dashboard from "../../components/Dashboard/Dashboard";
+import Header from "../../components/Header/Header";
 
 // Component tái sử dụng cho danh sách quiz
 const QuizSection = ({ icon: Icon, title, category }) => {
@@ -30,31 +29,10 @@ const QuizSection = ({ icon: Icon, title, category }) => {
 function MainPage() {
   return (
     <div className="flex font-bold ">
-      <Dashboard />
-      <div className="h-screen overflow-auto text-black bg-gray-50 flex-1 ">
+      {/* <Dashboard /> */}
+      <div className="h-screen text-black bg-gray-50 flex-1 " style={{height:"fit-content"}}>
         <div className="bg-purple-200 p-3 px-10">
-          <div className="flex justify-between relative ">
-            <div className="absolute h-full flex justify-center items-center ml-3">
-              <FaSearch />
-            </div>
-            <input
-              type="text"
-              placeholder="Tìm trong thư viện Quizizz .."
-              className="bg-white text-black w-8/12 h-14 rounded-full pl-9 shadow-2xl"
-              style={{ paddingLeft: "30px" }}
-            />
-
-            <div className="flex justify-center gap-3 ">
-              <select className="stt h-full rounded-lg text-center bg-purple-600 text-white shadow-2xl">
-                <option value="1" className="bg-white text-black">Thư viện</option>
-                <option value="2" className="bg-white text-black">Thư viện của tôi </option>
-                <option value="3" className="bg-white text-black">Báo cáo</option>
-              </select>
-              <button className="bell bg-gray-400 h-full rounded-full">
-                <FaBell />
-              </button>
-            </div>
-          </div>
+          
           <h1 className="text-dark-80% font-semibold flex flex-col items-center text-center mt-24">
             <span className="text-xl">Hi adasd 👋</span>
             <span className="text-2xl">Chúng ta học gì hôm nay ?</span>
@@ -96,7 +74,7 @@ function MainPage() {
             category="Khoa học máy tính và kỹ năng"
           />
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </div>
   );

@@ -10,6 +10,10 @@ body {
   display: block;
 }
 
+a {
+    color: black;
+}
+
 /* .App {
     font-family: Arial, sans-serif;
     padding: 20px;
