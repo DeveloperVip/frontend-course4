@@ -1,9 +1,9 @@
 // import React from "react";
-import FooterSection from "./FooterSection"; // Đường dẫn component
-import { LogoSection } from "./LogoSection";
-import { AppDownloadSection } from "./AppDownloadSection";
-import { LegalSection } from "./LegalSection";
-import { SocialSection } from "./SocialSection";
+import FooterSection from "./FooterSection.jsx"; // Đường dẫn component
+import { LogoSection } from "./LogoSection.jsx";
+import { AppDownloadSection } from "./AppDownloadSection.jsx";
+import { LegalSection } from "./LegalSection.jsx";
+import { SocialSection } from "./SocialSection.jsx";
 
 const Footer = () => {
   const sections = [
@@ -43,7 +43,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="w-full py-8 mt-auto bg-light-3">
+    <footer className="w-full py-8  bg-light-3 ">
       <div className="px-4 mx-auto max-w-7xl md:px-10">
         <div className="flex flex-col justify-between w-full">
           {/* Logo và App Download */}

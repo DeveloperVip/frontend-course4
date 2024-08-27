@@ -8,12 +8,13 @@ import { FaGoogle } from "react-icons/fa";
 import { BsMicrosoft } from "react-icons/bs";
 import { FaPhoneSquareAlt } from "react-icons/fa";
 import { SiApple } from "react-icons/si";
+// import LoginEmail from "./LoginEmail";
 const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleLogin = (provider) => {
     console.log(`Logging in with ${provider}`);
-    navigate("/main");
+    navigate("/login/email");
   };
 
   return (
@@ -80,6 +81,7 @@ const LoginPage = () => {
         </div>
       </div>
     </div>
+
   );
 };
 

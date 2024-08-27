@@ -1,5 +1,5 @@
 // import React from "react";
-import InterfaceProfile from "../../components/profile/InterfaceProfile";
+import InterfaceProfile from "../../components/profile/InterfaceProfile.jsx";
 import "./ProfilePage.css";
 
 

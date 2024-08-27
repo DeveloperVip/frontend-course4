@@ -1,4 +1,4 @@
-import  { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./CreateQuestion.css";
 import { FaFileImage, FaVideo } from "react-icons/fa6";
 import { PiMicrophoneLight } from "react-icons/pi";
@@ -7,20 +7,82 @@ import HeaderCreateQuestion from "./HeaderCreateQuestion";
 import CreateAnswer from "./CreateAnswer";
 import HeaderEditor from "./HeaderEditor";
 import { BiTrash } from "react-icons/bi";
+import { APIAnswer } from "../../services/API/APIAnswer.jsx";
+import { APIUpload } from "../../services/API/APIUpload.jsx";
+import { initialAnswers, initialFormQuestion } from "../../utils/Initial.jsx";
+import { APIQuestion } from "../../services/API/APIQuestion.jsx";
 
 const CreateQuestion = ({ lesson }) => {
-  const [selectedImage, setSelectedImage] = useState(null);
   const [selectedTypeQuestion, setSelectedTypeQuestion] = useState("single");
-  const [equation, setEquation] = useState(""); // State for equation
-  const [activeTextarea, setActiveTextarea] = useState(null); // Track active textarea
+  const [equation, setEquation] = useState("");
+  const [activeTextarea, setActiveTextarea] = useState(null);
+  const [selectedPoint, setSelectedPoint] = useState(1);
+  const [selectedTime, setSelectedTime] = useState("30 giây");
+  const [pictureQuestion, setPictureQuestion] = useState(null);
+  const [answers, setAnswers] = useState(initialAnswers);
+  const [selectedAnswers, setSelectedAnswers] = useState([]);
+  const textareasRefs = useRef([]);
 
-  const textareasRefs = useRef([]); // Array to store refs of all textareas
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("🚀 ~ handleSubmit ~ equation:", equation);
+    const arrayAnswer = [];
+    const arrayCorrect = [];
+    // selectedAnswers.map((item,index)=>{
+    //   initialAnswers[index].isTrue = item === index
+    // })
+    await Promise.all(
+      answers.map(async (item) => {
+        console.log("🚀 ~ answers.map ~ item:", item)
+        console.log(selectedAnswers.includes(item.id));
+        
+        let response;
+        if (item?.content) {
+          response = await APIAnswer.APICreate({
+            content: item.content,
+            isTrue: selectedAnswers.includes(item.id),
+          });
+          console.log("Content Response ID:", response.data._id);
+        } else if (item?.secure_url) {
+          response = await APIAnswer.APICreate({
+            relatedPictures: {
+              public_id: item?.public_id,
+              secure_url: item?.secure_url,
+            },
+            isTrue: selectedAnswers.includes(item.id),
+          });
+          console.log("Content Response ID:", response.data._id);
+        }
 
+        if (response?.data?._id) {
+          arrayAnswer.push(response.data._id);
+          if (selectedAnswers.includes(item.id)) {
+            arrayCorrect.push(response.data._id);
+          }
+        }
+      })
+    );
+    initialFormQuestion.question = equation;
+
+    (initialFormQuestion.pictureQuestion = {
+      public_id: pictureQuestion?.public_id,
+      secure_url: pictureQuestion?.secure_url,
+    }),
+      (initialFormQuestion.isMultiple =
+        selectedTypeQuestion === "single" ? false : true);
+    initialFormQuestion.point = selectedPoint;
+    initialFormQuestion.time = selectedTime;
+    initialFormQuestion.answers = arrayAnswer;
+    initialFormQuestion.answersCorrect = arrayCorrect;
+    console.log(initialFormQuestion);
+
+    const response = await APIQuestion.APICreate(initialFormQuestion);
+    console.log("🚀 ~ handleSubmit ~ response:", response);
+  };
   // Hàm xử lý khi người dùng click vào textarea
   const handleTextareaClick = (index) => {
     console.log("🚀 ~ handleTextareaClick ~ index:", index);
     console.log(textareasRefs);
-
     setActiveTextarea(index); // Store the index of the active textarea
   };
 
@@ -36,7 +98,6 @@ const CreateQuestion = ({ lesson }) => {
       const textarea = textareasRefs.current[activeTextarea];
 
       if (textarea) {
-        console.log("🚀 ~ insertEquation ~ textarea:", textarea);
         const start = textarea.selectionStart;
         const end = textarea.selectionEnd;
         const newText =
@@ -44,23 +105,49 @@ const CreateQuestion = ({ lesson }) => {
           equation +
           textarea.value.substring(end);
         textarea.value = newText;
-
-        if (textarea.name === "question") setEquation(newText); // Cập nhật phương trình trong state
+        if (textarea.name === "question")
+          setEquation(newText); // Cập nhật phương trình trong state
+        else
+          setAnswers(
+            answers.map((answer) => {
+              return answer.id === Number(textarea.id)
+                ? { ...answer, content: newText }
+                : answer;
+            })
+          );
       }
+    }
+  };
+
+  const uploadPictureQuestion = async (file) => {
+    if (file) {
+      const fileData = new FormData();
+      fileData.append("file", file);
+      const imageQuestion = await APIUpload.uploadImageQuestion(fileData);
+      console.log("🚀 ~ handleSubmit ~ imageQuestion:", imageQuestion);
+      setPictureQuestion(imageQuestion?.data);
     }
   };
 
   return (
     <div id="base-0" className={`z-0 h-screen ${lesson ? "" : "w-screen"}`}>
-      <div
+      <form
+        // onSubmit={handleSubmit}
         id="question-editor-container"
         className="overflow-hidden h-screen bg-dark-3"
       >
-        <HeaderCreateQuestion lesson={lesson} />
+        <HeaderCreateQuestion
+          lesson={lesson}
+          selectedPoint={selectedPoint}
+          setSelectedPoint={setSelectedPoint}
+          selectedTime={selectedTime}
+          setSelectedTime={setSelectedTime}
+          handleSubmit={handleSubmit}
+        />
 
         <main id="question-editor-main">
           <HeaderEditor
-            lesson={lesson}
+            // lesson={lesson}
             setEquation={(eq) => insertEquation(eq)} // Chèn phương trình vào thẻ textarea đang hoạt động
           />
 
@@ -70,27 +157,27 @@ const CreateQuestion = ({ lesson }) => {
           >
             <div id="question-editor-content-inner" className="self-center">
               <div className="flex justify-center items-center flex-col gap-2 col-start-2 col-span-10 !aspect-video">
-                <div className="w-full h-full md:rounded-2xl flex-0 overflow-hidden question-editor-desktop bg-purple">
+                <div className="rounded-lg w-full h-full md:rounded-2xl flex-0 overflow-hidden question-editor-desktop bg-purple">
                   <section className="h-full p-4">
                     <div className="h-full flex flex-col md:grid md:grid-rows-2">
                       <div className="query-editor relative text-center flex flex-col gap-4 justify-center items-center md:flex-grow md:flex-row md:h-auto mb-4">
                         <div
                           id="query-editor--wrapper"
                           className={`rounded-lg h-52 md:h-full text-light-3 relative flex ${
-                            selectedImage ? "flex-row" : "flex-col"
+                            pictureQuestion ? "flex-row" : "flex-col"
                           }  border-light-20% w-full border-1`}
                         >
-                          {selectedImage ? (
+                          {pictureQuestion ? (
                             <div className="relative">
                               <img
                                 alt="not found"
                                 width={"250px"}
-                                src={URL.createObjectURL(selectedImage)}
+                                src={pictureQuestion?.secure_url}
                               />
                               <br /> <br />
                               <button
                                 className="absolute top-0 bg-inherit p-0 right-0"
-                                onClick={() => setSelectedImage(null)}
+                                onClick={() => setPictureQuestion(null)}
                               >
                                 <BiTrash />
                               </button>
@@ -110,7 +197,9 @@ const CreateQuestion = ({ lesson }) => {
                                     type="file"
                                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                                     onChange={(event) => {
-                                      setSelectedImage(event.target.files[0]);
+                                      uploadPictureQuestion(
+                                        event.target.files[0]
+                                      );
                                     }}
                                   />
                                   <FaFileImage
@@ -154,29 +243,20 @@ const CreateQuestion = ({ lesson }) => {
                             }}
                           >
                             <div className="h-full">
-                              <div
-                                contentEditable="true"
-                                translate="no"
-                                className="ProseMirror h-full"
-                                tabIndex={0}
-                              >
-                                <textarea
-                                  style={{
-                                    width: "100%",
-                                    wordWrap: "break-word",
-                                    backgroundColor: "inherit",
-                                  }}
-                                  name="question"
-                                  className="h-full"
-                                  placeholder="Nhập văn bản của bạn tại đây..."
-                                  value={equation} // Hiển thị giá trị phương trình
-                                  onClick={() => handleTextareaClick(0)} // Khi click vào textarea đầu tiên
-                                  onChange={(event) =>
-                                    handleTextChange(event, 0)
-                                  } // Cập nhật phương trình
-                                  ref={(el) => (textareasRefs.current[0] = el)} // Lưu tham chiếu của textarea
-                                />
-                              </div>
+                              <textarea
+                                style={{
+                                  width: "100%",
+                                  wordWrap: "break-word",
+                                  backgroundColor: "inherit",
+                                }}
+                                name="question"
+                                className="h-full"
+                                placeholder="Nhập văn bản của bạn tại đây..."
+                                value={equation} // Hiển thị giá trị phương trình
+                                onClick={() => handleTextareaClick(0)} // Khi click vào textarea đầu tiên
+                                onChange={handleTextChange} // Cập nhật phương trình
+                                ref={(el) => (textareasRefs.current[0] = el)} // Lưu tham chiếu của textarea
+                              />
                             </div>
                           </div>
                         </div>
@@ -185,8 +265,10 @@ const CreateQuestion = ({ lesson }) => {
                         typeAnswer={selectedTypeQuestion}
                         onTextareaClick={handleTextareaClick}
                         textareasRefs={textareasRefs}
-                        equation={equation}
-                        setEquation={setEquation}
+                        answers={answers}
+                        setAnswers={setAnswers}
+                        selectedAnswers={selectedAnswers}
+                        setSelectedAnswers={setSelectedAnswers}
                       />
                       <TypeOfQuestionx
                         currentType={selectedTypeQuestion}
@@ -199,7 +281,7 @@ const CreateQuestion = ({ lesson }) => {
             </div>
           </section>
         </main>
-      </div>
+      </form>
     </div>
   );
 };

@@ -25,22 +25,22 @@
     max-width: 1280px;
     margin: auto;
 }
-.bg-brand-a {
+.bg-brand-0 {
     --tw-bg-opacity: 1;
     background-color: rgba(45, 112, 174, var(--tw-bg-opacity));
 }
-.bg-brand-b {
+.bg-brand-1 {
     --tw-bg-opacity: 1;
     background-color: rgba(45, 157, 166, var(--tw-bg-opacity));}
-.bg-brand-c {
+.bg-brand-2 {
     --tw-bg-opacity: 1;
     background-color: rgba(239, 169, 41, var(--tw-bg-opacity));}
 
-.bg-brand-d {
+.bg-brand-3 {
     --tw-bg-opacity: 1;
     background-color: rgba(213, 84, 109, var(--tw-bg-opacity));
 }
-.bg-brand-e {
+.bg-brand-4 {
     --tw-bg-opacity: 1;
     background-color: rgba(154, 66, 146, var(--tw-bg-opacity));
 }

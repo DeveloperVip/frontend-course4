@@ -37,7 +37,7 @@ const SettingPage = () => {
     <div className="flex bg-light-1 main-content justify-center overflow-auto">
       <div
         className="overflow-auto settings-layout-desktop p-8"
-        style={{ marginTop: "250px" }}
+        // style={{ marginTop: "250px" }}
       >
         <div className="settings-container flex flex-col p-6 rounded w-96 bg-light-3 desktop">
           <div className="flex mt-6 text-2xl font-bold justify-left text-dark-3">

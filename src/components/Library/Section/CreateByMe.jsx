@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { FaEllipsisV, FaShare, FaCaretUp } from "react-icons/fa";
 import HeaderSection from "./HeaderSection";
+import { useNavigate } from "react-router-dom";
 
 const ButtonPlay = ({ buttonItems }) => {
+  const navigate=useNavigate()
   return (
     <div>
       {buttonItems.map((item, index) => (
         <button
           key={index}
           type="button"
+          onClick={()=>navigate(item.direction)}
           className="w-full text-sm font-semibold text-left hover:bg-light-1 p-2 hover:cursor-pointer"
           aria-label={item.label}
         >
@@ -26,8 +29,8 @@ const DropdownButton = () => {
 
   // Button data for dropdown items
   const buttonItems = [
-    { label: "Assign homework", iconClass: "far fa-clock" },
-    { label: "Preview", iconClass: "far fa-play" },
+    { label: "Bắt đầu", iconClass: "far fa-clock" ,direction:"/startGame"},
+    { label: "Xem trước", iconClass: "far fa-play", direction:"/preview" },
   ];
 
   const toggleDropdown = () => {
@@ -57,7 +60,7 @@ const DropdownButton = () => {
 const CreateByMe = () => {
   return (
     <div className="flex flex-col p-4">
-      <HeaderSection />
+      
 
       <div className="flex flex-col gap-y-1 pb-12">
         <div className="flex items-center">
@@ -88,7 +91,7 @@ const CreateByMe = () => {
                         </div>
                       </div>
 
-                      <div className="name font-bold text-base">lesson 1</div>
+                      <div className="name font-bold text-base flex">lesson 1</div>
                       <div className="text-dark-3 flex flex-row items-center text-xs mt-2">
                         <div className="mr-3.5">
                           <i className="far fa-list mr-0.5" style={{ fontSize: 12 }}></i>
@@ -96,11 +99,11 @@ const CreateByMe = () => {
                         </div>
                         <div className="mr-3.5">
                           <i className="far fa-graduation-cap mr-0.5" style={{ fontSize: 12 }}></i>
-                          University
+                          Đại học
                         </div>
                         <div>
                           <i className="far fa-books mr-0.5" style={{ fontSize: 12 }}></i>
-                          Mathematics
+                          Môn toán
                         </div>
                       </div>
 
@@ -119,15 +122,15 @@ const CreateByMe = () => {
                             <span>an hour ago</span>
                           </div>
                         </div>
-                        <button
+                        <div className="flex flex-row gap-3"><button
                           className="flex items-center px-3 py-1 text-xs font-semibold h-6 bg-dark-5% active:bg-dark-10% text-dark-2 hover:text-dark-3 rounded"
                           aria-label="Share"
                           type="button"
                         >
-                          Share
+                          Chia sẻ
                           <FaShare className="ml-2 text-xs" />
                         </button>
-                        <DropdownButton />
+                        <DropdownButton /></div>
                       </div>
                     </div>
                   </div>

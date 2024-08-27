@@ -1,0 +1,21 @@
+.pagination{
+    width: 60%;
+    margin: 0 auto;
+}
+.pagination a:hover{
+    z-index: 3;
+    color: var(--bs-pagination-active-color);
+    background-color: var(--bs-pagination-active-bg);
+    border-color: var(--bs-pagination-active-border-color)
+}
+.pagination .page-item {
+    padding: 5px;
+    background-color: rgb(239, 243, 243);
+}
+.pagination .active{
+    background-color: rgba(136, 84, 192, var(--tw-bg-opacity));
+
+}
+.pagination .active a{
+    color: white;
+}

@@ -1,0 +1,146 @@
+.score-animation {
+    animation: 2.4s forwards scoreAnimation-9d7f2124;
+}
+.option .option-inner {
+    text-align: center;
+    vertical-align: middle;
+    box-sizing: border-box;
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+    transition: all .3s;
+    position: relative;
+    box-shadow: inset 0 -8px #0003;
+}
+.resizeable-text {
+    text-align: center;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 24px;
+    font-weight: 500;
+    display: flex;
+}
+.option.is-correct>.themed-option-container .option-inner {
+    --twc-option_correct_start: 111.5 100% 20.8%;
+    --twc-option_correct_middle: 111.8 68.1% 35.7%;
+    --twc-option_correct_end: 90 83.3% 44.7%;
+    background-image: -webkit-gradient(linear, left bottom, left top, from(var(--tw-gradient-stops)));
+    background-image: linear-gradient(to top, var(--tw-gradient-stops));
+    --tw-gradient-from: hsl(var(--twc-option_correct_start) / var(--twc-option_correct_start-opacity, 1)) var(--tw-gradient-from-position);
+    --tw-gradient-from-position: ;
+    --tw-gradient-to:  hsl(var(--twc-option_correct_end) / var(--twc-option_correct_end-opacity, 1)) var(--tw-gradient-to-position);
+    --tw-gradient-stops:  var(--tw-gradient-from), hsl(var(--twc-option_correct_middle) / var(--twc-option_correct_middle-opacity, 1)) var(--tw-gradient-via-position), var(--tw-gradient-to);
+    --tw-gradient-via-position: ;
+    --tw-gradient-to-position: ;
+}
+.option.is-selected {
+    opacity: 1;
+    transform: scale(1.05); /* Làm nổi bật đáp án được chọn */
+  }
+  
+  .option.blurred {
+    opacity: 0.5;
+    filter: blur(2px);
+    pointer-events: none; /* Không thể click vào các đáp án đã làm mờ */
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+  
+.option.is-incorrect>.themed-option-container .option-inner {
+    --twc-option_wrong_start: 0 100% 22.2%;
+    --twc-option_wrong_middle: 0 100% 33.1%;
+    --twc-option_wrong_end: 0 100% 50%;
+    background-image: -webkit-gradient(linear,left bottom,left top,from(var(--tw-gradient-stops)));
+    background-image: linear-gradient(to top,var(--tw-gradient-stops));
+    --tw-gradient-from: hsl(var(--twc-option_wrong_start)/var(--twc-option_wrong_start-opacity,1))var(--tw-gradient-from-position);
+    --tw-gradient-from-position: ;
+    --tw-gradient-to: hsl(var(--twc-option_wrong_end)/var(--twc-option_wrong_end-opacity,1))var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from),hsl(var(--twc-option_wrong_middle)/var(--twc-option_wrong_middle-opacity,1))var(--tw-gradient-via-position),var(--tw-gradient-to);
+    --tw-gradient-via-position: ;
+    --tw-gradient-to-position:
+}
+.option.option-1 .option-inner {
+    --twc-option_0_start: 208.8 95.8% 46.9%;
+    --twc-option_0_end: 208.5 81.9% 28.2%;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(var(--tw-gradient-stops)));
+    background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+    --tw-gradient-from: hsl(var(--twc-option_0_start) / var(--twc-option_0_start-opacity, 1)) var(--tw-gradient-from-position);
+    --tw-gradient-from-position: ;
+    --tw-gradient-to: hsl(var(--twc-option_0_end) / var(--twc-option_0_end-opacity, 1)) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    --tw-gradient-to-position: ;
+}
+.option.option-2 .option-inner {
+    --twc-option_1_start: 184.9 100% 38.2%;
+    --twc-option_1_end: 180 100% 22.7%;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(var(--tw-gradient-stops)));
+    background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+    --tw-gradient-from: hsl(var(--twc-option_1_start) / var(--twc-option_1_start-opacity, 1)) var(--tw-gradient-from-position);
+    --tw-gradient-from-position: ;
+    --tw-gradient-to: hsl(var(--twc-option_1_end) / var(--twc-option_1_end-opacity, 1)) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    --tw-gradient-to-position: ;
+}
+.option.option-3 .option-inner {
+    --twc-option_2_start: 38.8 100% 50%;
+    --twc-option_2_end: 25 89.7% 45.7%;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(var(--tw-gradient-stops)));
+    background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+    --tw-gradient-from: hsl(var(--twc-option_2_start) / var(--twc-option_2_start-opacity, 1)) var(--tw-gradient-from-position);
+    --tw-gradient-from-position: ;
+    --tw-gradient-to: hsl(var(--twc-option_2_end) / var(--twc-option_2_end-opacity, 1)) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    --tw-gradient-to-position: ;
+}
+.option.option-4 .option-inner {
+    --twc-option_3_start: 344.6 92.1% 65.1%;
+    --twc-option_3_end: 338.3 85.4% 45.7%;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(var(--tw-gradient-stops)));
+    background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+    --tw-gradient-from: hsl(var(--twc-option_3_start) / var(--twc-option_3_start-opacity, 1)) var(--tw-gradient-from-position);
+    --tw-gradient-from-position: ;
+    --tw-gradient-to: hsl(var(--twc-option_3_end) / var(--twc-option_3_end-opacity, 1)) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    --tw-gradient-to-position: ;
+}
+
+@keyframes scoreAnimation-9d7f2124 {
+    0% {
+        opacity: 1;
+        transform: translateY(0)
+    }
+
+    20% {
+        opacity: 1;
+        transform: translateY(10px)
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-20px)
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-100%)
+    }
+}
+.option-pressed {
+    transition: all .4s;
+    animation: .4s ease-in-out pressAndRelease;
+}
+@keyframes pressAndRelease {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(4px);
+    }
+    
+    100% {
+        transform: translateY(0);
+    }
+}

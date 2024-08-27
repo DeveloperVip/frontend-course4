@@ -1,0 +1,16 @@
+.shadow-\[-1px_0_0_\#3b71ca\,_0_1px_0_0_\#3b71ca\,_0_-1px_0_0_\#3b71ca\] {
+    --tw-shadow: -1px 0 0 #3b71ca, 0 1px 0 0 #3b71ca, 0 -1px 0 0 #3b71ca;
+    --tw-shadow-colored: -1px 0 0 var(--tw-shadow-color), 0 1px 0 0 var(--tw-shadow-color), 0 -1px 0 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow)
+}
+.leading-\[2\.15\] {
+    line-height: 2.15;
+}
+.py-\[0\.32rem\] {
+    padding-top: .32rem;
+    padding-bottom: .32rem;
+}
+.outline-none {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
