@@ -9,7 +9,7 @@ import axios from "axios";
 //https://backend-course-4.vercel.app/
 // };
 const axiosInstance = axios.create({
-  baseURL: "https://backend-course-4.vercel.app/"
+  baseURL: "http://localhost:8000"
 });
 axiosInstance.interceptors.request.use(
   function (config) {

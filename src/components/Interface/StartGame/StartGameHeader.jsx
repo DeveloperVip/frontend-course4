@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { TimerQuizContext } from "../../../contexts/displayQuiz/timerQuizContext";
 
 const StartGameHeader = ({currentQuestion, totalQuestions}) => {
+  const {timerQuiz} = useContext(TimerQuizContext)
+  console.log("🚀 ~ StartGameHeader ~ timerQuiz:", timerQuiz)
   return (
     <div className="app-header-container fixed z-101 top-0 left-0 right-0 p-2 sm:p-4 text-white text-base bg-[#141414]">
-      {/* Powerup Effects Wrapper */}
       <div className="powerup-effects-wrapper absolute top-full w-full pointer-events-none">
         <div className="powerup-effects-center-container">
           <p className="effects-container" />
@@ -11,19 +13,20 @@ const StartGameHeader = ({currentQuestion, totalQuestions}) => {
         </div>
       </div>
 
-      {/* Actions Wrapper */}
       <div className="actions-wrapper flex flex-1 justify-between items-center w-full h-full gap-1 sm:gap-3">
-        {/* Actions Container */}
         <div className="actions-container flex gap-1 sm:gap-3">
-          {/* Current Question Number */}
           <div className="flex items-center bg-slate-200 bg-opacity-10 h-[34px] sm:h-[42px] rounded-lg px-2 sm:px-3.5 py-2 sm:py-2.5 text-lg font-medium">
-            <span className="text-sm sm:text-base">{currentQuestion}</span>
+            <span className="text-sm sm:text-base">{currentQuestion + 1}</span>
             <span className="total-questions">/{totalQuestions}</span>
           </div>
         </div>
 
-        {/* Icon Button */}
-        <button
+        <div className="box-border select-none font-bold text-slate-200  hover:bg-slate-500 active:bg-slate-200-10 h-9 w-20 sm:h-10 sm:w-20 rounded-lg">
+          <span>{timerQuiz.seconds} s</span>
+
+        </div>
+
+        {/* <button
           className="box-border select-none font-bold text-slate-200 bg-slate-200 hover:bg-slate-500 active:bg-slate-200-10 h-9 w-9 sm:h-10 sm:w-10 rounded-lg"
           style={{
             backgroundColor: "rgba(255, 255, 255, 0.1)",
@@ -44,7 +47,7 @@ const StartGameHeader = ({currentQuestion, totalQuestions}) => {
               fill="currentColor"
             />
           </svg>
-        </button>
+        </button> */}
       </div>
     </div>
   );

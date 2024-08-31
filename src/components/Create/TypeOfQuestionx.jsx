@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import "./TypeOfQuestion.css"
+import { InnerClickContext } from "../../contexts/lesson/innerClick";
 
 const ToggleButton = ({ isActive, onClick, ariaLabel, title, children }) => (
   <button
@@ -17,6 +19,11 @@ const ToggleButton = ({ isActive, onClick, ariaLabel, title, children }) => (
 );
 
 const TypeOfQuestionx = ({ selectType, currentType }) => {
+  const {activateInnerClick} = useContext(InnerClickContext)
+  const handleClick = (name)=>{
+    selectType(name) 
+    activateInnerClick(true)
+  }
   return (
     <span
       className="bg-dark-50% p-0.5 text-light-66% flex md:w-fit rounded gap-0.5 w-full my-2"
@@ -24,7 +31,7 @@ const TypeOfQuestionx = ({ selectType, currentType }) => {
     >
       <ToggleButton
         isActive={currentType === "single"}
-        onClick={() => selectType("single")}
+        onClick={() => {handleClick("single")}}
         ariaLabel="Single correct answer"
         title="Single correct answer"
       >
@@ -32,7 +39,7 @@ const TypeOfQuestionx = ({ selectType, currentType }) => {
       </ToggleButton>
       <ToggleButton
         isActive={currentType === "multiple"}
-        onClick={() => selectType("multiple")}
+        onClick={() => handleClick("multiple")}
         ariaLabel="Multiple correct answers"
         title="Multiple correct answers"
       >

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import "./CreateQuestion.css";
 import { FaFileImage, FaVideo } from "react-icons/fa6";
 import { PiMicrophoneLight } from "react-icons/pi";
@@ -11,18 +11,57 @@ import { APIAnswer } from "../../services/API/APIAnswer.jsx";
 import { APIUpload } from "../../services/API/APIUpload.jsx";
 import { initialAnswers, initialFormQuestion } from "../../utils/Initial.jsx";
 import { APIQuestion } from "../../services/API/APIQuestion.jsx";
+import { LessonContext } from "../../contexts/lesson/lessonContext.jsx";
+import { SelectedSlideContext } from "../../contexts/lesson/selectedSlide.jsx";
 
-const CreateQuestion = ({ lesson }) => {
-  const [selectedTypeQuestion, setSelectedTypeQuestion] = useState("single");
-  const [equation, setEquation] = useState("");
+const CreateQuestion = ({ slides, lesson }) => {
+  console.log("🚀 ~ CreateQuestion ~ slides:", slides)
+  const { selectedSlide } = useContext(SelectedSlideContext);
+  const { handleSaveSlide } = useContext(LessonContext);
+  const [selectedTypeQuestion, setSelectedTypeQuestion] = useState(slides?.isMultiple === "multiple" ? "multiple" : "single");
+  const [equation, setEquation] = useState(slides?.question || "");
   const [activeTextarea, setActiveTextarea] = useState(null);
-  const [selectedPoint, setSelectedPoint] = useState(1);
-  const [selectedTime, setSelectedTime] = useState("30 giây");
-  const [pictureQuestion, setPictureQuestion] = useState(null);
-  const [answers, setAnswers] = useState(initialAnswers);
-  const [selectedAnswers, setSelectedAnswers] = useState([]);
-  const textareasRefs = useRef([]);
+  const [selectedPoint, setSelectedPoint] = useState(slides?.point || 1);
+  const [selectedTime, setSelectedTime] = useState(slides?.time || "30 giây");
+  const [pictureQuestion, setPictureQuestion] = useState( slides?.pictureQuestion?.secure_url ? slides?.pictureQuestion : null);
+  const [answers, setAnswers] = useState(slides?.answers?.length ? slides?.answers : initialAnswers);
+  const [selectedAnswers, setSelectedAnswers] = useState(slides?.answersCorrect?.length ? slides?.answersCorrect : []);
+  const textareasRefs = useRef( slides?.answersCorrect?.length ? slides?.answersCorrect : []);
 
+  // Sử dụng useEffect để cập nhật state khi slides thay đổi
+  useEffect(() => {
+    if (slides) {
+      // Tạo slide object để lưu
+      const slide = {
+        isMultiple: selectedTypeQuestion,
+        question: equation,
+        point:selectedPoint,
+        time: selectedTime,
+        pictureQuestion:pictureQuestion,
+        answers: answers,
+        answersCorrect:selectedAnswers,
+      };
+      console.log("🚀 ~ useEffect ~ slide.selectedAnswers:", slide)
+      // Gọi handleSaveSlide để lưu slide
+      handleSaveSlide(slides?.id, slide);
+
+      // else return;
+    }
+  }, [selectedTypeQuestion,equation,selectedPoint,selectedTime,pictureQuestion,answers,selectedAnswers]);
+  useEffect(()=>{
+    console.log("🚀 ~ CreateQuestion ~ slides:", slides);
+    setSelectedTypeQuestion(slides?.isMultiple === "multiple"? "multiple" : "single");
+    setEquation(slides?.question || "");
+    setSelectedPoint(slides?.point || 1);
+    setSelectedTime(slides?.time || "30 giây");
+    setPictureQuestion(
+      slides?.pictureQuestion?.secure_url ? slides?.pictureQuestion : null
+    );
+    setAnswers(slides?.answers?.length ? slides?.answers : initialAnswers);
+    setSelectedAnswers(
+      slides?.answersCorrect?.length ? slides?.answersCorrect : []
+    );
+  },[selectedSlide])
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("🚀 ~ handleSubmit ~ equation:", equation);
@@ -33,9 +72,9 @@ const CreateQuestion = ({ lesson }) => {
     // })
     await Promise.all(
       answers.map(async (item) => {
-        console.log("🚀 ~ answers.map ~ item:", item)
+        console.log("🚀 ~ answers.map ~ item:", item);
         console.log(selectedAnswers.includes(item.id));
-        
+
         let response;
         if (item?.content) {
           response = await APIAnswer.APICreate({
@@ -63,7 +102,6 @@ const CreateQuestion = ({ lesson }) => {
       })
     );
     initialFormQuestion.question = equation;
-
     (initialFormQuestion.pictureQuestion = {
       public_id: pictureQuestion?.public_id,
       secure_url: pictureQuestion?.secure_url,
@@ -81,8 +119,8 @@ const CreateQuestion = ({ lesson }) => {
   };
   // Hàm xử lý khi người dùng click vào textarea
   const handleTextareaClick = (index) => {
-    console.log("🚀 ~ handleTextareaClick ~ index:", index);
-    console.log(textareasRefs);
+    // console.log("🚀 ~ handleTextareaClick ~ index:", index);
+    // console.log(textareasRefs);
     setActiveTextarea(index); // Store the index of the active textarea
   };
 
@@ -124,7 +162,7 @@ const CreateQuestion = ({ lesson }) => {
       const fileData = new FormData();
       fileData.append("file", file);
       const imageQuestion = await APIUpload.uploadImageQuestion(fileData);
-      console.log("🚀 ~ handleSubmit ~ imageQuestion:", imageQuestion);
+      // console.log("🚀 ~ handleSubmit ~ imageQuestion:", imageQuestion);
       setPictureQuestion(imageQuestion?.data);
     }
   };
@@ -138,6 +176,7 @@ const CreateQuestion = ({ lesson }) => {
       >
         <HeaderCreateQuestion
           lesson={lesson}
+          slides={slides}
           selectedPoint={selectedPoint}
           setSelectedPoint={setSelectedPoint}
           selectedTime={selectedTime}
@@ -147,7 +186,7 @@ const CreateQuestion = ({ lesson }) => {
 
         <main id="question-editor-main">
           <HeaderEditor
-            // lesson={lesson}
+            // slides={slides}
             setEquation={(eq) => insertEquation(eq)} // Chèn phương trình vào thẻ textarea đang hoạt động
           />
 

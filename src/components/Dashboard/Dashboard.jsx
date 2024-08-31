@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { VscArchive } from "react-icons/vsc";
 import { HiOutlinePlusCircle } from "react-icons/hi";
 import { FaAddressBook } from "react-icons/fa6";
 import { IoIosSettings } from "react-icons/io";
 import { MdLogout } from "react-icons/md";
+import { removeQueryParameter } from "../../page/MainPage/RemoveParams";
+import { AccountNameContext } from "../../contexts/user/AccountName";
 
 // Component Button tái sử dụng
 const SidebarButton = ({ icon: Icon, label, direction = "", isActive, onClick }) => {
@@ -26,6 +28,7 @@ const SidebarButton = ({ icon: Icon, label, direction = "", isActive, onClick })
 };
 
 const Dashboard = () => {
+const {accountName} = useContext(AccountNameContext)
   const [appear, setAppear] = useState(false);
   const [activeButton, setActiveButton] = useState("/home"); // Default active button
   const navigate = useNavigate();
@@ -42,17 +45,16 @@ const Dashboard = () => {
               <div className="relative min-w-40 max-w-40">
                 <div className="flex items-center mb-3">
                   <div className="w-full">
-                    <a
-                      href="/profile/669faed55135824a6a3cab69"
+                    <Link
+                      to="/profile"
                       className="inline-block w-full text-sm font-semibold text-dark-2 cursor-pointer"
-                      data-testid="hero-profile-sidebar"
                     >
                       <div>
                         <span className="inline-block align-bottom">
-                          Mr. wfwfa
+                          {accountName}
                         </span>
                       </div>
-                    </a>
+                    </Link>
 
                     <div
                       translate="no"

@@ -3,6 +3,7 @@ import { FaExclamationTriangle, FaRegCheckSquare } from "react-icons/fa";
 // import { FaExclamationTriangle, FaRegCheckSquare } from "react-icons/fa6";
 
 const SlidePreview = ({ slide }) => {
+  // console.log("🚀 ~ SlidePreview ~ slide:", slide)
   return (
     <>
       <button

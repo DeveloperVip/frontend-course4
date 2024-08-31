@@ -22,6 +22,7 @@ const APIprofile = {
         // handle error
       });
   },
+
   changePassword: (_id, passwordData) => {
     return axiosInstance
       .put(`/user/password-user/${_id}`, passwordData)

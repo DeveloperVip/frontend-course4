@@ -1,22 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FaStream, FaRegCopy, FaRegTrashAlt } from "react-icons/fa";
 import SlidePreview from "./SlidePreview.jsx";
 import BottomToolbar from "./BottomToolbar.jsx";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { SelectedSlideContext } from "../../../contexts/lesson/selectedSlide.jsx";
 
 const Sidebar = ({ slides, onDuplicate, onDelete, onMove, handleAddSlide }) => {
+  console.log("🚀 ~ slides:", slides)
   const [slider, setSlider] = useState(slides);
-  console.log("🚀 ~ Sidebar ~ slides:", slides)
-
+  const { activateSelectedSlide } = useContext(SelectedSlideContext);
+  // console.log("🚀 ~ selectedSlide:", selectedSlide)
   // Đồng bộ slider với slides khi slides thay đổi
   useEffect(() => {
-    console.log("vào đây");
+    // console.log("vào đây");
     setSlider(slides);
   }, [slides]);
 
   const handleOnDragEnd = (param) => {
     const { source, destination } = param;
-    console.log("🚀 ~ handleOnDragEnd ~ source, destination:", source, destination)
+    // console.log(
+    //   "🚀 ~ handleOnDragEnd ~ source, destination:",
+    //   source,
+    //   destination
+    // );
 
     // Kiểm tra xem destination có tồn tại hay không
     if (!destination) return;
@@ -53,77 +59,82 @@ const Sidebar = ({ slides, onDuplicate, onDelete, onMove, handleAddSlide }) => {
             className="overflow-x-auto slide-sidebar-content-list-container h-full max-h-full"
           >
             <DragDropContext onDragEnd={handleOnDragEnd}>
-  <Droppable droppableId="slides" type="group">
-    {(provided, snapshot) => {
-      // Log the droppable provided and snapshot
-      console.log("Droppable props:", provided);
-      console.log("Droppable snapshot:", snapshot);
+              <Droppable droppableId="slides" type="group">
+                {(provided, snapshot) => {
+                  // Log the droppable provided and snapshot
+                  return (
+                    <div
+                      className="slide-sidebar-content-list"
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                    >
+                      {slider.map((slide, index) => {
+                        // console.log("🚀 ~ {slider.map ~ slide:", slide);
 
-      return (
-        <div
-          className="slide-sidebar-content-list"
-          {...provided.droppableProps}
-          ref={provided.innerRef}
-        >
-          {slider.map((slide, index) => {
-            console.log("🚀 ~ {slider.map ~ slide:", slide)
-
-            return (
-              <Draggable key={slide.id} draggableId={slide.id.toString()} index={index}>
-                {(provided) => (
-                  <div
-                    className="slide-preview flex pr-2 cursor-pointer mt-1"
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                  >
-                    <div className="p-1 pl-1 rounded-r-lg flex bg-light-20% text-lilac-faded">
-                      <div className="flex flex-col justify-evenly items-center w-6">
-                        <div className="text-sm font-bold">{index + 1}</div>
-                        <button
-                          type="button"
-                          onClick={() => onDuplicate(slide.id)}
-                          data-testid={`duplicate-slide-${index}`}
-                          className="w-6 h-6 inline-flex justify-center items-center hover:bg-lilac-10% rounded-sm v-popper--has-tooltip p-0"
-                        >
-                          <FaRegCopy
-                            className="flex items-center far fa-copy"
-                            style={{ fontSize: 12 }}
-                          />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => onDelete(slide.id)}
-                          className="w-6 h-6 inline-flex justify-center items-center hover:bg-lilac-10% rounded-sm v-popper--has-tooltip p-0"
-                          data-testid={`delete-slide-${index}`}
-                        >
-                          <FaRegTrashAlt
-                            className="flex items-center far fa-trash-alt"
-                            style={{ fontSize: 12 }}
-                          />
-                        </button>
-                      </div>
-                      <div className="ml-1">
-                        <button
-                          type="button"
-                          className="focus:ring-2 ring-lilac-light relative transition-transform duration-500 rounded overflow-hidden border-2 p-0"
-                        >
-                          <SlidePreview slide={slide} />
-                        </button>
-                      </div>
+                        return (
+                          <Draggable
+                            key={slide.id}
+                            draggableId={slide.id.toString()}
+                            index={index}
+                          >
+                            {(provided) => (
+                              <div
+                                className="slide-preview flex pr-2 cursor-pointer mt-1"
+                                ref={provided.innerRef}
+                                onClick={() => {
+                                  activateSelectedSlide(slide.id);
+                                }}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <div className="p-1 pl-1 rounded-r-lg flex bg-light-20% text-lilac-faded">
+                                  <div className="flex flex-col justify-evenly items-center w-6">
+                                    <div className="text-sm font-bold">
+                                      {index + 1}
+                                    </div>
+                                    <button
+                                      type="button"
+                                      onClick={() => onDuplicate(slide.id)}
+                                      data-testid={`duplicate-slide-${index}`}
+                                      className="w-6 h-6 inline-flex justify-center items-center hover:bg-lilac-10% rounded-sm v-popper--has-tooltip p-0"
+                                    >
+                                      <FaRegCopy
+                                        className="flex items-center far fa-copy"
+                                        style={{ fontSize: 12 }}
+                                      />
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() => onDelete(slide.id)}
+                                      className="w-6 h-6 inline-flex justify-center items-center hover:bg-lilac-10% rounded-sm v-popper--has-tooltip p-0"
+                                      data-testid={`delete-slide-${index}`}
+                                    >
+                                      <FaRegTrashAlt
+                                        className="flex items-center far fa-trash-alt"
+                                        style={{ fontSize: 12 }}
+                                      />
+                                    </button>
+                                  </div>
+                                  <div className="ml-1">
+                                    <button
+                                      type="button"
+                                      className="focus:ring-2 ring-lilac-light relative transition-transform duration-500 rounded overflow-hidden border-2 p-0"
+                                    >
+                                      <SlidePreview slide={slide} />
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+                          </Draggable>
+                        );
+                      })}
+                      {provided.placeholder}
                     </div>
-                  </div>
-                )}
-              </Draggable>
-            );
-          })}
-          {provided.placeholder}
-        </div>
-      );
-    }}
-  </Droppable>
-</DragDropContext>
-
+                  );
+                }}
+              </Droppable>
+            </DragDropContext>
           </div>
           <BottomToolbar onAddSlide={handleAddSlide} />
         </div>

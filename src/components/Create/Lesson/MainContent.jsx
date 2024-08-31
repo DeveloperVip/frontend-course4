@@ -3,6 +3,7 @@ import SlidePreview from "./SlidePreview.jsx";
 import CreateQuestion from "../CreateQuestion.jsx";
 
 const MainContent = ({ slides, onAddQuestion }) => {
+  // console.log("🚀 ~ MainContent ~ slides:", slides)
   return (
     <div className="main-content">
       {/* <div className="slides-container">
@@ -12,7 +13,7 @@ const MainContent = ({ slides, onAddQuestion }) => {
           </div>
         ))}
       </div> */}
-      <CreateQuestion lesson={true} onAddQuestion={onAddQuestion} />
+      <CreateQuestion lesson={true} slides={slides} onAddQuestion={onAddQuestion} />
     </div>
   );
 };

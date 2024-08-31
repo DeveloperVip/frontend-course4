@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import CheckPointHeader from "../../components/Interface/CheckPoint/CheckPointHeader.jsx";
 import CheckPointItem from "../../components/Interface/CheckPoint/CheckPointItem.jsx";
+import { DisplayQuizContext } from "../../contexts/displayQuiz/displayQuizContext.jsx";
 
 const CheckPointPage = () => {
+  const {displayQuiz} = useContext(DisplayQuizContext)
+  console.log(displayQuiz);
+  
   return (
     <div className="flex flex-col">
       <CheckPointHeader />

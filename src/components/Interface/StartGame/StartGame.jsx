@@ -1,31 +1,33 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./StartGame.css";
 import StartGameHeader from "./StartGameHeader.jsx";
+import SlideGame from "./SlideGame.jsx";
+import { DisplayQuizContext } from "../../../contexts/displayQuiz/displayQuizContext.jsx";
+import { useParams } from "react-router-dom";
+import { useFetchAPILessonById } from "../../../hook/useFetchAPILesson.jsx";
 
 const StartGame = () => {
-  const options = ["mẹ", "con", "cha", "muốn"];
-  const [currentQuestion, setCurrentQuestion] = useState(4);
-  const totalQuestions = 19;
-  const [selectedOption, setSelectedOption] = useState(null); // Quản lý đáp án đã chọn
+  const param = useParams();
+  console.log("🚀 ~ StartGame ~ param:", param?.id);
+  const {
+    displayQuestions,
+    currentQuestion,
+    nexted,
+    displayQuiz,
+    handleBefore,
+    setStartTimer,
+    setDisplayQuiz,
+    setParamQuizz,
+  } = useContext(DisplayQuizContext);
+  useEffect(() => {
+    setParamQuizz(param);
+  }, [param]);
+  useEffect(() => {
+    setStartTimer(true);
+  }, [param ]);
+
+  console.log("🚀 ~ StartGame ~ currentQuestion:", currentQuestion);
   const [showPopup, setShowPopup] = useState(false);
-
-  const handleNext = () => {
-    if (currentQuestion < totalQuestions) {
-      setCurrentQuestion(currentQuestion + 1);
-      setSelectedOption(null); // Reset đáp án đã chọn khi chuyển câu
-    }
-  };
-
-  const handleBefore = () => {
-    if (currentQuestion > 1) {
-      setCurrentQuestion(currentQuestion - 1);
-      setSelectedOption(null); // Reset đáp án đã chọn khi chuyển câu
-    }
-  };
-
-  const handleOptionClick = (index) => {
-    setSelectedOption(index); // Cập nhật trạng thái đáp án đã chọn
-  };
 
   const handleSubmit = () => {
     setShowPopup(true); // Hiển thị popup xác nhận khi nhấn vào "Nộp bài"
@@ -40,85 +42,28 @@ const StartGame = () => {
     setShowPopup(false); // Ẩn popup khi người dùng nhấn "Hủy bỏ"
   };
 
+  const handleClick = () => {
+    nexted.current = true;
+  };
+
   return (
     <div className="w-screen h-screen overflow-hidden quiz-container-inner flex flex-col gap-2">
       <StartGameHeader
         currentQuestion={currentQuestion}
-        totalQuestions={totalQuestions}
+        totalQuestions={displayQuiz?.questions?.length}
       />
-      <div className="h-1/2 w-full flex flex-col">
-        <div
-          className="themed question-container flex justify-center relative overflow-y-auto overflow-x-hidden rounded-lg transition-all duration-300 ease-in overflow-y-auto flex-1"
-          currentquestionnumber={currentQuestion}
-          totalquestions={totalQuestions}
-        >
-          <div className="question-container-inner box-border text-center rounded-lg w-full h-auto overflow-y-visible flex flex-row">
-            <div
-              aria-describedby="questionText"
-              className="question-text relative p-2 w-auto flex flex-1 text-ds-light-300 align-middle transition-all duration-300 ease-in leading-8 overflow-y-auto"
-            >
-              <div className="w-full h-full" data-cy="read-aloud-container">
-                <div
-                  id="questionText"
-                  className="resizeable-text"
-                  shouldscroll="true"
-                  style={{ fontSize: 32 }}
-                >
-                  <div className="text-container w-full">
-                    <div className="resizeable gap-x-2 question-text-color text-ds-light-500">
-                      <p style={{ display: "inline" }}>
-                        Nghĩa ... như nước trong nguồn chảy ra
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="options-container w-full text-center rounded-t-lg mt-2 h-1/2">
-        <div className="flex flex-col gap-y-2 h-full">
-          <div
-            className="options-grid flex flex-col sm:flex-row w-full h-full gap-2"
-            style={{ "--totalOptions": options.length }}
-          >
-            {options.map((option, index) => {
-              return (
-                <div
-                  key={index}
-                  className={`option pb-1 sm:p-1 sm:pb-2 rounded-lg relative hover:cursor-pointer option-${
-                    index + 1
-                  } sm:w-[calc((100%-32px)/var(--totalOptions))] flex-1 ${
-                    selectedOption !== null && selectedOption !== index
-                      ? "blurred"
-                      : ""
-                  } ${selectedOption === index ? "is-selected" : ""}`}
-                  onClick={() => handleOptionClick(index)} // Sự kiện chọn đáp án
-                >
-                  <div className="themed h-full option-inner w-full h-full">
-                    <span className="bpl-content-container flex justify-center items-center h-full">
-                      <p style={{ fontSize: 32 }}>{option}</p>
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
+      <SlideGame />
 
       <div className="flex justify-between items-center p-4">
         <button
           onClick={handleBefore}
-          disabled={currentQuestion === 1}
+          disabled="true"
           className="bg-blue-500 text-white px-4 py-2 rounded-lg disabled:opacity-50"
         >
           Quay lại
         </button>
 
-        {currentQuestion === totalQuestions ? (
+        {currentQuestion === displayQuiz?.questions?.length - 1 ? (
           <button
             onClick={handleSubmit}
             className="bg-green-500 text-white px-4 py-2 rounded-lg"
@@ -127,8 +72,8 @@ const StartGame = () => {
           </button>
         ) : (
           <button
-            onClick={handleNext}
-            disabled={currentQuestion === totalQuestions}
+            onClick={handleClick}
+            disabled={currentQuestion === displayQuiz?.questions?.length - 1}
             className="bg-blue-500 text-white px-4 py-2 rounded-lg disabled:opacity-50"
           >
             Câu tiếp theo

@@ -1,8 +1,9 @@
 // import React, { useState } from 'react';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./SettingPage.css";
 import { FaUserCircle } from "react-icons/fa";
 import { FaCaretDown, FaFlag, FaLanguage, FaLock } from "react-icons/fa6";
+import { APIUser } from "../../services/API/APIUser";
 const SettingPage = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -11,18 +12,42 @@ const SettingPage = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [language, setLanguage] = useState("English");
   const [isLanguageDropdownOpen, setLanguageDropdownOpen] = useState(false);
+  const [identify,setIdentify] = useState("")
 
-  const handleSaveAccount = () => {
+  const handleSaveAccount = async() => {
     // Logic to save email and username
     console.log("Email:", email);
     console.log("Username:", username);
+    const data= {
+      email:email,
+      userName:username
+    }
+    const response = await APIUser.APIUpdateInfor(identify,data)
+    console.log("🚀 ~ handleSaveAccount ~ response:", response)
   };
 
-  const handleChangePassword = () => {
+  const handleChangePassword = async() => {
+    if (newPassword.length < 6) {
+      alert("Mật khẩu mới phải có ít nhất 6 ký tự.");
+      return;
+    }
+  
+    if (newPassword !== repeatPassword) {
+      alert("Mật khẩu mới và nhập lại mật khẩu không khớp.");
+      return;
+    }
+  
     // Logic to change password
     console.log("Old Password:", oldPassword);
     console.log("New Password:", newPassword);
     console.log("Repeat Password:", repeatPassword);
+    const data = {
+      newPassword:newPassword,
+      password:oldPassword,
+    }
+    const response = await APIUser.APIUpdatePassword(identify,data)
+    console.log(response);
+    
   };
   const toggleLanguageDropdown = () => {
     setLanguageDropdownOpen(!isLanguageDropdownOpen);
@@ -32,6 +57,23 @@ const SettingPage = () => {
     setLanguage(lang);
     setLanguageDropdownOpen(false); // Đóng dropdown sau khi chọn ngôn ngữ
   };
+
+  useEffect(()=>{
+    const fetchUserInfo = async () => {
+      try {
+        const response = await APIUser.APIGetInfor();
+        console.log(response);
+        // Assume response contains email and username
+        setIdentify(response.data._id)
+        setEmail(response.data.email);
+        setUsername(response.data.userName);
+      } catch (error) {
+        console.error("Error fetching user info:", error);
+      } 
+    };
+  
+    fetchUserInfo();
+  },[])
 
   return (
     <div className="flex bg-light-1 main-content justify-center overflow-auto">

@@ -8,6 +8,7 @@ import Preview from "../components/Create/Preview.jsx";
 import StartGame from "../components/Interface/StartGame/StartGame.jsx";
 import Layout from "../components/Layout/Layout.jsx";
 import AllMyContent from "../components/Library/Section/AllMyContent.jsx";
+import AddTopic from "../components/Setting/AddTopic.jsx";
 import SettingLesson from "../components/Setting/SettingLesson.jsx";
 // import ReportHeader from "../components/Report/ReportHeader.jsx";
 // import ReportSection from "../components/Report/ReportSection.jsx";
@@ -57,10 +58,11 @@ const publicRoutes = [
     component: MainPage,layout:Layout
   },
   { path: "/presentation/:id", component: LessonPage, layout: Layout },
-  {path:"/startGame",component:StartGame},
+  {path:"/startGame/:id",component:StartGame},
   {path:"/checkPoint",component:CheckPointPage,layout:Layout},
   {path:"/report",component:ReportPage,layout:Layout},
-  {path:"/test", component:SettingLesson}
+  {path:"/test", component:SettingLesson},
+  {path:"/addTopic",component:AddTopic},
 ];
 
 const privateRoutes = [

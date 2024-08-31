@@ -5,9 +5,14 @@ import "./MainPage.css";
 import { FaComputer } from "react-icons/fa6";
 import { MdLanguage } from "react-icons/md";
 // import Footer from "../../components/footer/Footer";
-import { FaFolderOpen, FaSearch } from "react-icons/fa";
+import { FaFilter, FaFolderOpen, FaSearch } from "react-icons/fa";
 import { BiMath } from "react-icons/bi";
 import { SiStudyverse } from "react-icons/si";
+import { useState } from "react";
+import { Dropdown } from "../../components/ToolBar/Dropdown.jsx";
+import { useParams } from "react-router-dom";
+import { removeQueryParameter } from "./RemoveParams.jsx";
+
 // import Dashboard from "../../components/Dashboard/Dashboard";
 // import Header from "../../components/Header/Header";
 
@@ -27,6 +32,16 @@ const QuizSection = ({ icon: Icon, title, category }) => {
 };
 
 function MainPage() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get('token');
+  if(token) {localStorage.setItem("token",token)}
+  removeQueryParameter('token');
+  const [selectedFilter, setSelectedFilter] = useState('Tất cả');
+  const handleFilterSelect = (filter) => {
+    setSelectedFilter(filter);
+    // Handle filter change logic here
+  };
+  const filterOptions = ['Tất cả', 'Đã published'];
   return (
     <div className="flex font-bold ">
       {/* <Dashboard /> */}
@@ -50,7 +65,17 @@ function MainPage() {
             </div>
           </div>
         </div>
+        <div className="w-full p-4 md:px-32 md:py-6 h-fit md:mx-auto flex justify-end">
 
+        <div className="w-2/12 ">
+        <Dropdown
+              title={selectedFilter}
+              icon={<FaFilter style={{ fontSize: 12 }} />}
+              options={filterOptions}
+              onOptionSelect={handleFilterSelect}
+            />
+        </div>
+        </div>
         <div className="w-full p-4 md:px-32 md:py-6 h-fit md:mx-auto">
           <QuizSection
             icon={FaFolderOpen}

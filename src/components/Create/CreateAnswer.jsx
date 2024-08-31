@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BiTrash } from "react-icons/bi";
 import { FaCheckCircle, FaRegCheckSquare, FaTrashAlt } from "react-icons/fa";
 import { FaImage, FaPlus } from "react-icons/fa6";
 import { APIUpload } from "../../services/API/APIUpload.jsx";
+import { InnerClickContext } from "../../contexts/lesson/innerClick.jsx";
 
 const CreateAnswer = ({
   typeAnswer,
@@ -13,18 +14,28 @@ const CreateAnswer = ({
   selectedAnswers,
   setSelectedAnswers,
 }) => {
+  console.log("🚀 ~ selectedAnswers,:", selectedAnswers);
+  const { innerClick, setInnerClick, activateInnerClick } =
+    useContext(InnerClickContext);
   useEffect(() => {
-    if (typeAnswer) {
+    if (typeAnswer && innerClick) {
       setSelectedAnswers([]);
+      activateInnerClick(false);
     }
-  }, [typeAnswer]);
+  }, [typeAnswer, innerClick]);
 
   const handleClick = () => {
     const newId =
       answers.length > 0 ? Math.max(...answers.map((a) => a.id)) + 1 : 1;
     setAnswers([
       ...answers,
-      { id: newId, content: "", secure_url: null, isTrue: false ,public_id:null},
+      {
+        id: newId,
+        content: "",
+        secure_url: null,
+        isTrue: false,
+        public_id: null,
+      },
     ]);
   };
 
@@ -51,7 +62,11 @@ const CreateAnswer = ({
       setAnswers(
         answers.map((answer) =>
           answer.id === id
-            ? { ...answer, secure_url: response.data.secure_url ,public_id: response.data.public_id}
+            ? {
+                ...answer,
+                secure_url: response.data.secure_url,
+                public_id: response.data.public_id,
+              }
             : answer
         )
       );
@@ -174,7 +189,7 @@ const CreateAnswer = ({
                 </>
               )}
               <button
-              type="button"
+                type="button"
                 className={`transition-colors duration-200 p-0 ease-in-out flex items-center justify-center w-6 h-6 bg-light-20% ${
                   typeAnswer === "single"
                     ? selectedAnswers.includes(answer.id)
@@ -187,7 +202,6 @@ const CreateAnswer = ({
                   typeAnswer === "single" ? "rounded-full" : ""
                 } border-light absolute top-1 p-0 right-8`}
                 aria-label="Mark answer"
-                
                 tabIndex={-1}
                 onClick={() => handleSelectAnswer(answer.id)}
               >
@@ -211,7 +225,7 @@ const CreateAnswer = ({
           style={{ display: answers.length >= 5 ? "none" : "flex" }}
         >
           <button
-          type="button"
+            type="button"
             className="transition-colors duration-200 p-0 ease-in-out flex items-center justify-center w-6 h-6 bg-black-50% text-black hover:bg-black-60% active:bg-black-50% rounded black relative min-w-max border-2 text-light-50% rounded-lg border-light p-0"
             onClick={handleClick}
           >

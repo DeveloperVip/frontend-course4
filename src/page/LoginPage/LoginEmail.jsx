@@ -20,7 +20,7 @@ const LoginEmail = () => {
     console.log(response.data);
     if (response.data.token) {
       localStorage.setItem("token", response.data.token);
-      navigate("/home");
+      navigate(`/?userName=${response.data.userName}`);
     }
   };
   return (
