@@ -63,9 +63,7 @@ const CreateAnswer = ({
       // fileData.append("isTrue", item.isTrue);
       const response = await APIUpload.uploadImageAnswer(fileData);
       // console.log("Image Response ID:", response.data._id);
-      toast.success("Upload hình ảnh thành công !", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
+      toast.success("Upload hình ảnh thành công !");
       setAnswers(
         answers.map((answer) =>
           (answer.id || answer?._id) === id
@@ -81,9 +79,7 @@ const CreateAnswer = ({
   };
 
   const removeImage = (id) => {
-    toast.info("Xóa hình ảnh !", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
+    toast.info("Xóa hình ảnh !");
     setAnswers(
       answers.map((answer) =>
         (answer.id || answer?._id) === id ? { ...answer, image: null } : answer
@@ -93,14 +89,10 @@ const CreateAnswer = ({
 
   const handleSelectAnswer = (id) => {
     if (typeAnswer === "single") {
-      toast.info("Một lựa chọn !", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
+      toast.info("Một lựa chọn !");
       setSelectedAnswers([id]); // Only allow one selection
     } else {
-      toast.info("Đã thêm lựa chọn !", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
+      toast.info("Đã thêm lựa chọn !");
       setSelectedAnswers((prevSelected) => {
         if (!Array.isArray(prevSelected)) {
           return [id];

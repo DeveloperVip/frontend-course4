@@ -17,9 +17,7 @@ const AddTopic = ({UITopic,handleUITopic}) => {
     const response = APITopic.APICreateTopic(data)
     // console.log("🚀 ~ handleSubmit ~ response:", response)
     if(response){
-      toast("Tạo mới chủ đề thành công !", {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      toast("Tạo mới chủ đề thành công !");
     }
     // Reset fields after submission
     setTopicName("");

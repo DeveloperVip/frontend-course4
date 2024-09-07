@@ -140,9 +140,7 @@ const CreateQuestion = ({ slides, lesson }) => {
     const response = await APIQuestion.APICreate(initialFormQuestion);
     // console.log("🚀 ~ handleSubmit ~ response:", response);
     if (response) {
-      toast.info("Tạo câu hỏi thành công !", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
+      toast.info("Tạo câu hỏi thành công !");
       navigate(-1);
     }
   };

@@ -12,9 +12,7 @@ const QuizList = ({ quizzes }) => {
         <div
           key={index}
           onClick={()=>{
-            toast.info("Đang chuyển tới slide !", {
-              position: toast.POSITION.TOP_CENTER,
-            });
+            toast.info("Đang chuyển tới slide !");
             navigate(`/presentation/${quiz?._id}`)}}
           className="quiz-item hover:shadow-lg ring-1 rounded-lg cursor-pointer"
         >

@@ -30,9 +30,7 @@ axiosInstance.interceptors.response.use(
   (error) => {
     // console.log("🚀 ~ error:", error?.response)
     if (error?.response?.status === 401) {
-      toast("Vui lòng đăng nhập lại tài khoản !", {
-        position: toast.POSITION.BOTTOM_LEFT,
-      });
+      toast("Vui lòng đăng nhập lại tài khoản !");
       window.location.href = "/login";
       localStorage.removeItem("token");
       localStorage.removeItem("userName");

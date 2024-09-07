@@ -63,9 +63,7 @@ export const useStartTimer = (
                   const response  = await APIHistory.APICreateHistory(submitQuiz);
                   if(response.data) {
                     
-                    toast.success("Nộp bài thành công !", {
-                      position: toast.POSITION.TOP_RIGHT,
-                    });
+                    toast.success("Nộp bài thành công !");
                     window.location.href = `/checkPoint/${response.data._id}`;
                   }
                 };

@@ -201,9 +201,7 @@ const EditQuestion = () => {
       fileData.append("file", file);
       const imageQuestion = await APIUpload.uploadImageQuestion(fileData);
       if (imageQuestion) {
-        toast("Upload hình ảnh thành công !", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
+        toast("Upload hình ảnh thành công !");
       }
       // console.log("🚀 ~ handleSubmit ~ imageQuestion:", imageQuestion);
       setPictureQuestion(imageQuestion?.data);

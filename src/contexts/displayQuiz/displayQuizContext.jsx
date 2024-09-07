@@ -69,9 +69,7 @@ export const DisplayQuizProvider = ({ children }) => {
       const nextQuestion = lesson?.question[number + 1];
       const previousQuestion = lesson?.question[number - 1];
       const answersCorrect = currentQuestions?.answersCorrect || [];
-      toast.info("Câu trả lời đúng !", {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      toast.info("Câu trả lời đúng !");
       setDisplayQuiz({
         ...displayQuiz,
         score: score + point,
@@ -106,9 +104,7 @@ export const DisplayQuizProvider = ({ children }) => {
       const nextQuestion = lesson?.question[number + 1];
       const previousQuestion = lesson?.question[number - 1];
       const answersCorrect = currentQuestions?.answersCorrect || [];
-      toast.error("Câu trả lời sai !", {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      toast.error("Câu trả lời sai !");
       setDisplayQuiz({
         ...displayQuiz,
         numberOfAnswerQuestion: numberOfAnswerQuestion + 1,
