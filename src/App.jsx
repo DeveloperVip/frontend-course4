@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { privateRoutes, publicRoutes } from "./routes/routes.js";
 // import PublicRoutes from "./routes/publicRoutes/publicRoutes.jsx";
-import PrivateRoutes from "./routes/privateRoutes/privateRoutes.jsx";
+// import PrivateRoutes from "./routes/privateRoutes/privateRoutes.jsx";
 import Layout from "./components/Layout/Layout.jsx";
 import PublicRoutes from "./routes/publicRoutes/publicRoutes.jsx";
+import PrivateRoutes from "./routes/privateRoutes/privateRoutes.jsx";
 
 function App() {
   return (
