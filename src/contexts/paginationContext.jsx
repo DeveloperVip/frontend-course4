@@ -16,9 +16,7 @@ export const PaginationProvider = ({ children }) => {
   // Hàm xử lý khi click vào trang
   const handleClick = (page) => {
     if (page >= 1 && page <= totalPages) {
-        toast("Chuyển sang trang tiếp theo !", {
-            position: toast.POSITION.TOP_LEFT,
-          });
+        toast("Chuyển sang trang tiếp theo !");
       setCurrentPage(page);
 
       // setPage(page -1)

@@ -23,10 +23,7 @@ const HeaderEditor = ({ lesson, setEquation }) => {
   };
 
   const handleEquationSubmit = (latex) => {
-    toast("Custom Style Notification with css class!", {
-      position: toast.POSITION.TOP_RIGHT,
-      className: "foo-bar",
-    });
+
     setEquation(latex); // Update the equation in the parent component
   };
 

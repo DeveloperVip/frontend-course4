@@ -31,9 +31,7 @@ const HeaderCreateQuestion = ({
   };
 
   const handleTime = (time) => {
-    toast.info("Đã chọn thời gian !", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
+    toast.info("Đã chọn thời gian !");
     setSelectedTime(time);
     setClick("");
   };

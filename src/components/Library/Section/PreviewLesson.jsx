@@ -38,9 +38,7 @@ const PreviewLesson = () => {
 
   const closePreview = () => {
     setIsOpen(false);
-    toast("Đang quay lại !", {
-      position: toast.POSITION.TOP_LEFT,
-    });
+    toast("Đang quay lại !");
     
     navigate(-1);
   };
@@ -48,14 +46,10 @@ const PreviewLesson = () => {
   const toggleCorrectAnswer = () => {
     setShowCorrectAnswer(!showCorrectAnswer);
     if(showCorrectAnswer){
-      toast("Hiển thị đáp án !", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
+      toast("Hiển thị đáp án !");
     }
     else{
-      toast("Ẩn đáp án !", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
+      toast("Ẩn đáp án !");
     }
   };
 

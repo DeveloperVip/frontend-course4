@@ -14,9 +14,7 @@ const usePreviousRoute = () => {
 
   const goBack = () => {
     if (previousPathRef.current) {
-      toast("Quay lại trang trước !", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
+      toast("Quay lại trang trước !");
       navigate(previousPathRef.current);
     }
   };

@@ -33,15 +33,11 @@ const Register = () => {
   const onSubmit = async (data) => {
     // console.log(data);
     // alert(JSON.stringify(data));
-    toast("Đăng ký thành công !", {
-      position: toast.POSITION.BOTTOM_LEFT,
-    });
+    toast("Đăng ký thành công !");
     const response = await APIUser.APIRegistor(data);
     // console.log("🚀 ~ onSubmit ~ response:", response);
     if (response.data) {
-      toast("Đăng nhập với email !", {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      toast("Đăng nhập với email !");
       navigate("/login/email");
     }
   };

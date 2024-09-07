@@ -9,15 +9,11 @@ const VisibleSettingProvider = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const show = () => {
-    toast("Mở setting !", {
-      position: toast.POSITION.BOTTOM_LEFT,
-    });
+    toast("Mở setting !");
     setIsVisible(true);
   };
   const hide = () => {
-    toast("Ẩn setting !", {
-      position: toast.POSITION.BOTTOM_LEFT,
-    });
+    toast("Ẩn setting !");
     setIsVisible(false);
   };
   const toggle = () => setIsVisible((prev) => !prev);
