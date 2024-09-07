@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { BiTrash } from "react-icons/bi";
+import { v4 as uuidv4 } from "uuid";
 import { FaCheckCircle, FaRegCheckSquare, FaTrashAlt } from "react-icons/fa";
 import { FaImage, FaPlus } from "react-icons/fa6";
 import { APIUpload } from "../../services/API/APIUpload.jsx";
 import { InnerClickContext } from "../../contexts/lesson/innerClick.jsx";
+import { toast } from "react-toastify";
 
 const CreateAnswer = ({
   typeAnswer,
@@ -14,7 +16,7 @@ const CreateAnswer = ({
   selectedAnswers,
   setSelectedAnswers,
 }) => {
-  console.log("🚀 ~ selectedAnswers,:", selectedAnswers);
+  // console.log("🚀 ~ selectedAnswers,:", selectedAnswers);
   const { innerClick, setInnerClick, activateInnerClick } =
     useContext(InnerClickContext);
   useEffect(() => {
@@ -25,8 +27,8 @@ const CreateAnswer = ({
   }, [typeAnswer, innerClick]);
 
   const handleClick = () => {
-    const newId =
-      answers.length > 0 ? Math.max(...answers.map((a) => a.id)) + 1 : 1;
+    const newId = uuidv4();
+    // console.log("🚀 ~ handleClick ~ newId:", newId);
     setAnswers([
       ...answers,
       {
@@ -40,14 +42,16 @@ const CreateAnswer = ({
   };
 
   const handleDelete = (id) => {
-    setAnswers(answers.filter((answer) => answer.id !== id));
+    setAnswers(answers.filter((answer) => (answer.id || answer?._id) !== id));
   };
 
   const handleContentChange = (id, newContent) => {
-    console.log(newContent);
+    // console.log(newContent);
     setAnswers(
       answers.map((answer) =>
-        answer.id === id ? { ...answer, content: newContent } : answer
+        (answer.id || answer?._id) === id
+          ? { ...answer, content: newContent }
+          : answer
       )
     );
   };
@@ -58,10 +62,13 @@ const CreateAnswer = ({
       fileData.append("file", newImage);
       // fileData.append("isTrue", item.isTrue);
       const response = await APIUpload.uploadImageAnswer(fileData);
-      console.log("Image Response ID:", response.data._id);
+      // console.log("Image Response ID:", response.data._id);
+      toast.success("Upload hình ảnh thành công !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
       setAnswers(
         answers.map((answer) =>
-          answer.id === id
+          (answer.id || answer?._id) === id
             ? {
                 ...answer,
                 secure_url: response.data.secure_url,
@@ -74,17 +81,26 @@ const CreateAnswer = ({
   };
 
   const removeImage = (id) => {
+    toast.info("Xóa hình ảnh !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
     setAnswers(
       answers.map((answer) =>
-        answer.id === id ? { ...answer, image: null } : answer
+        (answer.id || answer?._id) === id ? { ...answer, image: null } : answer
       )
     );
   };
 
   const handleSelectAnswer = (id) => {
     if (typeAnswer === "single") {
+      toast.info("Một lựa chọn !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
       setSelectedAnswers([id]); // Only allow one selection
     } else {
+      toast.info("Đã thêm lựa chọn !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
       setSelectedAnswers((prevSelected) => {
         if (!Array.isArray(prevSelected)) {
           return [id];
@@ -96,15 +112,13 @@ const CreateAnswer = ({
     }
   };
 
-  console.log("answer", answers);
-
   return (
     <>
       <div className="options-container flex flex-col md:flex-row w-full h-full gap-2">
         <div className="grid md:grid-flow-col md:auto-cols-fr w-full h-full gap-2">
           {answers.map((answer, index) => (
             <div
-              key={answer.id}
+              key={answer.id || answer?._id}
               className={`question-option relative rounded-lg h-full max-h-full overflow-y-hidden overflow-x-hidden flex flex-row-reverse md:flex-col bg-brand-${index} p-1 gap-2 group`}
             >
               {answer.secure_url ? (
@@ -118,7 +132,7 @@ const CreateAnswer = ({
                   <br /> <br />
                   <button
                     className="absolute top-0 bg-inherit p-0 right-0"
-                    onClick={() => removeImage(answer.id)}
+                    onClick={() => removeImage(answer.id || answer?._id)}
                   >
                     <BiTrash />
                   </button>
@@ -134,7 +148,7 @@ const CreateAnswer = ({
                       aria-label="Delete option"
                       type="button"
                       tabIndex={-1}
-                      onClick={() => handleDelete(answer.id)}
+                      onClick={() => handleDelete(answer.id || answer?._id)}
                     >
                       <FaTrashAlt
                         className="flex items-center fas fa-trash-alt"
@@ -151,7 +165,10 @@ const CreateAnswer = ({
                         type="file"
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                         onChange={(event) =>
-                          uploadImageAnswer(answer.id, event.target.files[0])
+                          uploadImageAnswer(
+                            answer.id || answer?._id,
+                            event.target.files[0]
+                          )
                         }
                       />
                       <FaImage
@@ -174,15 +191,22 @@ const CreateAnswer = ({
                           wordWrap: "break-word",
                           backgroundColor: "inherit",
                         }}
-                        id={answer.id}
+                        id={answer.id || answer?._id}
                         className="h-full"
                         placeholder="Nhập văn bản của bạn tại đây..."
                         value={answer.content}
-                        onClick={() => onTextareaClick(answer.id)}
-                        onChange={(event) =>
-                          handleContentChange(answer.id, event.target.value)
+                        onClick={() =>
+                          onTextareaClick(answer.id || answer?._id)
                         }
-                        ref={(el) => (textareasRefs.current[answer.id] = el)}
+                        onChange={(event) =>
+                          handleContentChange(
+                            answer.id || answer?._id,
+                            event.target.value
+                          )
+                        }
+                        ref={(el) =>
+                          (textareasRefs.current[answer.id || answer?._id] = el)
+                        }
                       />
                     </div>
                   </div>
@@ -192,10 +216,10 @@ const CreateAnswer = ({
                 type="button"
                 className={`transition-colors duration-200 p-0 ease-in-out flex items-center justify-center w-6 h-6 bg-light-20% ${
                   typeAnswer === "single"
-                    ? selectedAnswers.includes(answer.id)
+                    ? selectedAnswers.includes(answer.id || answer?._id)
                       ? "text-green-500"
                       : "text-white"
-                    : selectedAnswers.includes(answer.id)
+                    : selectedAnswers.includes(answer.id || answer?._id)
                     ? "text-green-500"
                     : "text-white"
                 } hover:bg-black-60% active:bg-black-50% rounded black min-w-max border-2 text-light-50% ${
@@ -203,7 +227,7 @@ const CreateAnswer = ({
                 } border-light absolute top-1 p-0 right-8`}
                 aria-label="Mark answer"
                 tabIndex={-1}
-                onClick={() => handleSelectAnswer(answer.id)}
+                onClick={() => handleSelectAnswer(answer.id || answer?._id)}
               >
                 {typeAnswer === "single" ? (
                   <FaCheckCircle

@@ -6,7 +6,6 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { SelectedSlideContext } from "../../../contexts/lesson/selectedSlide.jsx";
 
 const Sidebar = ({ slides, onDuplicate, onDelete, onMove, handleAddSlide }) => {
-  console.log("🚀 ~ slides:", slides)
   const [slider, setSlider] = useState(slides);
   const { activateSelectedSlide } = useContext(SelectedSlideContext);
   // console.log("🚀 ~ selectedSlide:", selectedSlide)

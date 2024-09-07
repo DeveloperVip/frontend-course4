@@ -2,16 +2,23 @@ import { TbSquareRoundedCheckFilled } from "react-icons/tb";
 import { IoCheckmark, IoChevronBack } from "react-icons/io5";
 import { FaCaretDown, FaFloppyDisk } from "react-icons/fa6";
 import { BsClock } from "react-icons/bs";
-import { LuTags } from "react-icons/lu";
 import { useState } from "react";
 import usePreviousRoute from "../../hook/usePreviousRoute.jsx";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const HeaderCreateQuestion = ({lesson,selectedPoint, setSelectedPoint ,selectedTime ,setSelectedTime,handleSubmit}) => {
+const HeaderCreateQuestion = ({
+  lesson,
+  selectedPoint,
+  setSelectedPoint,
+  selectedTime,
+  setSelectedTime,
+  handleSubmit,
+  edit,
+}) => {
   const { goBack } = usePreviousRoute();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [click, setClick] = useState("none");
-  
 
   const handleClick = (e) => {
     if (e === click) setClick("");
@@ -24,6 +31,9 @@ const HeaderCreateQuestion = ({lesson,selectedPoint, setSelectedPoint ,selectedT
   };
 
   const handleTime = (time) => {
+    toast.info("Đã chọn thời gian !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
     setSelectedTime(time);
     setClick("");
   };
@@ -48,11 +58,15 @@ const HeaderCreateQuestion = ({lesson,selectedPoint, setSelectedPoint ,selectedT
   ];
 
   return (
-    <header className={`w-full font-open-sans ${lesson?"bg-purple-600":"bg-white"} flex items-center gap-2 py-2 px-4 h-14`} >
+    <header
+      className={`w-full font-open-sans ${
+        lesson ? "bg-purple-600" : "bg-white"
+      } flex items-center gap-2 py-2 px-4 h-14`}
+    >
       <div
         className="transition-colors duration-200 p-0 ease-in-out flex items-center justify-center w-8 h-8 bg-dark-5% active:bg-dark-10% text-dark-2 hover:text-dark-3 rounded relative min-w-max"
         aria-label="Back"
-        onClick={()=>navigate("/profile")}
+        onClick={() => navigate(-1)}
       >
         <IoChevronBack
           className="flex items-center fas fa-chevron-left"
@@ -61,7 +75,10 @@ const HeaderCreateQuestion = ({lesson,selectedPoint, setSelectedPoint ,selectedT
       </div>
       <div className="relative flex-grow flex-shrink-0 max-w-55">
         <div className="dropdown flex relative rounded">
-          <button className="w-full flex rounded font-semibold items-center whitespace-nowrap py-2 pl-2 pr-1 text-xs h-8 cursor-pointer bg-dark-5% text-dark-2 hover:text-dark-3">
+          <button
+            type="button"
+            className="w-full flex rounded font-semibold items-center whitespace-nowrap py-2 pl-2 pr-1 text-xs h-8 cursor-pointer bg-dark-5% text-dark-2 hover:text-dark-3"
+          >
             <span className="question-type-icon relative flex items-center justify-center p-1 bg-brand-b text-white rounded-sm mr-2">
               <TbSquareRoundedCheckFilled
                 className="flex items-center far fa-check-square"
@@ -104,12 +121,13 @@ const HeaderCreateQuestion = ({lesson,selectedPoint, setSelectedPoint ,selectedT
                         key={index}
                       >
                         <button
-                          
                           type="button"
-                          className={`px-2 py-1 w-full  ${selectedPoint === item ? "bg-purple-300": ""} hover:bg-purple-100 hover:text-purple-400 bg-purple-100-faded text-lilac font-semibold`}
+                          className={`px-2 py-1 w-full  ${
+                            selectedPoint === item ? "bg-purple-300" : ""
+                          } hover:bg-purple-100 hover:text-purple-400 bg-purple-100-faded text-lilac font-semibold`}
                           onClick={() => handlePoint(item)}
                         >
-                          {item}&nbsp;<span >điểm</span>
+                          {item}&nbsp;<span>điểm</span>
                         </button>
                       </li>
                     );
@@ -142,18 +160,15 @@ const HeaderCreateQuestion = ({lesson,selectedPoint, setSelectedPoint ,selectedT
                 className="list bg-light-3 h-min shadow-soft-high rounded z-on-overlay mt-2 left-0 w-full top-full origin-top z-on-overlay"
                 style={{ position: "absolute" }}
               >
-                <ul  >
+                <ul>
                   {timeArray.map((item, index) => {
                     return (
-                      <li
-                        
-                        className="text-sm text-dark-2"
-                        key={index}
-                      >
+                      <li className="text-sm text-dark-2" key={index}>
                         <button
-                          
                           type="button"
-                          className={`px-2 py-1 w-full ${selectedTime === item ? "bg-purple-300": ""} hover:bg-purple-100 hover:text-purple-400 font-semibold`}
+                          className={`px-2 py-1 w-full ${
+                            selectedTime === item ? "bg-purple-300" : ""
+                          } hover:bg-purple-100 hover:text-purple-400 font-semibold`}
                           onClick={() => handleTime(item)}
                         >
                           {item}
@@ -166,19 +181,16 @@ const HeaderCreateQuestion = ({lesson,selectedPoint, setSelectedPoint ,selectedT
             </div>
           </div>
         </div>
-        <button className="transition-colors duration-200 p-0 ease-in-out flex items-center justify-center px-4 py-1.5 text-xs font-semibold h-8 bg-dark-5% active:bg-dark-10% text-dark-2 hover:text-dark-3 rounded">
-          <LuTags
-            className="flex items-center far fa-tags mr-2"
-            style={{ fontSize: 12 }}
-          />
-          <span>Tiêu chuẩn thẻ</span>
-        </button>
-        <button onClick={handleSubmit} className="transition-colors duration-200 p-0 ease-in-out flex items-center justify-center px-4 py-1.5 text-xs font-semibold h-8 bg-purple-500 text-white hover:bg-purple-400 active:bg-purple rounded">
+
+        <button
+          onClick={handleSubmit}
+          className="transition-colors duration-200 p-0 ease-in-out flex items-center justify-center px-4 py-1.5 text-xs font-semibold h-8 bg-purple-500 text-white hover:bg-purple-400 active:bg-purple rounded"
+        >
           <FaFloppyDisk
             className="flex items-center fas fa-floppy-disk mr-2"
             style={{ fontSize: 12 }}
           />
-          <span>Lưu câu hỏi</span>
+          <span>{edit ? "Lưu thay đổi" : "Lưu câu hỏi"}</span>
         </button>
       </div>
     </header>

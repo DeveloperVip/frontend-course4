@@ -8,30 +8,37 @@ import { FaGoogle } from "react-icons/fa";
 import { BsMicrosoft } from "react-icons/bs";
 import { FaPhoneSquareAlt } from "react-icons/fa";
 import { SiApple } from "react-icons/si";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../../contexts/auth/authContext.jsx";
+import { toast } from "react-toastify";
+import { AccountNameContext } from "../../contexts/user/AccountName.jsx";
 // import LoginEmail from "./LoginEmail";
 const LoginPage = () => {
   const navigate = useNavigate();
-
+  const {setIsAuthenticated} = useContext(AuthContext);
   const handleLogin = (provider) => {
-    console.log(`Logging in with ${provider}`);
+    // console.log(`Logging in with ${provider}`);
     navigate(provider);
   };
+  const { activateAccountName } = useContext(AccountNameContext);
+  const urlParams = new URLSearchParams(window.location.search);
+  // console.log("🚀 ~ MainPage ~ urlParams:", urlParams)
+  const token = urlParams.get("token") 
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get("token");
-    console.log("vào được đây");
-    
     if (token) {
+      toast.success("Đăng nhập thành công ")
+      activateAccountName()
       // Save the token to local storage or context
+      localStorage.setItem("userName",urlParams.get("userName"))
       localStorage.setItem("token", token);
+      setIsAuthenticated(true)
       navigate("/");
     } else {
       // Handle the case where there is no token (optional)
       navigate("/login");
     }
-  }, [navigate]);
+  }, [token]);
 
   return (
     <div className="topa h-screen gap-5 flex-col">

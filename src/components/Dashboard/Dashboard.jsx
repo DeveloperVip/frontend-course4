@@ -1,23 +1,38 @@
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { VscArchive } from "react-icons/vsc";
 import { HiOutlinePlusCircle } from "react-icons/hi";
 import { FaAddressBook } from "react-icons/fa6";
 import { IoIosSettings } from "react-icons/io";
 import { MdLogout } from "react-icons/md";
-import { removeQueryParameter } from "../../page/MainPage/RemoveParams";
-import { AccountNameContext } from "../../contexts/user/AccountName";
+// import { removeQueryParameter } from "../../page/MainPage/RemoveParams";
+import { AccountNameContext } from "../../contexts/user/AccountName.jsx";
+import { toast } from "react-toastify";
 
 // Component Button tái sử dụng
-const SidebarButton = ({ icon: Icon, label, direction = "", isActive, onClick }) => {
+const SidebarButton = ({
+  icon: Icon,
+  label,
+  direction = "",
+  isActive,
+  onClick,
+}) => {
   const navigate = useNavigate();
-  
+
   return (
     <button
       className={`flex gap-5 items-center w-full py-2 px-4 rounded-md transition-colors 
-      ${isActive ? 'bg-purple-600 text-white' : 'text-dark-2 hover:bg-gray-100'}`}
+      ${
+        isActive ? "bg-purple-600 text-white" : "text-dark-2 hover:bg-gray-100"
+      }`}
       onClick={() => {
-        navigate(direction);
+        if (direction) {
+          toast(`Chuyển tới ${label}`, {
+            position: toast.POSITION.TOP_RIGHT,
+            className: "foo-bar",
+          });
+          navigate(direction);
+        }
         onClick(); // Trigger the parent function to set the active button
       }}
     >
@@ -28,11 +43,26 @@ const SidebarButton = ({ icon: Icon, label, direction = "", isActive, onClick })
 };
 
 const Dashboard = () => {
-const {accountName} = useContext(AccountNameContext)
-  const [appear, setAppear] = useState(false);
-  const [activeButton, setActiveButton] = useState("/home"); // Default active button
-  const navigate = useNavigate();
+  const location = useLocation();
 
+  const { accountName } = useContext(AccountNameContext);
+
+  const [appear, setAppear] = useState(false);
+  // const [activeButton, setActiveButton] = useState(loc); // Default active button
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+  useEffect(() => {
+    if (
+      location.pathname.includes("/library") ||
+      location.pathname.includes("/collection") ||
+      location.pathname.includes("/profile")
+    ) {
+      setAppear(true);
+    }
+  }, [location.pathname]);
   return (
     <>
       <div className=" bg-white text-black shadow-2xl border-r border-light-1 max-w-min filter-box-shadow sticky top-0 ">
@@ -80,23 +110,21 @@ const {accountName} = useContext(AccountNameContext)
           <SidebarButton
             icon={VscArchive}
             label="Khám phá"
-            direction="/"
-            isActive={activeButton === "/home"}
-            onClick={() => setActiveButton("/home")}
+            direction={`/?userName=${localStorage.getItem("userName")}`}
+            isActive={location.pathname === "/"}
+            // onClick={() => setActiveButton("/home")}
           />
           <SidebarButton
             icon={FaAddressBook}
             label="Báo cáo"
-            direction="/report"
-            isActive={activeButton === "/reports"}
-            onClick={() => setActiveButton("/reports")}
+            direction={`/reports`}
+            isActive={location.pathname.includes(`/reports`)}
           />
           <SidebarButton
             icon={IoIosSettings}
             label="Cài đặt"
-            direction="/setting"
-            isActive={activeButton === "/setting"}
-            onClick={() => setActiveButton("/setting")}
+            direction={`/setting`}
+            isActive={location.pathname.includes("/setting")}
           />
         </div>
         <input
@@ -119,29 +147,25 @@ const {accountName} = useContext(AccountNameContext)
             <SidebarButton
               icon={FaAddressBook}
               label="Thư viện"
-              direction="/library/createdByMy"
-              isActive={activeButton === "/Library"}
-              onClick={() => setActiveButton("/Library")}
+              direction={`/library/createdByMe`}
+              isActive={location.pathname.includes("/library")}
             />
             <SidebarButton
               icon={FaAddressBook}
               label="Bộ sưu tập"
-              direction="/collection"
-              isActive={activeButton === "/Bộ sưu tập"}
-              onClick={() => setActiveButton("/Bộ sưu tập")}
+              direction={`/collection/all_quiz`}
+              isActive={location.pathname.includes("/collection")}
             />
             <SidebarButton
               icon={FaAddressBook}
               label="Hồ sơ"
-              direction="/profile"
-              isActive={activeButton === "/profile"}
-              onClick={() => setActiveButton("/profile")}
+              direction={`/profile`}
+              isActive={location.pathname.includes("/profile")}
             />
             <SidebarButton
               icon={MdLogout}
               label="Đăng xuất"
-              isActive={activeButton === "Đăng xuất"}
-              onClick={() => setActiveButton("Đăng xuất")}
+              onClick={() => handleLogout()}
             />
           </div>
         )}

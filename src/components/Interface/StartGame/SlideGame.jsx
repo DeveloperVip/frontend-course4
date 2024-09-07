@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
-import { DisplayQuizContext } from "../../../contexts/displayQuiz/displayQuizContext";
+import { DisplayQuizContext } from "../../../contexts/displayQuiz/displayQuizContext.jsx";
 
 const SlideGame = () => {
   //   const answers = [2];
   const { displayQuiz, selectedOptions, handleOptionClick } =
     useContext(DisplayQuizContext);
-  console.log("🚀 ~ SlideGame ~ currentQuestion:", displayQuiz);
+  // console.log("🚀 ~ SlideGame ~ currentQuestion:", displayQuiz);
   const currentQuestion = displayQuiz?.currentQuestion;
-  console.log(
-    "🚀 ~ SlideGame ~ displayQuiz?.currentQuestion:",
-    displayQuiz?.currentQuestion
-  );
+  // console.log(
+  //   "🚀 ~ SlideGame ~ displayQuiz?.currentQuestion:",
+  //   displayQuiz?.currentQuestion
+  // );
   const answersCorrect = displayQuiz?.answersCorrect;
   //   console.log("🚀 ~ SlideGame ~ answers:", answers,selectedOptions)
   //   const answersCorrect = displayQuiz?.currentQuestion?.answersCorrect

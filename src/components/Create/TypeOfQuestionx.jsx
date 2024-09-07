@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import "./TypeOfQuestion.css"
-import { InnerClickContext } from "../../contexts/lesson/innerClick";
+import { InnerClickContext } from "../../contexts/lesson/innerClick.jsx";
 
 const ToggleButton = ({ isActive, onClick, ariaLabel, title, children }) => (
   <button
@@ -19,6 +19,7 @@ const ToggleButton = ({ isActive, onClick, ariaLabel, title, children }) => (
 );
 
 const TypeOfQuestionx = ({ selectType, currentType }) => {
+  // console.log("🚀 ~ TypeOfQuestionx ~ currentType:", currentType)
   const {activateInnerClick} = useContext(InnerClickContext)
   const handleClick = (name)=>{
     selectType(name) 

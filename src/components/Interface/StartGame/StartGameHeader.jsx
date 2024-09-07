@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { TimerQuizContext } from "../../../contexts/displayQuiz/timerQuizContext";
+import { TimerQuizContext } from "../../../contexts/displayQuiz/timerQuizContext.jsx";
 
 const StartGameHeader = ({currentQuestion, totalQuestions}) => {
   const {timerQuiz} = useContext(TimerQuizContext)
-  console.log("🚀 ~ StartGameHeader ~ timerQuiz:", timerQuiz)
+  // console.log("🚀 ~ StartGameHeader ~ timerQuiz:", timerQuiz)
   return (
     <div className="app-header-container fixed z-101 top-0 left-0 right-0 p-2 sm:p-4 text-white text-base bg-[#141414]">
       <div className="powerup-effects-wrapper absolute top-full w-full pointer-events-none">

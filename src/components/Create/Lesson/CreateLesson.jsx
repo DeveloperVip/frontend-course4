@@ -16,9 +16,9 @@ import { SelectedSlideContext } from "../../../contexts/lesson/selectedSlide.jsx
 import { LessonContext } from "../../../contexts/lesson/lessonContext.jsx";
 
 const CreateLesson = () => {
-  const {slides,setSlides,handleAddSlide} = useContext(LessonContext)
+  const { slides, setSlides, handleAddSlide } = useContext(LessonContext);
   const { isVisible } = useContext(VisibleSettingContext);
-  const {selectedSlide} = useContext(SelectedSlideContext)
+  const { selectedSlide } = useContext(SelectedSlideContext);
   // console.log("🚀 ~ CreateLesson ~ isVisible:", slides);
 
   const handleDuplicateSlide = (id) => {
@@ -41,7 +41,7 @@ const CreateLesson = () => {
     newSlides.splice(newIndex, 0, movedSlide);
     setSlides(newSlides);
   };
-  
+
   return (
     <div className="z-0 w-screen h-screen relative">
       <Header />
@@ -56,11 +56,11 @@ const CreateLesson = () => {
           />
 
           <main className="w-full">
-            <MainContent slides={slides[selectedSlide-1]} />
+            <MainContent slides={slides[selectedSlide - 1]} />
           </main>
         </div>
       </div>
-      {isVisible ? <SettingLesson slides={slides}/> : ""}
+      {isVisible ? <SettingLesson slides={slides} /> : ""}
     </div>
   );
 };

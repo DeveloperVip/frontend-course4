@@ -2,7 +2,8 @@ import { createContext, useState } from "react";
 import { APILesson } from "../../services/API/APILesson.jsx";
 import { APIAnswer } from "../../services/API/APIAnswer.jsx";
 import { initialFormQuestion } from "../../utils/Initial.jsx";
-import { APIQuestion } from "../../services/API/APIQuestion";
+import { APIQuestion } from "../../services/API/APIQuestion.jsx";
+import { toast } from "react-toastify";
 
 export const LessonContext = createContext();
 
@@ -69,12 +70,12 @@ export const LessonProvider = ({ children }) => {
 
   const handleNewLesson = async () => {
     const response = await APILesson.APICreateLesson(formLesson);
-    console.log(response);
+    // console.log(response);
     setFormLesson({ ...formLesson, ...response })
   };
 
   const handleUpdateLesson = async () => {
-    console.log(slides);
+    // console.log(slides);
     const arrayQuestion = [];
     let pointLesson = 0;
     let timeLesson = 0;
@@ -138,6 +139,9 @@ export const LessonProvider = ({ children }) => {
     formLesson.question = arrayQuestion;
     const response =await APILesson.APIUpdateLesson(formLesson._id,formLesson);
     // console.log("🚀 ~ handleUpdateLesson ~ response:", response)
+    if(response) toast.success("Cập nhập thành công !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
     return response
   };
 

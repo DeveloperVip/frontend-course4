@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 const SetTimeLesson = ({ title = "", onSubmit, setTitle }) => {
-  console.log(title);
 
   const [isVisible, setIsVisible] = useState(
     title  ? true : false

@@ -7,7 +7,7 @@ export const Dropdown = ({ title, icon, options, onOptionSelect }) => {
     const toggleDropdown = () => setIsOpen(!isOpen);
   
     return (
-      <div className="relative">
+      <div className="relative ">
         <div className="field relative rounded text-sm text-dark-4 bg-light-3 h-6 border border-dark-6">
           <div className="dropdown flex relative rounded">
             <button
@@ -25,11 +25,11 @@ export const Dropdown = ({ title, icon, options, onOptionSelect }) => {
             </button>
           </div>
           {isOpen && (
-            <ul className="absolute bg-light-3 border border-dark-6 rounded mt-1 w-full z-10">
-              {options.map((option, index) => (
+            <ul className="absolute bg-light-3 border border-dark-6 rounded mt-1 w-full z-10 max-h-52 overflow-y-scroll">
+              {options?.map((option, index) => (
                 <li
                   key={index}
-                  className="py-1 px-2 cursor-pointer hover:bg-light-2"
+                  className="py-1 px-2 cursor-pointer hover:bg-slate-300"
                   onClick={() => {
                     onOptionSelect(option);
                     toggleDropdown();

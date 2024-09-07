@@ -6,9 +6,9 @@ import {
   FaArrowAltCircleLeft,
 } from "react-icons/fa";
 import "./Preview.css";
-import { initialAnswers } from "../../utils/Initial.jsx";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { LessonContext } from "../../contexts/lesson/lessonContext.jsx";
+import { toast } from "react-toastify";
 
 const Preview = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Preview = () => {
   useEffect(() => {
     setSlideShow(slides[indexSlide]);
   }, [indexSlide]);
-  console.log(slideShow);
+  // console.log(slideShow);
 
   // const initialAnswers = [
   //   { id: 1, brand: "brand-a", content: "Answer 1", image: null, correct: true },
@@ -57,7 +57,7 @@ const Preview = () => {
                 className="flex items-center far fa-check-square"
                 style={{ fontSize: 18 }}
               />
-              <span className="ml-2 text-sm">Nhiều đáp án</span>
+              <span className="ml-2 text-sm">Đáp án</span>
             </div>
           </div>
           <span className="px-4 py-2 bg-light-10% rounded-lg absolute left-1/2 -ml-20">
@@ -108,7 +108,7 @@ const Preview = () => {
                   <div className="options-container flex flex-col md:flex-row w-full h-3/6 gap-2">
                     <div className="grid md:grid-flow-col md:auto-cols-fr w-full h-full gap-2">
                       {slideShow?.answers.map((answer, index) => {
-                        console.log(answer);
+                        // console.log(answer);
 
                         return (
                           <div

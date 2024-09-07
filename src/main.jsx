@@ -14,28 +14,42 @@ import { AccountNameProvider } from "./contexts/user/AccountName.jsx";
 import { DisplayQuizProvider } from "./contexts/displayQuiz/displayQuizContext.jsx";
 import { TimerQuizProvider } from "./contexts/displayQuiz/timerQuizContext.jsx";
 import { CheckpointProvider } from "./contexts/displayQuiz/CheckpointQuizContext.jsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { SlideVisibilityProvider } from "./contexts/hideSlideContext.jsx";
+import { GetInforUserProvider } from "./contexts/user/GetInforUserContext.jsx";
+import { QuizProvider } from "./contexts/quiz/quizContext.jsx";
+import { PaginationProvider } from "./contexts/paginationContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
-  <CheckpointProvider>
-
-    <TimerQuizProvider>
-      <DisplayQuizProvider>
-        <AccountNameProvider>
-          <InnerClickProvider>
-            <LessonProvider>
-              <SelectedSlideProvider>
-                <AuthProvider>
-                  <VisibleSettingProvider>
-                    <App />
-                  </VisibleSettingProvider>
-                </AuthProvider>
-              </SelectedSlideProvider>
-            </LessonProvider>
-          </InnerClickProvider>
-        </AccountNameProvider>
-      </DisplayQuizProvider>
-    </TimerQuizProvider>
-  </CheckpointProvider>
+    <PaginationProvider>
+      <QuizProvider>
+        <GetInforUserProvider>
+          <SlideVisibilityProvider>
+            <CheckpointProvider>
+              <TimerQuizProvider>
+                <DisplayQuizProvider>
+                  <AccountNameProvider>
+                    <InnerClickProvider>
+                      <LessonProvider>
+                        <SelectedSlideProvider>
+                          <AuthProvider>
+                            <VisibleSettingProvider>
+                              <App />
+                            </VisibleSettingProvider>
+                          </AuthProvider>
+                        </SelectedSlideProvider>
+                      </LessonProvider>
+                    </InnerClickProvider>
+                  </AccountNameProvider>
+                </DisplayQuizProvider>
+              </TimerQuizProvider>
+            </CheckpointProvider>
+          </SlideVisibilityProvider>
+        </GetInforUserProvider>
+      </QuizProvider>
+    </PaginationProvider>
+    <ToastContainer />
   </>
 );

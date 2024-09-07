@@ -1,9 +1,10 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { isEmpty } from "../../utils/is-empty.jsx";
-import { questions } from "../../utils/Initial.jsx";
+// import { isEmpty } from "../../utils/is-empty.jsx";
+// import { questions } from "../../utils/Initial.jsx";
 import { useStartTimer } from "../../components/Interface/StartGame/startTimer.jsx";
 import { TimerQuizContext } from "./timerQuizContext.jsx";
 import { useFetchAPILessonById } from "../../hook/useFetchAPILesson.jsx";
+import { toast } from "react-toastify";
 export const DisplayQuizContext = createContext();
 
 export const DisplayQuizProvider = ({ children }) => {
@@ -20,21 +21,23 @@ export const DisplayQuizProvider = ({ children }) => {
     correctAnswer: 0,
     wrongAnswer: 0,
     allAnswersSelected: [],
-    time: [],
+    time: 0,
+    lessonId: "",
   };
   const [displayQuiz, setDisplayQuiz] = useState(quizzs);
   const [paramQuizz, setParamQuizz] = useState();
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const selectedAnswer = useRef([]);
+  let amountAnswer = useRef(0);
   const nexted = useRef(false);
   const [startTimer, setStartTimer] = useState(false);
   const { activateTimerQuiz } = useContext(TimerQuizContext);
   const { lesson } = useFetchAPILessonById(paramQuizz?.id);
 
-  const displayQuestions = (paramQuizz, lesson) => {
+  const displayQuestions = (paramQuizz, lesson, id) => {
     if (paramQuizz && lesson) {
-      console.log(lesson);
+      // console.log(lesson);
       // if (!isEmpty(questions)) {
       const currentQuestions = lesson[currentQuestion];
       const nextQuestion = lesson[currentQuestion + 1];
@@ -48,32 +51,30 @@ export const DisplayQuizProvider = ({ children }) => {
         currentQuestion: currentQuestions,
         currentQuestionIndex: currentQuestion,
         answersCorrect: answersCorrect,
+        lessonId: id,
       }));
       // }
     }
   };
 
-  const correctQuiz = () => {
-    const {
-      score,
-      currentQuestionIndex,
-      correctAnswer,
-      numberOfAnswerQuestion,
-    } = quizzs;
-    console.log("🚀 ~ wrongQuiz ~ arrayAnswers:", selectedAnswer.current);
+  const correctQuiz = (point) => {
+    const { score, correctAnswer, numberOfAnswerQuestion } = displayQuiz;
+    // console.log("🚀 ~ wrongQuiz ~ arrayAnswers:", selectedAnswer.current);
     // console.log("🚀 ~ wrongQuiz ~ arrayAnswers:", currentQuestionIndex)
-    if (currentQuestion < lesson?.question?.length - 1) {
+    if (currentQuestion <= lesson?.question?.length - 1) {
       const number = currentQuestion + 1;
       // console.log("🚀 ~ handleNext ~ newCurrentQuestion:", number,lesson?.question?.length)
       const currentQuestions = lesson?.question[number];
       // console.log("🚀 ~ displayQuestions ~ currentQuestion:", currentQuestion)
       const nextQuestion = lesson?.question[number + 1];
       const previousQuestion = lesson?.question[number - 1];
-      const answersCorrect = currentQuestions?.answersCorrect;
-
+      const answersCorrect = currentQuestions?.answersCorrect || [];
+      toast.info("Câu trả lời đúng !", {
+        position: toast.POSITION.TOP_CENTER,
+      });
       setDisplayQuiz({
         ...displayQuiz,
-        score: score + 1,
+        score: score + point,
         numberOfAnswerQuestion: numberOfAnswerQuestion + 1,
         correctAnswer: correctAnswer + 1,
         currentQuestionIndex: number,
@@ -83,32 +84,31 @@ export const DisplayQuizProvider = ({ children }) => {
         answersCorrect: answersCorrect,
         allAnswersSelected: selectedAnswer.current,
       });
-      if (number < lesson?.question?.length) setSelectedOptions([]);
-      setCurrentQuestion(number);
+      setSelectedOptions([]);
+      if (number < lesson?.question?.length) {
+        setCurrentQuestion(number);
+      }
     }
   };
 
-  const wrongQuiz = () => {
-    const {
-      questions,
-      currentQuestionIndex,
-      wrongAnswer,
-      numberOfAnswerQuestion,
-    } = quizzs;
-    console.log("🚀 ~ wrongQuiz ~ arrayAnswers:", selectedAnswer.current);
-    if (currentQuestion < lesson?.question?.length - 1) {
+  const wrongQuiz = (point) => {
+    const { wrongAnswer, numberOfAnswerQuestion } = displayQuiz;
+    // console.log("🚀 ~ wrongQuiz ~ arrayAnswers:", selectedAnswer.current);
+    if (currentQuestion <= lesson?.question?.length - 1) {
       const number = currentQuestion + 1;
       const currentQuestions = lesson?.question[number];
-      console.log(
-        "🚀 ~ handleNext ~ newCurrentQuestion:",
-        number,
-        lesson?.question?.length
-      );
+      // console.log(
+      //   "🚀 ~ handleNext ~ newCurrentQuestion:",
+      //   number,
+      //   lesson?.question?.length
+      // );
       // console.log("🚀 ~ displayQuestions ~ currentQuestion:", currentQuestion)
       const nextQuestion = lesson?.question[number + 1];
       const previousQuestion = lesson?.question[number - 1];
-      const answersCorrect = currentQuestions?.answersCorrect;
-
+      const answersCorrect = currentQuestions?.answersCorrect || [];
+      toast.error("Câu trả lời sai !", {
+        position: toast.POSITION.TOP_CENTER,
+      });
       setDisplayQuiz({
         ...displayQuiz,
         numberOfAnswerQuestion: numberOfAnswerQuestion + 1,
@@ -120,15 +120,28 @@ export const DisplayQuizProvider = ({ children }) => {
         answersCorrect: answersCorrect,
         allAnswersSelected: selectedAnswer.current,
       });
-      if (number < lesson?.question?.length) setSelectedOptions([]);
-      setCurrentQuestion(number);
+      setSelectedOptions([]);
+      if (number < lesson?.question?.length) {
+        setCurrentQuestion(number);
+      }
     }
   };
 
   const handleCompare = () => {
-    const { currentQuestion, answersCorrect, allAnswersSelected } = displayQuiz;
+    const {
+      currentQuestion,
+      answersCorrect,
+      allAnswersSelected,
+      currentQuestionIndex,
+    } = displayQuiz;
     let correctQuestion = true;
-    console.log("vào đây á", selectedAnswer.current);
+    // console.log(
+    //   "🚀 ~ handleOptionClick ~ answersCorrect:",
+    //   currentQuestionIndex,
+    //   lesson?.question?.length - 1,
+    //   selectedOptions?.length,
+    //   answersCorrect?.length
+    // );
     let arrayAnswers = [...allAnswersSelected];
     // console.log(
     //   "🚀 ~ handleCompare ~ selectedOptions?.length:",
@@ -136,8 +149,8 @@ export const DisplayQuizProvider = ({ children }) => {
     //   answersCorrect?.length
     // );
     // console.log("🚀 ~ handleCompare ~ arrayAnswers:", arrayAnswers);
+
     if (selectedOptions?.length === answersCorrect?.length) {
-      console.log("có vào không đây");
       selectedOptions.map((item) => {
         if (arrayAnswers?.includes(currentQuestion?.answers[item]?._id)) {
           arrayAnswers?.filter(
@@ -146,18 +159,28 @@ export const DisplayQuizProvider = ({ children }) => {
         } else {
           arrayAnswers?.push(currentQuestion?.answers[item]?._id);
         }
-        console.log("🚀 ~ selectedOptions.map ~ arrayAnswers:", arrayAnswers);
         selectedAnswer.current = arrayAnswers;
         // Use forEach instead of map since you aren't returning anything
         if (currentQuestion?.answers[item]?.isTrue === false) {
           correctQuestion = false;
         }
       });
-
+      // console.log(
+      //   "🚀 ~ handleCompare ~ currentQuestion?.point:",
+      //   currentQuestion?.point
+      // );
       if (correctQuestion) {
-        correctQuiz();
+        correctQuiz(currentQuestion?.point);
+        // if(currentQuestionIndex === lesson?.question?.length - 1 && selectedOptions?.length === answersCorrect?.length && allAnswersSelected?.includes(selectedOptions)) {
+        //   console.log("handle vafo dday");
+        //   setStartTimer(false)
+        // }
       } else {
-        wrongQuiz();
+        wrongQuiz(currentQuestion?.point);
+        // if(currentQuestionIndex === lesson?.question?.length - 1 && selectedOptions?.length === answersCorrect?.length && allAnswersSelected?.includes(selectedOptions)) {
+        //   console.log("handle vafo dday");
+        //   setStartTimer(false)
+        // }
       }
     }
   };
@@ -178,10 +201,11 @@ export const DisplayQuizProvider = ({ children }) => {
   const handleNext = () => {
     nexted.current = false;
     const { questions } = displayQuiz;
-    console.log("🚀 ~ displayQuestions ~ questions:", questions)
-    console.log("🚀 ~ handleNext ~  questions:", lesson?.question);
-    if (currentQuestion < lesson?.question?.length) {
+    // console.log("🚀 ~ displayQuestions ~ questions:", questions);
+    // console.log("🚀 ~ handleNext ~  questions:", lesson?.question);
+    if (currentQuestion <= lesson?.question?.length) {
       const newCurrentQuestion = currentQuestion + 1;
+      // console.log("🚀 ~ handleNext ~ newCurrentQuestion:", newCurrentQuestion);
 
       const currentQuestions = lesson?.question[newCurrentQuestion];
       // console.log("🚀 ~ displayQuestions ~ currentQuestion:", currentQuestion)
@@ -191,7 +215,7 @@ export const DisplayQuizProvider = ({ children }) => {
 
       setDisplayQuiz({
         ...displayQuiz,
-        questions:lesson?.question,
+        questions: lesson?.question,
         currentQuestionIndex: newCurrentQuestion,
         nextQuestion: nextQuestion,
         previousQuestion: previousQuestion,
@@ -200,13 +224,14 @@ export const DisplayQuizProvider = ({ children }) => {
       });
       setCurrentQuestion(newCurrentQuestion);
 
-      if (newCurrentQuestion < lesson?.question?.length - 1) setSelectedOptions([]); // Reset nhiều đáp án đã chọn khi chuyển câu
+      if (newCurrentQuestion < lesson?.question?.length - 1)
+        setSelectedOptions([]); // Reset nhiều đáp án đã chọn khi chuyển câu
     }
   };
 
   const handleBefore = () => {
-    const { questions, currentQuestionIndex } = displayQuiz;
-    console.log("🚀 ~ handleBefore ~ currentQuestion:", currentQuestion);
+    const { questions} = displayQuiz;
+    // console.log("🚀 ~ handleBefore ~ currentQuestion:", currentQuestion);
     if (currentQuestion > 0) {
       const newCurrentQuestion = currentQuestion - 1;
 
@@ -228,25 +253,35 @@ export const DisplayQuizProvider = ({ children }) => {
       setSelectedOptions([]);
     }
   };
-
+  // console.log(
+  //   "🚀 ~ wrongQuiz ~ setDisplayQuiz:",
+  //   displayQuiz?.allAnswersSelected
+  // );
   useStartTimer(
     startTimer,
     handleNext,
     nexted,
     currentQuestion,
-    lesson?.questions,
     displayQuiz,
+    displayQuiz?.currentQuestionIndex,
+    displayQuiz?.lessonId,
     selectedAnswer,
     lesson,
     paramQuizz
   );
 
+  // console.log(displayQuiz);
   useEffect(() => {
     // const fetchAPILesson =async()=>{
     //   const response =
     // }
+    // console.log(lesson);
 
-    displayQuestions(paramQuizz, lesson?.question);
+    lesson?.question?.map((item) => {
+      amountAnswer.current += item?.answersCorrect?.length;
+    });
+
+    displayQuestions(paramQuizz, lesson?.question, lesson?._id);
   }, [paramQuizz, lesson]);
 
   useEffect(() => {
@@ -260,15 +295,6 @@ export const DisplayQuizProvider = ({ children }) => {
       }, 1000);
     }
   }, [selectedOptions]);
-
-  // useEffect(() => {
-  //   setDisplayQuiz({
-  //     ...displayQuiz,
-  //     currentQuestionIndex: currentQuestion,
-
-  //   });
-  // }, [currentQuestion]);
-  console.log(displayQuiz);
 
   const value = {
     wrongQuiz,

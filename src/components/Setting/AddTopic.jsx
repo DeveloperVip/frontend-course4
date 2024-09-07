@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { APITopic } from "../../services/API/APITopic.jsx";
+import { toast } from "react-toastify";
 
 const AddTopic = ({UITopic,handleUITopic}) => {
   const [topicName, setTopicName] = useState("");
@@ -12,9 +13,14 @@ const AddTopic = ({UITopic,handleUITopic}) => {
       name:topicName, description:description
     }
     // Handle form submission, such as sending data to a backend or updating state
-    console.log("New Topic:", data);
+    // console.log("New Topic:", data);
     const response = APITopic.APICreateTopic(data)
-    console.log("🚀 ~ handleSubmit ~ response:", response)
+    // console.log("🚀 ~ handleSubmit ~ response:", response)
+    if(response){
+      toast("Tạo mới chủ đề thành công !", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
     // Reset fields after submission
     setTopicName("");
     setDescription("");

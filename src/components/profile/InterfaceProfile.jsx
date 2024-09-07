@@ -4,12 +4,15 @@ import { FaRegEdit } from "react-icons/fa";
 import EditProfile from "./EditProfile.jsx";
 import MemeProfile from "./MemeProfile.jsx";
 import LibraryProfile from "./LibraryProfile.jsx";
-import Collections from "./Collections.jsx";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { GetInforUserContext } from "../../contexts/user/GetInforUserContext.jsx";
+import CollectionPage from "../../page/CollectionPage/CollectionPage.jsx";
 
 const InterfaceProfile = () => {
+  const {email} = useContext(GetInforUserContext)
   const [isModalOpen, setIsModalOpen] = useState(false); 
-  console.log("🚀 ~ InterfaceProfile ~ isModalOpen:", isModalOpen)
+  // console.log("🚀 ~ InterfaceProfile ~ isModalOpen:", isModalOpen)
   const [selectedImage, setSelectedImage] = useState(null);
   const [change, setChange] = useState(0);
   const arrayTitle = ["Thư viện", "Bộ sưu tập", "Bộ Meme"];
@@ -42,7 +45,7 @@ const InterfaceProfile = () => {
       >
         <div className="profile-layout h-full md:p-8">
           <div className="col-span-full">
-            <a
+            <Link
               href="https://quizizz.com/home/certifiededucators"
               target="_blank"
               rel="noopener noreferrer"
@@ -61,7 +64,7 @@ const InterfaceProfile = () => {
                 Đọc thêm
               </span>
               <i className="far fa-chevron-right text-lilac font-semibold text-xs my-auto pt-0.5" />
-            </a>
+            </Link>
             <div className="bg-light rounded-t-lg">
               <div className="flex justify-between p-6 relative">
                 <div className="flex">
@@ -101,7 +104,7 @@ const InterfaceProfile = () => {
                           title="Mr. adasd wfwfa"
                           className="ellipsis max-w-50 inline-block"
                         >
-                          <span>Mr. adasd wfwfa</span>
+                          <span>{localStorage.getItem("userName")}</span>
                         </p>
                         <div className="lozenge items-center inline-flex text-xs font-semibold py-0.5 rounded px-1.5 uppercase text-light bg-purple-400 ml-1 rounded-2xl">
                           <span>SCHOOL</span>
@@ -109,7 +112,7 @@ const InterfaceProfile = () => {
                       </div>
                       <div className="flex items-center">
                         <span className="text-lilac text-sm">
-                          @safawef22_33730
+                          {email}
                         </span>
                       </div>
                     </div>
@@ -207,7 +210,7 @@ const InterfaceProfile = () => {
           {change === 0 ? (
           <LibraryProfile />
           ) : change === 1 ? (
-            <Collections />
+            <CollectionPage visiable ={true}/>
           ) : (
             <MemeProfile />
           )}

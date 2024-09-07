@@ -4,11 +4,11 @@ import StartGameHeader from "./StartGameHeader.jsx";
 import SlideGame from "./SlideGame.jsx";
 import { DisplayQuizContext } from "../../../contexts/displayQuiz/displayQuizContext.jsx";
 import { useParams } from "react-router-dom";
-import { useFetchAPILessonById } from "../../../hook/useFetchAPILesson.jsx";
+// import { useFetchAPILessonById } from "../../../hook/useFetchAPILesson.jsx";
 
 const StartGame = () => {
   const param = useParams();
-  console.log("🚀 ~ StartGame ~ param:", param?.id);
+  // console.log("🚀 ~ StartGame ~ param:", param?.id);
   const {
     displayQuestions,
     currentQuestion,
@@ -26,7 +26,7 @@ const StartGame = () => {
     setStartTimer(true);
   }, [param ]);
 
-  console.log("🚀 ~ StartGame ~ currentQuestion:", currentQuestion);
+  // console.log("🚀 ~ StartGame ~ currentQuestion:", currentQuestion);
   const [showPopup, setShowPopup] = useState(false);
 
   const handleSubmit = () => {

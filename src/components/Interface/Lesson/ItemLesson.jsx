@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ItemLesson = () => {
   return (
     <div className="w-full md:w-80 p-1 rounded hover:bg-dark-6 bg-light-3 border-dark-10%">
-      <a
+      <Link
         href="/admin/quiz/5e7ffdf1bf0c1c001b3b8136/thu-thach-toan-hoc?isSuperRecommeded=false"
         className="relative flex cursor-pointer"
         data-testid="qp-quiz-recommend-desktop-0"
@@ -33,7 +34,7 @@ const ItemLesson = () => {
             <span className="text-xxs text-dark-4">KG</span>
           </h6>
         </div>
-      </a>
+      </Link>
     </div>
   );
 };

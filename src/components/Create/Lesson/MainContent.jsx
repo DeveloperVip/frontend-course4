@@ -13,7 +13,11 @@ const MainContent = ({ slides, onAddQuestion }) => {
           </div>
         ))}
       </div> */}
-      <CreateQuestion lesson={true} slides={slides} onAddQuestion={onAddQuestion} />
+      <CreateQuestion
+        lesson={true}
+        slides={slides}
+        onAddQuestion={onAddQuestion}
+      />
     </div>
   );
 };

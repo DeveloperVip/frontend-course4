@@ -1,14 +1,17 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const AccountNameContext = createContext();
 
 export const AccountNameProvider = ({ children }) => {
   const urlParams = new URLSearchParams(window.location.search);
-  const [accountName, setAccountName] = useState(urlParams.get("userName"));
+  const [accountName, setAccountName] = useState();
 
   const activateAccountName = () => {
-    setAccountName(urlParams.get("userName"));
+    setAccountName(localStorage.getItem("userName"));
   };
+  useEffect(() => {
+    activateAccountName();
+  }, [localStorage.getItem("userName")]);
 
   const value = {
     accountName,

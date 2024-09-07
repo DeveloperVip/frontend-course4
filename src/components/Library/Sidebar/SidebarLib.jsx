@@ -1,14 +1,18 @@
 // import React from "react";
-import { FaUser, FaFileImport, FaHistory, FaHeart, FaUsers, FaTags, FaArchive, FaFolder } from "react-icons/fa";
-import Collection from "../../Collection/Collection.jsx";
+import { FaUser, FaHeart, FaArchive } from "react-icons/fa";
+// import Collection from "../../Collection/Collection.jsx";
+import { useNavigate } from "react-router-dom";
+import { useFetchAPILessonByUser } from "../../../hook/useFetchAPILesson.jsx";
 
 const SidebarLib = () => {
+  const { allLessonByUser } = useFetchAPILessonByUser();
+  const navigate = useNavigate()
   const menuItems = [
-    { text: "Được tạo bởi tôi", href: "/library/createdByMe", icon: <FaUser /> },
+    { text: "Được tạo bởi tôi", href: "/library/createdByMe", icon: <FaUser /> ,total:allLessonByUser.length},
     
-    { text: "Đã thích", href: "/admin/my-library/likedQuizzes?order=desc&sortBy=createdAt&contentType=all&term=", icon: <FaHeart /> },
+    { text: "Đã thích", href: "/library/createdByMe", icon: <FaHeart /> ,total:allLessonByUser.length},
     
-    { text: "Tất cả nội dung ", href: "/library/allMyContent", icon: <FaArchive /> },
+    { text: "Tất cả nội dung ", href: "/library/allMyContent", icon: <FaArchive /> ,total:0},
   ];
 
   return (
@@ -24,9 +28,9 @@ const SidebarLib = () => {
               </header>
               <ul className="flex flex-row flex-wrap text-xs p-3 gap-2 md:text-sm md:flex-col md:p-0 md:pb-4 md:gap-y-1">
                 {menuItems.map((item, index) => (
-                  <li key={index} className="md:w-full bg-light-66% rounded-t rounded-b-lg">
-                    <a href={item.href} className="flex flex-col border border-dark-6 rounded text-dark-4 hover:bg-light hover:shadow-sm hover:text-dark-2 cursor-pointer md:border-0 md:mb-0 md:w-full md:h-8 p-0 bg-light-3 md:bg-light-1 h-6">
-                      <button type="button" className="flex flex-row flex-grow items-center justify-between h-full">
+                  <li  key={index} className="md:w-full bg-light-66% rounded-t rounded-b-lg">
+                    <div href={item.href} className="flex flex-col border border-dark-6 rounded text-dark-4 hover:bg-light hover:shadow-sm hover:text-dark-2 cursor-pointer md:border-0 md:mb-0 md:w-full md:h-8 p-0 bg-light-3 md:bg-light-1 h-6">
+                      <button onClick={()=>navigate(item.href)} type="button" className="flex flex-row flex-grow items-center justify-between h-full">
                         <div className="flex flex-row items-center border-r-1 border-dark-10% md:border-0 w-8 h-full justify-center">
                           {item.icon}
                         </div>
@@ -35,11 +39,11 @@ const SidebarLib = () => {
                         </div>
                         <div className="flex">
                           <div className="flex pr-2 items-center text-xs md:font-semibold">
-                            <span>0</span>
+                            <span>{item?.total}</span>
                           </div>
                         </div>
                       </button>
-                    </a>
+                    </div>
                   </li>
                 ))}
               </ul>

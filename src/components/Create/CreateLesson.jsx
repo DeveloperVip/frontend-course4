@@ -14,11 +14,11 @@ import { useState } from "react";
 import SettingLesson from "../Setting/SettingLesson.jsx";
 
 const CreateLesson = () => {
-  const [visiable,setVisiable] = useState(false)
-  console.log("🚀 ~ CreateLesson ~ visiable:", visiable)
-  const handleSetting = ()=>{
-    setVisiable(true)
-  }
+  const [visiable, setVisiable] = useState(false);
+  // console.log("🚀 ~ CreateLesson ~ visiable:", visiable);
+  const handleSetting = () => {
+    setVisiable(true);
+  };
   return (
     <div className="z-0 w-screen h-screen">
       <div className="presentation-editor flex-col flex w-screen h-screen overflow-hidden">
@@ -43,7 +43,7 @@ const CreateLesson = () => {
                 className="transition-colors duration-200 ease-in-out flex flex items-center justify-center px-4 py-1 text-sm font-semibold h-8 transparent bg-light-20% text-light-3 hover:bg-light-33% active:bg-light-10% rounded transparent relative min-w-max"
                 aria-label="Preview"
                 type="button"
-                
+
                 // tooltip="[object Object]"
               >
                 <FaPlay
@@ -68,14 +68,13 @@ const CreateLesson = () => {
               />
 
               <span className="title" title="Settings">
-                Cài đặt 
+                Cài đặt
               </span>
             </button>
             <button
               className="transition-colors duration-200 ease-in-out flex flex items-center justify-center px-4 py-1 text-sm font-semibold h-8 bg-light-3 border border-solid border-dark-6 text-dark-2 hover:bg-light-2 active:bg-light-1 rounded white relative min-w-max"
               aria-label="Publish"
               type="button"
-              
             >
               <AiOutlineCloudUpload
                 className="flex items-center fas fa-cloud-upload mr-2"
@@ -354,9 +353,7 @@ const CreateLesson = () => {
                   <div className="flex p-2 px-1 bg-light-2">
                     <button
                       className="transition-colors duration-200 ease-in-out flex flex items-center justify-center px-4 py-1 text-purple-900 font-semibold h-8 base bg-purple-100 text-lilac hover:text-purple-400 active:text-purple-900 rounded secondary relative"
-                      
                       type="button"
-                      
                     >
                       <AiOutlineCloudUpload
                         className="flex items-center far fa-cloud-upload-alt mr-2"
@@ -369,7 +366,6 @@ const CreateLesson = () => {
                     </button>
                     <button
                       className="transition-colors duration-200 ease-in-out flex flex items-center justify-center px-4 py-1 text-sm font-semibold h-8 base bg-purple-900 text-light-3 hover:bg-purple-400 active:bg-purple-900 rounded primary relative ml-2 w-36 whitespace-nowrap ml-2 w-36 whitespace-nowrap"
-                      
                       type="button"
                       onClick={onAddSlide}
                     >
@@ -378,10 +374,7 @@ const CreateLesson = () => {
                         style={{ fontSize: "20px" }}
                       />
 
-                      <span
-                        className="title max-w-24 overflow-hidden whitespace-nowrap overflow-ellipsis v-popper--has-tooltip"
-                        
-                      >
+                      <span className="title max-w-24 overflow-hidden whitespace-nowrap overflow-ellipsis v-popper--has-tooltip">
                         Thêm slide mới
                       </span>
                     </button>
@@ -395,7 +388,9 @@ const CreateLesson = () => {
           </main>
         </div>
       </div>
-      {visiable ? <SettingLesson visiable={visiable} setVisiable={setVisiable}/>:null}
+      {visiable ? (
+        <SettingLesson visiable={visiable} setVisiable={setVisiable} />
+      ) : null}
     </div>
   );
 };

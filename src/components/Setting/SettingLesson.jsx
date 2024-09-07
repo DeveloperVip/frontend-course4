@@ -9,7 +9,6 @@ import {
 import SelectBox from "./SelectBox.jsx";
 import { grades, visibility } from "../../utils/Initial.jsx";
 import { IoSparkles } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
 import { VisibleSettingContext } from "../../contexts/visiableSettingContext.jsx";
 import AddTopic from "./AddTopic.jsx";
 import { APITopic } from "../../services/API/APITopic.jsx";
@@ -17,8 +16,6 @@ import { APIUpload } from "../../services/API/APIUpload.jsx";
 import { LessonContext } from "../../contexts/lesson/lessonContext.jsx";
 
 const SettingLesson = ({ slides }) => {
-  console.log(slides);
-  const navigate = useNavigate();
   const [UITopic, setUITopic] = useState(false);
   const [topic, setTopic] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -54,7 +51,7 @@ const SettingLesson = ({ slides }) => {
     const fetchApiTopic = async () => {
       try {
         const response = await APITopic.APIGetAllTopic();
-        console.log(response);
+        // console.log(response);
         setTopic(response);
       } catch (error) {
         console.error("Failed to fetch topics:", error);
@@ -69,7 +66,7 @@ const SettingLesson = ({ slides }) => {
       name: lessonName,
       image: selectedFile,
     };
-    console.log("🚀 ~ useEffect ~ updateLesson:", updateLesson);
+    // console.log("🚀 ~ useEffect ~ updateLesson:", updateLesson);
     handleSaveLesson(updateLesson);
   }, [selectedFile, lessonName]);
 

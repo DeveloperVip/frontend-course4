@@ -1,9 +1,19 @@
-import { FaBold, FaFont, FaItalic, FaLightbulb, FaStrikethrough, FaSubscript, FaSuperscript, FaUnderline } from "react-icons/fa6";
+import {
+  FaBold,
+  FaFont,
+  FaItalic,
+  FaLightbulb,
+  FaStrikethrough,
+  FaSubscript,
+  FaSuperscript,
+  FaUnderline,
+} from "react-icons/fa6";
 import { LuSigma } from "react-icons/lu";
 import { AiOutlineFunction } from "react-icons/ai";
 import EquationEditor from "./EquationEditor.jsx";
 import { useState } from "react";
 import { CKEditor } from "ckeditor4-react"; // Ensure correct CKEditor version is used
+import { toast } from "react-toastify";
 
 const HeaderEditor = ({ lesson, setEquation }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,13 +23,20 @@ const HeaderEditor = ({ lesson, setEquation }) => {
   };
 
   const handleEquationSubmit = (latex) => {
+    toast("Custom Style Notification with css class!", {
+      position: toast.POSITION.TOP_RIGHT,
+      className: "foo-bar",
+    });
     setEquation(latex); // Update the equation in the parent component
   };
 
   return (
     <>
       {isOpen ? (
-        <EquationEditor closeEdit={setIsOpen} onSubmitEquation={handleEquationSubmit} />
+        <EquationEditor
+          closeEdit={setIsOpen}
+          onSubmitEquation={handleEquationSubmit}
+        />
       ) : (
         ""
       )}
@@ -36,18 +53,38 @@ const HeaderEditor = ({ lesson, setEquation }) => {
               initData="<p>Nội dung của bạn tại đây...</p>" // Default content
               config={{
                 toolbar: [
-                  { name: "basicstyles", items: ["Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript"] },
-                  { name: "insert", items: ["Image", "Table", "HorizontalRule", "SpecialChar", "MathJax"] },
+                  {
+                    name: "basicstyles",
+                    items: [
+                      "Bold",
+                      "Italic",
+                      "Underline",
+                      "Strike",
+                      "Subscript",
+                      "Superscript",
+                    ],
+                  },
+                  {
+                    name: "insert",
+                    items: [
+                      "Image",
+                      "Table",
+                      "HorizontalRule",
+                      "SpecialChar",
+                      "MathJax",
+                    ],
+                  },
                   { name: "styles", items: ["Format", "Font", "FontSize"] },
                   { name: "colors", items: ["TextColor", "BGColor"] },
                   { name: "tools", items: ["Maximize"] },
                 ],
                 extraPlugins: "mathjax",
-                mathJaxLib: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML",
+                mathJaxLib:
+                  "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML",
               }}
               onChange={(event) => {
                 const editorData = event.editor.getData();
-                console.log(editorData);
+                // console.log(editorData);
               }}
             />
           </div>

@@ -3,7 +3,6 @@ import { LessonContext } from "../../contexts/lesson/lessonContext.jsx";
 import { VisibleSettingContext } from "../../contexts/visiableSettingContext.jsx";
 
 const SelectBox = ({ label, options, icon: Icon, item }) => {
-  console.log("🚀 ~ SelectBox ~ label:", options);
   const { handleSaveLesson, formLesson } = useContext(LessonContext);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
