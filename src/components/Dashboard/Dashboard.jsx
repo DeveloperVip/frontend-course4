@@ -27,10 +27,6 @@ const SidebarButton = ({
       }`}
       onClick={() => {
         if (direction) {
-          toast(`Chuyển tới ${label}`, {
-            position: toast.POSITION.TOP_RIGHT,
-            className: "foo-bar",
-          });
           navigate(direction);
         }
         onClick(); // Trigger the parent function to set the active button

@@ -105,7 +105,7 @@ const LoginPage = () => {
           </div>
           </div>
           <div className="register-link">
-            Không có tài khoản? <a href="/register">Đăng ký</a>
+            Không có tài khoản? <Link to="/register">Đăng ký</Link>
           </div>
         </div>
         <div className="login-image-container">
