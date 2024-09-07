@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { yupLogin } from "./yupLogin.jsx";
 import "./LoginEmail.css";
 import { APIUser } from "../../services/API/APIUser.jsx";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 // import { AccountNameContext } from "../../contexts/user/AccountName.jsx";
 import { AuthContext } from "../../contexts/auth/authContext.jsx";
 import { toast } from "react-toastify";
@@ -162,12 +162,12 @@ const LoginEmail = () => {
                 {/* <!-- Register link --> */}
                 <p className="mb-0 mt-2 pt-1 text-sm font-semibold">
                   Chưa có tài khoản ?{" "}
-                  <a
-                    href="#!"
+                  <Link
+                    to="/register"
                     className="text-danger transition duration-150 ease-in-out hover:text-danger-600 focus:text-danger-600 active:text-danger-700"
                   >
                     Đăng ký
-                  </a>
+                  </Link>
                 </p>
               </div>
             </form>
