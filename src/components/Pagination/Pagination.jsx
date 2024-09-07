@@ -1,24 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Pagination.css";
+// import { useFetchAPIHistoryAll } from "../../hook/useFetchAPIHistory.jsx";
+import { PaginationContext } from "../../contexts/paginationContext.jsx";
 
 const Pagination = () => {
-  const totalPages = 5 // Tổng số trang
-  const [currentPage, setCurrentPage] = useState(1);
-
-  // Hàm xử lý khi click vào trang
-  const handleClick = (page) => {
-    if (page >= 1 && page <= totalPages) {
-        setCurrentPage(page); 
-        // setPage(page -1)
-    }
-  };
-
-  // Tạo mảng các số trang
-  const pages = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pages.push(i);
-  }
+   // Tổng số trang
+   const {currentPage,handleClick,pages,totalPages} = useContext(PaginationContext)
+  
 
   return (
     <>

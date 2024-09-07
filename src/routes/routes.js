@@ -1,5 +1,6 @@
 // import CreateLesson from "../components/Create/CreateLesson.jsx";
-import Collection from "../components/Collection/Collection.jsx";
+// import CollectionSideBar from "../components/Collection/Collection.jsx";
+import EditQuestion from "../components/Collection/EditQuiz.jsx";
 import CreateQuestion from "../components/Create/CreateQuestion.jsx";
 import CreateLesson from "../components/Create/Lesson/CreateLesson.jsx";
 import Preview from "../components/Create/Preview.jsx";
@@ -8,12 +9,15 @@ import Preview from "../components/Create/Preview.jsx";
 import StartGame from "../components/Interface/StartGame/StartGame.jsx";
 import Layout from "../components/Layout/Layout.jsx";
 import AllMyContent from "../components/Library/Section/AllMyContent.jsx";
+import PreviewLesson from "../components/Library/Section/PreviewLesson.jsx";
+import AddTopic from "../components/Setting/AddTopic.jsx";
 import SettingLesson from "../components/Setting/SettingLesson.jsx";
 // import ReportHeader from "../components/Report/ReportHeader.jsx";
 // import ReportSection from "../components/Report/ReportSection.jsx";
 // import CreateByMe from "../components/Library/Section/CreateByMe.jsx";
 // import SidebarLib from "../components/Library/Sidebar/SidebarLib.jsx";
 import CheckPointPage from "../page/CheckPoint/CheckPointPage.jsx";
+import CollectionPage from "../page/CollectionPage/CollectionPage.jsx";
 import LessonPage from "../page/LessonPage/LessonPage.jsx";
 import LibraryPage from "../page/LibraryPage/LibraryPage.jsx";
 import LoginEmail from "../page/LoginPage/LoginEmail.jsx";
@@ -37,6 +41,9 @@ const publicRoutes = [
     path: "/register",
     component: Register,
   },
+];
+
+const privateRoutes = [
   {
     path: "/profile",
     component: ProfilePage,
@@ -47,26 +54,24 @@ const publicRoutes = [
   // {path:"/profile/editProfile",component:EditProfile}
   { path: "/setting", component: SettingPage, layout: Layout },
   { path: "/preview", component: Preview },
-  {path:"/all-my-content",component:AllMyContent},
-  {path:"/collection",component:Collection, layout:Layout   },
+  { path: "/all-my-content", component: AllMyContent },
+  { path: "/collection/:id", component: CollectionPage, layout: Layout },
   // {path:"/sidebarlib",component:SidebarLib},
   // {path:"/section",component:CreateByMe}
-  { path: "/library/:id", component: LibraryPage,layout:Layout },
+  { path: "/library/:id", component: LibraryPage, layout: Layout },
   {
     path: "/",
-    component: MainPage,layout:Layout
+    component: MainPage,
+    layout: Layout,
   },
   { path: "/presentation/:id", component: LessonPage, layout: Layout },
-  {path:"/startGame",component:StartGame},
-  {path:"/checkPoint",component:CheckPointPage,layout:Layout},
-  {path:"/report",component:ReportPage,layout:Layout},
-  {path:"/test", component:SettingLesson}
-];
-
-const privateRoutes = [
-  // {
-  //   path: "/",
-  // },
+  { path: "/startGame/:id", component: StartGame },
+  { path: "/checkPoint/:id", component: CheckPointPage, layout: Layout },
+  { path: "/reports", component: ReportPage, layout: Layout },
+  { path: "/test", component: SettingLesson },
+  { path: "/addTopic", component: AddTopic },
+  { path: "/preview_lesson/:id", component: PreviewLesson },
+  { path: "/edit_question/:id", component: EditQuestion },
 ];
 
 export { publicRoutes, privateRoutes };

@@ -1,5 +1,5 @@
-import React from "react";
-import { TEInput, TERipple } from "tw-elements-react";
+import React, { useContext } from "react";
+import {  TERipple } from "tw-elements-react";
 import Input from "../../components/Input/Input.jsx";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,20 +7,27 @@ import { yupLogin } from "./yupLogin.jsx";
 import "./LoginEmail.css";
 import { APIUser } from "../../services/API/APIUser.jsx";
 import { useNavigate } from "react-router-dom";
+// import { AccountNameContext } from "../../contexts/user/AccountName.jsx";
+import { AuthContext } from "../../contexts/auth/authContext.jsx";
+import { toast } from "react-toastify";
 const LoginEmail = () => {
+  const {setIsAuthenticated} = useContext(AuthContext);
   const navigate = useNavigate();
-  const { control, setValue, reset, handleSubmit } = useForm({
+  const { control, handleSubmit } = useForm({
     mode: "all",
     defaultValues: { email: "", password: "" },
     resolver: yupResolver(yupLogin),
   });
   const onSubmit = async (data) => {
-    alert(JSON.stringify(data));
+    toast.success("Đăng nhập thành công ")
     const response = await APIUser.APILogin(data);
-    console.log(response.data);
+    // console.log(response.data);
     if (response.data.token) {
       localStorage.setItem("token", response.data.token);
-      navigate("/home");
+      localStorage.setItem("userName",response.data.userName)
+      setIsAuthenticated(true)
+      // const {activateAccountName} = useContext(AccountNameContext)
+      navigate(`/?userName=${response.data.userName}`);
     }
   };
   return (

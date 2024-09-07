@@ -1,6 +1,12 @@
 .score-animation {
     animation: 2.4s forwards scoreAnimation-9d7f2124;
 }
+.option .wrong-answer{
+    background: red !important;
+}
+.option .correct-answer{
+    background: green !important;
+}
 .option .option-inner {
     text-align: center;
     vertical-align: middle;

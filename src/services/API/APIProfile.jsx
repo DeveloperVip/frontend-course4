@@ -14,7 +14,7 @@ const APIprofile = {
     return axiosInstance
       .put(`/user/update-user/${_id}`, userData)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         return res.data;
       })
       .catch((error) => {
@@ -22,11 +22,12 @@ const APIprofile = {
         // handle error
       });
   },
+
   changePassword: (_id, passwordData) => {
     return axiosInstance
       .put(`/user/password-user/${_id}`, passwordData)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         return res.data;
       })
       .catch((error) => {

@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 
 const LibraryPage = () => {
   const href = useParams();
-  console.log(href.id);
+  // console.log(href.id);
   return (
     <div className="p-10 h-full flex flex-row  bg-light-1 overflow-auto">
       <SidebarLib />

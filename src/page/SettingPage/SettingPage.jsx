@@ -1,28 +1,52 @@
 // import React, { useState } from 'react';
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./SettingPage.css";
 import { FaUserCircle } from "react-icons/fa";
 import { FaCaretDown, FaFlag, FaLanguage, FaLock } from "react-icons/fa6";
+import { APIUser } from "../../services/API/APIUser.jsx";
+import { GetInforUserContext } from "../../contexts/user/GetInforUserContext.jsx";
 const SettingPage = () => {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [language, setLanguage] = useState("English");
   const [isLanguageDropdownOpen, setLanguageDropdownOpen] = useState(false);
+  const { identify, setIdentify, email, setEmail, username, setUsername } =
+    useContext(GetInforUserContext);
 
-  const handleSaveAccount = () => {
+  const handleSaveAccount = async () => {
     // Logic to save email and username
-    console.log("Email:", email);
-    console.log("Username:", username);
+    // console.log("Email:", email);
+    // console.log("Username:", username);
+    const data = {
+      email: email,
+      userName: username,
+    };
+    const response = await APIUser.APIUpdateInfor(identify, data);
+    // console.log("🚀 ~ handleSaveAccount ~ response:", response);
   };
 
-  const handleChangePassword = () => {
+  const handleChangePassword = async () => {
+    if (newPassword.length < 6) {
+      alert("Mật khẩu mới phải có ít nhất 6 ký tự.");
+      return;
+    }
+
+    if (newPassword !== repeatPassword) {
+      alert("Mật khẩu mới và nhập lại mật khẩu không khớp.");
+      return;
+    }
+
     // Logic to change password
-    console.log("Old Password:", oldPassword);
-    console.log("New Password:", newPassword);
-    console.log("Repeat Password:", repeatPassword);
+    // console.log("Old Password:", oldPassword);
+    // console.log("New Password:", newPassword);
+    // console.log("Repeat Password:", repeatPassword);
+    const data = {
+      newPassword: newPassword,
+      password: oldPassword,
+    };
+    const response = await APIUser.APIUpdatePassword(identify, data);
+    // console.log(response);
   };
   const toggleLanguageDropdown = () => {
     setLanguageDropdownOpen(!isLanguageDropdownOpen);
@@ -124,14 +148,32 @@ const SettingPage = () => {
               {isLanguageDropdownOpen && (
                 <ul className="listbox absolute z-30 list bg-light-3 shadow-soft-high w-full transform rounded transition-transform h-80 mt-12 overflow-y-auto">
                   {[
-                    "English", "Español", "Français", "Polski", "Русский", "Bahasa Indonesia", 
-                    "Melayu", "Filipino", "Deutsch", "Tiếng Việt", "ไทย", "Português", 
-                    "한국인", "中文 （简体）", "中文 （繁體）", "Türk", "Italiano", "日本語", "қазақша"
+                    "English",
+                    "Español",
+                    "Français",
+                    "Polski",
+                    "Русский",
+                    "Bahasa Indonesia",
+                    "Melayu",
+                    "Filipino",
+                    "Deutsch",
+                    "Tiếng Việt",
+                    "ไทย",
+                    "Português",
+                    "한국인",
+                    "中文 （简体）",
+                    "中文 （繁體）",
+                    "Türk",
+                    "Italiano",
+                    "日本語",
+                    "қазақша",
                   ].map((lang) => (
                     <li
                       key={lang}
                       className={`option cursor-pointer p-2 flex ${
-                        language === lang ? "bg-purple-600 text-light-3" : "bg-light-3 text-dark-3"
+                        language === lang
+                          ? "bg-purple-600 text-light-3"
+                          : "bg-light-3 text-dark-3"
                       } hover:bg-purple-400 hover:text-white`}
                       onClick={() => selectLanguage(lang)}
                     >

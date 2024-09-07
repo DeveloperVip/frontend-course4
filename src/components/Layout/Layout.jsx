@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Dashboard from "../Dashboard/Dashboard.jsx";
-import Header from "../Header/Header.jsx";
+// import Header from "../Header/Header.jsx";
 import Footer from "../footer/Footer.jsx";
 
 const Layout = () => {
@@ -9,7 +9,7 @@ const Layout = () => {
       <div className="flex h-full flex-1">
         <Dashboard />
         <div className="flex-col w-full admin bg-slate-100">
-          <Header />
+          {/* <Header /> */}
           <Outlet />
         </div>
       </div>
