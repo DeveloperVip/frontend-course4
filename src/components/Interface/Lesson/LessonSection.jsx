@@ -10,7 +10,7 @@ const LessonSection = ({ lesson = {} }) => {
   return (
     <div className="w-full">
       <StartOrAssign />
-      <HeaderSlider amountQuestion={questions?.length} />
+      <HeaderSlider amountQuestion={questions?.length} idLesson={lesson?._id} />
 
       {questions?.map((item, index) => {
         return (

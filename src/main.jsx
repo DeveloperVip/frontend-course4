@@ -20,36 +20,39 @@ import { SlideVisibilityProvider } from "./contexts/hideSlideContext.jsx";
 import { GetInforUserProvider } from "./contexts/user/GetInforUserContext.jsx";
 import { QuizProvider } from "./contexts/quiz/quizContext.jsx";
 import { PaginationProvider } from "./contexts/paginationContext.jsx";
+import { ProfileProvider } from "./contexts/profile/profileContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
-    <PaginationProvider>
-      <QuizProvider>
-        <GetInforUserProvider>
-          <SlideVisibilityProvider>
-            <CheckpointProvider>
-              <TimerQuizProvider>
-                <DisplayQuizProvider>
-                  <AccountNameProvider>
-                    <InnerClickProvider>
-                      <LessonProvider>
-                        <SelectedSlideProvider>
-                          <AuthProvider>
-                            <VisibleSettingProvider>
-                              <App />
-                            </VisibleSettingProvider>
-                          </AuthProvider>
-                        </SelectedSlideProvider>
-                      </LessonProvider>
-                    </InnerClickProvider>
-                  </AccountNameProvider>
-                </DisplayQuizProvider>
-              </TimerQuizProvider>
-            </CheckpointProvider>
-          </SlideVisibilityProvider>
-        </GetInforUserProvider>
-      </QuizProvider>
-    </PaginationProvider>
+    <ProfileProvider>
+      <PaginationProvider>
+        <QuizProvider>
+          <GetInforUserProvider>
+            <SlideVisibilityProvider>
+              <CheckpointProvider>
+                <TimerQuizProvider>
+                  <DisplayQuizProvider>
+                    <AccountNameProvider>
+                      <InnerClickProvider>
+                        <LessonProvider>
+                          <SelectedSlideProvider>
+                            <AuthProvider>
+                              <VisibleSettingProvider>
+                                <App />
+                              </VisibleSettingProvider>
+                            </AuthProvider>
+                          </SelectedSlideProvider>
+                        </LessonProvider>
+                      </InnerClickProvider>
+                    </AccountNameProvider>
+                  </DisplayQuizProvider>
+                </TimerQuizProvider>
+              </CheckpointProvider>
+            </SlideVisibilityProvider>
+          </GetInforUserProvider>
+        </QuizProvider>
+      </PaginationProvider>
+    </ProfileProvider>
     <ToastContainer />
   </>
 );

@@ -63,7 +63,7 @@ const Dashboard = () => {
     <>
       <div className=" bg-white text-black shadow-2xl border-r border-light-1 max-w-min filter-box-shadow sticky top-0 ">
         <div className=" flex h-14 m-2">
-          <img src="/1a.png" alt="logo Visual" className="a" />
+          <h3 style={{fontSize:"x-large",color:"var(--c-1625121945268, #5f00bf)",textShadow:"0 1px #808d93, -1px 0 #cdd2d5, -1px 2px #808d93, -2px 1px #cdd2d5, -2px 3px #808d93, -3px 2px #cdd2d5, -3px 4px #808d93, -4px 3px #cdd2d5, -4px 5px #808d93, -5px 4px #cdd2d5, -5px 6px #808d93, -6px 5px #cdd2d5, -6px 7px #808d93, -7px 6px #cdd2d5, -7px 8px #808d93, -8px 7px #cdd2d5"}}>QUIZIZZHOUSE</h3>
         </div>
         <div data-testid="user-details" className="user-details">
           <div className="pb-2 p-4 user-section">
@@ -76,7 +76,7 @@ const Dashboard = () => {
                       className="inline-block w-full text-sm font-semibold text-dark-2 cursor-pointer"
                     >
                       <div>
-                        <span className="inline-block align-bottom">
+                        <span className="inline-block align-bottom uppercase">
                           {accountName}
                         </span>
                       </div>

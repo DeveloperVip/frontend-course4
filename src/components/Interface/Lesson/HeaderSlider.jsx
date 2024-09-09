@@ -2,10 +2,11 @@
 import React, { useContext } from "react";
 import { FaEyeSlash, FaPlay, FaTasks } from "react-icons/fa";
 import { SlideVisibilityContext } from "../../../contexts/hideSlideContext.jsx";
+import { Navigate, useNavigate } from "react-router-dom";
 
-const HeaderSlider = ({ amountQuestion }) => {
+const HeaderSlider = ({ amountQuestion,idLesson }) => {
   const { isSlidesVisible, toggleSlidesVisibility } = useContext(SlideVisibilityContext)
-
+const navigate = useNavigate()
   return (
     <div translate="no" className="hidden md:flex justify-between mb-4 mt-7">
       <div className="flex items-center text-base">
@@ -31,7 +32,7 @@ const HeaderSlider = ({ amountQuestion }) => {
           />
 
           <span className="title" title={isSlidesVisible ? "Hide slides" : "Show slides"}>
-            {isSlidesVisible ? "Ẩn slide" : "Hiển thị slide"}
+            {isSlidesVisible ? "Hiển thị slide":"Ẩn slide"}
           </span>
         </button>
         <button
@@ -39,6 +40,7 @@ const HeaderSlider = ({ amountQuestion }) => {
           aria-label="Preview quiz"
           type="button"
           translate="no"
+          onClick={()=>navigate( `/preview_lesson/${idLesson}`)}
         >
           <FaPlay
             className="flex items-center fas fa-play mr-2"

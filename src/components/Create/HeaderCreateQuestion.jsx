@@ -61,16 +61,20 @@ const HeaderCreateQuestion = ({
         lesson ? "bg-purple-600" : "bg-white"
       } flex items-center gap-2 py-2 px-4 h-14`}
     >
-      <div
-        className="transition-colors duration-200 p-0 ease-in-out flex items-center justify-center w-8 h-8 bg-dark-5% active:bg-dark-10% text-dark-2 hover:text-dark-3 rounded relative min-w-max"
-        aria-label="Back"
-        onClick={() => navigate(-1)}
-      >
-        <IoChevronBack
-          className="flex items-center fas fa-chevron-left"
-          style={{ fontSize: 12 }}
-        />
-      </div>
+      {lesson ? (
+        ""
+      ) : (
+        <button type="button"
+          className="hover:bg-slate-400 transition-colors duration-200 p-0 ease-in-out flex items-center justify-center w-8 h-8 bg-dark-5% active:bg-dark-10% text-dark-2 hover:text-dark-3 rounded relative min-w-max"
+          aria-label="Back"
+          onClick={() => navigate(-1)}
+        >
+          <IoChevronBack
+            className="flex items-center fas fa-chevron-left"
+            style={{ fontSize: 12 }}
+          />
+        </button>
+      )}
       <div className="relative flex-grow flex-shrink-0 max-w-55">
         <div className="dropdown flex relative rounded">
           <button
@@ -180,16 +184,20 @@ const HeaderCreateQuestion = ({
           </div>
         </div>
 
-        <button
-          onClick={handleSubmit}
-          className="transition-colors duration-200 p-0 ease-in-out flex items-center justify-center px-4 py-1.5 text-xs font-semibold h-8 bg-purple-500 text-white hover:bg-purple-400 active:bg-purple rounded"
-        >
-          <FaFloppyDisk
-            className="flex items-center fas fa-floppy-disk mr-2"
-            style={{ fontSize: 12 }}
-          />
-          <span>{edit ? "Lưu thay đổi" : "Lưu câu hỏi"}</span>
-        </button>
+        {lesson ? (
+          ""
+        ) : (
+          <button
+            onClick={handleSubmit}
+            className="transition-colors duration-200 p-0 ease-in-out flex items-center justify-center px-4 py-1.5 text-xs font-semibold h-8 bg-purple-500 text-white hover:bg-purple-400 active:bg-purple rounded"
+          >
+            <FaFloppyDisk
+              className="flex items-center fas fa-floppy-disk mr-2"
+              style={{ fontSize: 12 }}
+            />
+            <span>{edit ? "Lưu thay đổi" : "Lưu câu hỏi"}</span>
+          </button>
+        )}
       </div>
     </header>
   );

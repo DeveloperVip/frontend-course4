@@ -10,7 +10,7 @@ const SidebarLib = () => {
   const menuItems = [
     { text: "Được tạo bởi tôi", href: "/library/createdByMe", icon: <FaUser /> ,total:allLessonByUser.length},
     
-    { text: "Đã thích", href: "/library/createdByMe", icon: <FaHeart /> ,total:allLessonByUser.length},
+    // { text: "Đã thích", href: "/library/createdByMe", icon: <FaHeart /> ,total:allLessonByUser.length},
     
     { text: "Tất cả nội dung ", href: "/library/allMyContent", icon: <FaArchive /> ,total:0},
   ];

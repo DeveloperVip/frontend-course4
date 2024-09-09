@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { FaPlay } from "react-icons/fa";
 import { AiOutlineCloudUpload } from "react-icons/ai";
-import { IoSettings } from "react-icons/io5";
+import { IoChevronBack, IoSettings } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { VisibleSettingContext } from "../../../contexts/visiableSettingContext.jsx";
 import { LessonContext } from "../../../contexts/lesson/lessonContext.jsx";
@@ -15,6 +15,18 @@ const Header = () => {
       className="presentation-editor-header flex items-center h-12 p-2 bg-purple z-100"
       //   contenttype="presentation"
     >
+      <button
+        type="button"
+        style={{backgroundColor:"#fff3", marginRight:"10px"}}
+        className="hover:bg-slate-500 transition-colors duration-200 p-0 ease-in-out flex items-center justify-center w-8 h-8 bg-dark-5% active:bg-dark-10% text-dark-2 hover:text-dark-3 rounded relative min-w-max "
+        aria-label="Back"
+        onClick={() => navigate(-1)}
+      >
+        <IoChevronBack
+          className="flex items-center fas fa-chevron-left"
+          style={{ fontSize: 12, color: "white" }}
+        />
+      </button>
       <div className="w-20">
         <a className="hover:cursor-pointer">
           <img

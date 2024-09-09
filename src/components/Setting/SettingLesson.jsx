@@ -14,6 +14,7 @@ import AddTopic from "./AddTopic.jsx";
 import { APITopic } from "../../services/API/APITopic.jsx";
 import { APIUpload } from "../../services/API/APIUpload.jsx";
 import { LessonContext } from "../../contexts/lesson/lessonContext.jsx";
+import { BiTrash } from "react-icons/bi";
 
 const SettingLesson = ({ slides }) => {
   const [UITopic, setUITopic] = useState(false);
@@ -34,7 +35,7 @@ const SettingLesson = ({ slides }) => {
       const fileData = new FormData();
       fileData.append("file", file);
       const imageQuestion = await APIUpload.uploadImageQuestion(fileData);
-      setSelectedFile(imageQuestion?.data);
+      setSelectedFile(imageQuestion?.data?.secure_url);
     }
   };
 
@@ -172,11 +173,19 @@ const SettingLesson = ({ slides }) => {
                   >
                     <div className="flex relative items-center w-full justify-center h-full">
                       {selectedFile ? (
-                        <img
-                          src={selectedFile?.secure_url}
-                          alt="Quiz cover image"
-                          className="flex  min-h-0 min-w-0 max-h-full max-w-full object-scale-down"
-                        />
+                        <div>
+                          <img
+                            src={selectedFile}
+                            alt="Quiz cover image"
+                            className="flex  min-h-0 min-w-0 max-h-full max-w-full object-scale-down"
+                          />
+                          <button
+                            className="absolute top-0 bg-inherit p-0 right-0"
+                            onClick={() => setSelectedFile(null)}
+                          >
+                            <BiTrash />
+                          </button>
+                        </div>
                       ) : (
                         <div className="absolute flex flex-col justify-center items-center w-full h-full overflow-hidden bg-dark-50% z-30">
                           <FaCamera

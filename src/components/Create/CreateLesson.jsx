@@ -27,12 +27,12 @@ const CreateLesson = () => {
           //   contenttype="presentation"
         >
           <div className="w-20">
-            <a className="hover:cursor-pointer">
+            <button type="button" className="hover:cursor-pointer">
               <img
                 src="https://cf.quizizz.com/img/quizizz_logos/white-brandmark-600x164.png"
                 alt="Quizizz"
               />
-            </a>
+            </button>
           </div>
           <div className="flex float-right ml-auto">
             <div

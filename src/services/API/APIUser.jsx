@@ -31,9 +31,9 @@ export const APIUser = {
     // console.log(response.data);
     return response.data;
   },
-  APIUpdateInfor: async (id, infor) => {
+  APIUpdateInfor: async (userId,updateData) => {
     // console.log("🚀 ~ APIUpdateInfor:async ~ infor:", infor);
-    const response = await axiosInstance.put(`/user/update-user/${id}`, infor);
+    const response = await axiosInstance.put(`/user/update-user/${userId}`, updateData);
     // console.log(response.data);
     return response.data;
   },

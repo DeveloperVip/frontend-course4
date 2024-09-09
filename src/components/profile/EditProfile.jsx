@@ -1,73 +1,59 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaUserEdit } from "react-icons/fa";
 import { FaCaretDown } from "react-icons/fa6";
+import { ProfileContext } from "../../contexts/profile/profileContext.jsx";
+import { GetInforUserContext } from "../../contexts/user/GetInforUserContext.jsx";
 
-const EditProfile = ({isModalOpen,setIsModalOpen}) => {
- 
+const EditProfile = ({ isModalOpen, setIsModalOpen }) => {
+  const { profile, updateProfile } = useContext(ProfileContext);
+  // console.log("🚀 ~ EditProfile ~ profile:", profile)
+  const { firstName: initialFirstName, lastName: initialLastName,userId:userId } = useContext(GetInforUserContext);
+  const { subjects, grade, place: initialPlace } = profile;
+
+  const [firstName, setFirstName] = useState(initialFirstName);
+  const [lastName, setLastName] = useState(initialLastName);
+  const [selectedClasses, setSelectedClasses] = useState(grade );
+  const [selectedSubjects, setSelectedSubjects] = useState(subjects || []);
+  const [place, setPlace] = useState(initialPlace || "");
+
   const classLevels = [
-    "Lớp 1",
-    "Lớp 2",
-    "Lớp 3",
-    "Lớp 4",
-    "Lớp 5",
-    "Lớp 6",
-    "Lớp 7",
-    "Lớp 8",
-    "Lớp 9",
-    "Lớp 10",
-    "Lớp 11",
-    "Lớp 12",
-    "Đại học",
-    "Phát triển chuyên môn",
-    "Đào tạo nghề",
-  ];
-  const subjects = [
-    "Toán học",
-    "Văn học",
-    "Tiếng Anh",
-    "Vật lý",
-    "Hóa học",
-    "Sinh học",
-    "Lịch sử",
-    "Địa lý",
-    "Giáo dục công dân",
-    "Tin học",
-    "Thể dục",
-    "Nghệ thuật",
-    "Công nghệ",
-    "Âm nhạc",
-    "Mỹ thuật",
-    "Kỹ năng sống",
+    "Lớp 1", "Lớp 2", "Lớp 3", "Lớp 4", "Lớp 5", "Lớp 6",
+    "Lớp 7", "Lớp 8", "Lớp 9", "Lớp 10", "Lớp 11", "Lớp 12",
+    "Đại học", "Phát triển chuyên môn", "Đào tạo nghề"
   ];
 
-  // State để lưu trữ các mục đã chọn
-  const [selectedClasses, setSelectedClasses] = useState([]);
-  const [selectedSubjects, setSelectedSubjects] = useState([]);
+  const subjectsList = [
+    "Toán học", "Văn học", "Tiếng Anh", "Vật lý", "Hóa học", "Sinh học",
+    "Lịch sử", "Địa lý", "Giáo dục công dân", "Tin học", "Thể dục",
+    "Nghệ thuật", "Công nghệ", "Âm nhạc", "Mỹ thuật", "Kỹ năng sống"
+  ];
 
-  // Hàm để chọn lớp
   const handleClassSelection = (item) => {
-    setSelectedClasses((prevSelected) => {
-      // Nếu lớp đã được chọn thì bỏ chọn
+    setSelectedClasses(item);
+  };
+
+  const handleSubjectSelection = (item) => {
+    setSelectedSubjects((prevSelected) => {
       if (prevSelected.includes(item)) {
         return prevSelected.filter((selectedItem) => selectedItem !== item);
       } else {
-        // Nếu lớp chưa được chọn thì thêm vào danh sách
         return [...prevSelected, item];
       }
     });
   };
 
-  // Hàm để chọn môn học
-  const handleSubjectSelection = (item) => {
-    setSelectedSubjects((prevSelected) => {
-      // Nếu môn học đã được chọn thì bỏ chọn
-      if (prevSelected.includes(item)) {
-        return prevSelected.filter((selectedItem) => selectedItem !== item);
-      } else {
-        // Nếu môn học chưa được chọn thì thêm vào danh sách
-        return [...prevSelected, item];
-      }
-    });
+  const handleSubmit = () => {
+    const updateData = {
+      firstName,
+      lastName,
+      selectedClasses,
+      selectedSubjects,
+      place,
+    }
+    const profileId = profile?._id
+    // Update profile with the new values
+    updateProfile(profileId,updateData,userId);
+    closeModal();
   };
 
   const closeModal = () => {
@@ -80,8 +66,7 @@ const EditProfile = ({isModalOpen,setIsModalOpen}) => {
       translate="no"
       tabIndex={0}
       data-testid="modal-container"
-      className={`modal-mask fixed top-0 left-0 h-screen w-screen bg-slate-400 z-overlay flex justify-center items-center pt-6 px-6 edit-profile-modal ${isModalOpen?"":"hidden"}`}
-      //   grades={13}
+      className={`modal-mask fixed top-0 left-0 h-screen w-screen bg-slate-400 z-overlay flex justify-center items-center pt-6 px-6 edit-profile-modal ${isModalOpen ? "" : "hidden"}`}
     >
       <div
         className="z-on-overlay modal-anim max-w-2xl p-6 pt-2 bg-white modal-container relative rounded-lg"
@@ -90,13 +75,12 @@ const EditProfile = ({isModalOpen,setIsModalOpen}) => {
       >
         <div className="modal-body relative rounded-lg bg-light-3 py-4">
           <div className="close-btn z-10 absolute top-1 right-0">
-          <button
+            <button
               type="button"
               className="transition-colors duration-200 ease-in-out flex flex items-center justify-center w-10 h-10 bg-transparent text-dark hover:bg-dark-10% active:bg-dark rounded-full transparent-floating-dark relative min-w-max"
-              onClick={closeModal} // Gán hàm đóng modal vào nút
+              onClick={closeModal}
             >
               <span className="sr-only">Đóng menu</span>
-              {/* Heroicon name: outline/x */}
               <svg
                 className="h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -123,14 +107,9 @@ const EditProfile = ({isModalOpen,setIsModalOpen}) => {
                 <FaUserEdit className="w-10 h-10" />
               </div>
               <span className="ml-3">
-                <span className="font-semibold text-dark-2">
-                  Sửa đổi thông tin
-                </span>
+                <span className="font-semibold text-dark-2">Sửa đổi thông tin</span>
                 <div className="text-sm text-dark-5 font-normal">
-                  <span>
-                    Để nhận được các đề xuất có liên quan, hãy đảm bảo thông tin
-                    này được cung Lớp chính xác bao gồm cả tên tổ chức của bạn.
-                  </span>
+                  <span>Để nhận được các đề xuất có liên quan, hãy đảm bảo thông tin này được cung cấp chính xác bao gồm cả tên tổ chức của bạn.</span>
                 </div>
               </span>
             </div>
@@ -207,198 +186,101 @@ const EditProfile = ({isModalOpen,setIsModalOpen}) => {
               </div>
               <div className="flex-1">
                 <div className="relative w-full">
-                  <label
-                    className="font-semibold text-xs mb-1 ml-1 text-dark"
-                    htmlFor="first-name"
-                  >
+                  <label className="font-semibold text-xs mb-1 ml-1 text-dark" htmlFor="first-name">
                     Họ
                   </label>
                   <div className="relative">
                     <input
                       id="first-name"
-                      aria-describedby="input-error-message"
-                      aria-invalid="false"
-                      aria-required="true"
                       type="text"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
                       name="First Name"
-                      className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-                      style={{ height: "40px" }}
-                      placeholder="Họ"
-                      autoComplete="off"
-                      maxLength={-1}
-                      tabIndex={0}
+                      className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-dark-5 focus:ring-2 focus:ring-lilac focus:border-lilac"
                     />
-                  </div>
-                  <div
-                    className="flex pt-1 text-xs font-semibold text-red-500"
-                    aria-live="assertive"
-                    style={{ display: "none" }}
-                  >
-                    <span className="w-4 h-4 flex items-center justify-center mr-0.5">
-                      <i
-                        className="fas fa-exclamation-circle"
-                        style={{ fontSize: 11 }}
-                      />
-                    </span>
-                    <span id="input-error-message"></span>
                   </div>
                 </div>
               </div>
-
               <div className="flex-1">
                 <div className="relative w-full">
-                  <label
-                    className="font-semibold text-xs mb-1 ml-1 text-dark"
-                    htmlFor="last-name"
-                  >
+                  <label className="font-semibold text-xs mb-1 ml-1 text-dark" htmlFor="last-name">
                     Tên
                   </label>
                   <div className="relative">
                     <input
                       id="last-name"
-                      aria-describedby="input-error-message"
-                      aria-invalid="false"
-                      aria-required="true"
                       type="text"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
                       name="Last Name"
-                      className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-                      style={{ height: "40px" }}
-                      placeholder="Tên"
-                      autoComplete="off"
-                      maxLength={-1}
-                      tabIndex={0}
+                      className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-dark-5 focus:ring-2 focus:ring-lilac focus:border-lilac"
                     />
-                  </div>
-                  <div
-                    className="flex pt-1 text-xs font-semibold text-red-500"
-                    aria-live="assertive"
-                    style={{ display: "none" }}
-                  >
-                    <span className="w-4 h-4 flex items-center justify-center mr-0.5">
-                      <i
-                        className="fas fa-exclamation-circle"
-                        style={{ fontSize: 11 }}
-                      />
-                    </span>
-                    <span id="input-error-message"></span>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div className="inline-block text-xs text-dark mb-2 mt-4">
-              <span className="font-semibold">
-                <span>Lớp học</span>
-              </span>
+            <div className="relative mt-4 w-full">
+              <label className="font-semibold text-xs mb-1 ml-1 text-dark" htmlFor="place">
+                Địa chỉ
+              </label>
+              <input
+                id="place"
+                type="text"
+                value={place}
+                onChange={(e) => setPlace(e.target.value)}
+                className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-dark-5 focus:ring-2 focus:ring-lilac focus:border-lilac"
+              />
             </div>
-            <div
-              className="choose-grades flex items-center flex-wrap gap-2"
-              role="listbox"
-              aria-multiselectable="true"
-            >
-              {classLevels.map((item, index) => (
-                <button
-                  key={index}
-                  className={`transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 rounded-full selector relative min-w-max ${
-                    selectedClasses.includes(item)
-                      ? "bg-purple-500 text-white"
+            <div className="relative mt-4">
+              <label className="font-semibold text-xs mb-1 ml-1 text-dark">Lớp học</label>
+              <div className="flex flex-wrap gap-2">
+                {classLevels.map((className) => (
+                  <button
+                    key={className}
+                    onClick={() => handleClassSelection(className)}
+                    className={`px-4 py-2 border rounded-md ${
+                      selectedClasses===className ? "bg-purple-500 text-white"
                       : "bg-light-1 text-dark"
-                  }`}
-                  aria-label={item}
-                  type="button"
-                  role="option"
-                  aria-selected={selectedClasses.includes(item)}
-                  onClick={() => handleClassSelection(item)}
-                >
-                  <span className="title" title={item}>
-                    {item}
-                  </span>
-                </button>
-              ))}
-            </div>
-
-            <div className="inline-block text-xs text-dark mt-4 mb-2">
-              <span className="font-semibold">Môn học</span>
-            </div>
-            <div
-              className="choose-subjects flex items-center flex-wrap gap-y-2 gap-x-1"
-              role="listbox"
-              aria-multiselectable="true"
-            >
-              {subjects.map((item, index) => (
-                <button
-                  key={index}
-                  className={`transition-colors duration-200 ease-in-out flex items-center justify-center px-3 py-1 text-xs font-semibold h-6 rounded-full min-w-max ${
-                    selectedSubjects.includes(item)
-                      ? "bg-purple-500 text-white"
-                      : "bg-lilac text-dark"
-                  }`}
-                  aria-label={item}
-                  type="button"
-                  role="option"
-                  aria-selected={selectedSubjects.includes(item)}
-                  onClick={() => handleSubjectSelection(item)}
-                >
-                  <span className="title" title={item}>
-                    {item}
-                  </span>
-                </button>
-              ))}
-            </div>
-
-            <div className="inline-block text-xs text-dark mt-4 mb-2 font-semibold">
-              <span>Trường học / Tổ chức</span>
-            </div>
-            <div className="relative w-full">
-              <div className="relative">
-                <input
-                  type="text"
-                  className="focus:outline-none h-10 w-full py-2 text-sm placeholder-sm remove-number-selector pl-3 border border-solid border-dark rounded bg-light-3 text-dark-2 placeholder-dark-5 pr-2"
-                  placeholder="Tên tổ chức"
-                  autoComplete="off"
-                  maxLength={-1}
-                  tabIndex={0}
-                  style={{ height: 40 }}
-                />
+                    }`}
+                  >
+                    {className}
+                  </button>
+                ))}
               </div>
-              <div
-                className="flex pt-1 text-xs font-semibold text-red"
-                aria-live="assertive"
-                style={{ display: "none" }}
-              >
-                <span className="w-4 h-4 flex items-center justify-center mr-0.5">
-                  <i
-                    className="flex items-center far fa-exclamation-circle"
-                    style={{ fontSize: 11 }}
-                  />
-                </span>
-                <span id="input-error-message" />
+            </div>
+            <div className="relative mt-4">
+              <label className="font-semibold text-xs mb-1 ml-1 text-dark">Môn học</label>
+              <div className="flex flex-wrap gap-2">
+                {subjectsList.map((subject) => (
+                  <button
+                    key={subject}
+                    onClick={() => handleSubjectSelection(subject)}
+                    className={`px-4 py-2 border rounded-md ${
+                      selectedSubjects.includes(subject) ? "bg-purple-500 text-white"
+                      : "bg-lilac text-dark"
+                    }`}
+                  >
+                    {subject}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
-          <div className="relative flex items-center justify-end w-full mt-4 px-4">
-            <div className="">
-              <div className="flex justify-end w-fit pl-2">
-                <button
-                  className="transition-colors duration-200 ease-in-out flex items-center justify-center px-4 py-1 text-sm font-semibold h-8 bg-dark active:bg-dark-10% text-dark-2 hover:text-dark-3 rounded min-w-max mr-2"
-                  aria-label="Cancel"
-                  type="button"
-                >
-                  <span className="title" title="Cancel">
-                    Hủy
-                  </span>
-                </button>
-                <button
-                  className="transition-colors duration-200 ease-in-out flex items-center justify-center px-4 py-1 text-sm font-semibold h-8 bg-lilac text-dark hover:bg-lilac-light active:bg-lilac-dark rounded min-w-max"
-                  aria-label="Save Changes"
-                  type="button"
-                >
-                  <span className="title" title="Save Changes">
-                    Lưu thay đổi
-                  </span>
-                </button>
-              </div>
-            </div>
+          <div className="modal-footer mt-4 px-4 flex justify-end">
+          <button
+              type="button"
+              className="bg-green-400 text-white px-4 py-2 rounded-md hover:bg-lilac-dark focus:outline-none"
+              onClick={handleSubmit}
+            >
+              Lưu thay đổi
+            </button>
+            <button
+              type="button"
+              className="ml-2 bg-light-3 text-dark px-4 py-2 rounded-md hover:bg-dark-10 focus:outline-none"
+              onClick={closeModal}
+            >
+              Hủy
+            </button>
           </div>
         </div>
       </div>

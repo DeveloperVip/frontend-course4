@@ -10,9 +10,9 @@ const ReportSection = () => {
   const navigate = useNavigate();
 
   // Xác định chỉ số bắt đầu và kết thúc của các mục cần hiển thị
-  const startIndex = currentPage * itemsPerPage - 1;
+  const startIndex = (currentPage-1) * itemsPerPage ;
   // console.log("🚀 ~ ReportSection ~ startIndex:", startIndex);
-  const endIndex = startIndex + itemsPerPage;
+  const endIndex = startIndex + itemsPerPage ;
 
   // Cắt mảng để lấy các mục hiện tại
   const currentItems = allHistory.slice(startIndex, endIndex);

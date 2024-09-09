@@ -10,7 +10,7 @@ const StartOrAssign = () => {
   };
 
   const handleTimeSubmit = (hour, minute) => {
-    console.log(`Selected time: ${hour} giờ ${minute} phút`);
+    // console.log(`Selected time: ${hour} giờ ${minute} phút`);
   };
 
   return (

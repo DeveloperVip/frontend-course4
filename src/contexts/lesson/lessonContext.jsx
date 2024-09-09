@@ -139,7 +139,10 @@ export const LessonProvider = ({ children }) => {
     formLesson.question = arrayQuestion;
     const response =await APILesson.APIUpdateLesson(formLesson._id,formLesson);
     // console.log("🚀 ~ handleUpdateLesson ~ response:", response)
-    if(response) toast.success("Cập nhập thành công !");
+    if (response) {
+      toast.success("Cập nhập thành công!");
+      window.location.href= "/"
+  }
     return response
   };
 

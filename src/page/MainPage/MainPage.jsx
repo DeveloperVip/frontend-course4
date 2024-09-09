@@ -36,6 +36,7 @@ function MainPage() {
   const [keyword, setKeyword] = useState("");
   const [filterOptions, setFilterOptions] = useState(["Tất cả"]);
   const { allLesson } = useFetchAPILesson(keyword, selectedFilter);
+  console.log("🚀 ~ MainPage ~ allLesson:", allLesson)
   // console.log("🚀 ~ MainPage ~ allLesson:", keyword);
 
   // removeQueryParameter("token");

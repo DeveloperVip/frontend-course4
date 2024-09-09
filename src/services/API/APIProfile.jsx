@@ -1,13 +1,22 @@
 import axiosInstance from "../axios.js";
 
 const APIprofile = {
-  getProfile: () => {
+  getProfile: async() => {
+    const response = await axiosInstance
+    .get(`/profile/get`)
+    return response?.data
+    
+  },
+  APIUpdateProfile: (id, updateData) => {
     return axiosInstance
-      .get(`/profile`)
-      .then((response) => response.data)
+      .put(`/profile/update-profile/${id}`, updateData)
+      .then((res) => {
+        // console.log(res);
+        return res.data;
+      })
       .catch((error) => {
-        // Xử lý lỗi khi gọi API
-        console.error("Error :", error);
+        console.log(error);
+        // handle error
       });
   },
   updateUser: (_id, userData) => {

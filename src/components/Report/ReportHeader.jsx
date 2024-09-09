@@ -13,7 +13,6 @@ const ReportHeader = () => {
   const [selectedOption, setSelectedOption] = useState({
     gameState: "All Games",
     report: "All Reports",
-    class: "All Classes",
     date: "Select Date",
   });
 
@@ -32,7 +31,7 @@ const ReportHeader = () => {
   return (
     <div className="gap-2 items-center justify-start pagination col-span-full flex flex-row z-20">
       <div className="text-sm font-semibold text-dark-4 mr-3">
-        <span>Filter by :</span>
+        <span>Lọc theo :</span>
       </div>
       {/* Game State Dropdown */}
 
@@ -43,7 +42,9 @@ const ReportHeader = () => {
           className="flex items-center cursor-pointer rounded font-semibold text-sm text-dark-3 p-4 border border-dark-6 w-full h-8"
           onClick={() => handleButtonClick("gameState")}
         >
-          <div className="truncate w-full text-sm">{selectedOption.gameState}</div>
+          <div className="truncate w-full text-sm">
+            {selectedOption.gameState}
+          </div>
           <div className="ml-auto flex items-center w-4 h-4">
             <FaCaretDown className="text-dark-3" />
           </div>
@@ -57,14 +58,20 @@ const ReportHeader = () => {
               <li
                 key={option}
                 className={`option cursor-pointer py-2 px-5 hover:bg-dark-5% ${
-                  selectedOption.gameState === option ? "bg-dark-5% text-lilac" : ""
+                  selectedOption.gameState === option
+                    ? "bg-dark-5% text-lilac"
+                    : ""
                 }`}
                 onClick={() => handleOptionSelect("gameState", option)}
                 role="option"
               >
-                <div className={`font-semibold text-xs ${
-                  selectedOption.gameState === option ? "text-lilac" : "text-dark-2"
-                }`}>
+                <div
+                  className={`font-semibold text-xs ${
+                    selectedOption.gameState === option
+                      ? "text-lilac"
+                      : "text-dark-2"
+                  }`}
+                >
                   {option}
                 </div>
               </li>
@@ -80,10 +87,7 @@ const ReportHeader = () => {
           className="listbox-button flex items-center cursor-pointer box-border text-left rounded font-semibold text-sm text-dark-3 p-4 border border-dark-6 text-dark-2 pl-2 pr-1 py-2 h-8 w-full"
           onClick={() => handleButtonClick("report")}
         >
-          <div
-            className="title w-full truncate text-sm"
-            aria-live="assertive"
-          >
+          <div className="title w-full truncate text-sm" aria-live="assertive">
             {selectedOption.report}
           </div>
           <div
@@ -99,7 +103,9 @@ const ReportHeader = () => {
               <li
                 key={option}
                 className={`option cursor-pointer py-2 px-5 hover:bg-dark-5% ${
-                  selectedOption.report === option ? "bg-dark-5% text-lilac" : ""
+                  selectedOption.report === option
+                    ? "bg-dark-5% text-lilac"
+                    : ""
                 }`}
                 onClick={() => handleOptionSelect("report", option)}
               >
@@ -111,7 +117,7 @@ const ReportHeader = () => {
       </div>
 
       {/* Class Dropdown */}
-      <div className="bg-light rounded w-45 relative">
+      {/* <div className="bg-light rounded w-45 relative">
         <button
           type="button"
           className="flex items-center cursor-pointer text-left rounded font-semibold text-sm text-dark-3 p-4 border border-dark-6 w-full h-8"
@@ -137,10 +143,10 @@ const ReportHeader = () => {
             ))}
           </ul>
         )}
-      </div>
+      </div> */}
 
       {/* Date Selector */}
-      <div className="relative">
+      {/* <div className="relative">
         <button
           type="button"
           className="flex py-2 px-2 justify-between items-center text-dark-3 text-xs font-semibold bg-light border border-dark-6 rounded w-45"
@@ -152,10 +158,9 @@ const ReportHeader = () => {
           </div>
           <FaCaretDown />
         </button>
-
         {activeDropdown === "date" && (
           <div className="absolute right-0 bg-light text-sm font-semibold rounded flex">
-            {/* Date Options */}
+            
             <ul className="text-right">
               {dateOptions.map((option) => (
                 <li
@@ -169,14 +174,14 @@ const ReportHeader = () => {
             </ul>
 
             <div>
-              {/* Calendar */}
+              
               <div className="p-3 text-center">
                 <FaChevronLeft className="float-left cursor-pointer" />
                 <span>August 2024</span>
                 <FaChevronRight className="float-right cursor-pointer" />
               </div>
 
-              {/* Week Days */}
+             
               <div className="px-5 py-1">
                 <table className="w-full border-collapse">
                   <thead>
@@ -209,7 +214,7 @@ const ReportHeader = () => {
                 </table>
               </div>
 
-              {/* Actions */}
+              
               <div className="flex justify-end px-2 py-1">
                 {actions.map((action) => (
                   <button
@@ -229,7 +234,7 @@ const ReportHeader = () => {
             </div>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

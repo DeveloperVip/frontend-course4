@@ -56,6 +56,7 @@ const Sidebar = ({ slides, onDuplicate, onDelete, onMove, handleAddSlide }) => {
           <div
             id="slideSidebarListContainer"
             className="overflow-x-auto slide-sidebar-content-list-container h-full max-h-full"
+            style={{paddingBottom:"35px"}}
           >
             <DragDropContext onDragEnd={handleOnDragEnd}>
               <Droppable droppableId="slides" type="group">

@@ -8,7 +8,7 @@ export const PaginationContext = createContext();
 // Tạo Provider cho context
 export const PaginationProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [totalItems, setTotalItems] = useState(0);
   const { allHistory } = useFetchAPIHistoryAll();
   const totalPages = Math.ceil(allHistory?.length / itemsPerPage);
