@@ -78,9 +78,9 @@ const Slider = ({ question, position ,visiable}) => {
           <div className="flex gap-2 items-center mb-4">
             <div className="question-wrapper text-sm flex overflow-hidden w-full text-dark-2 items-center">
             {question?.pictureQuestion?.secure_url ? (
-              <>
-                <img src={question?.pictureQuestion?.secure_url} alt="" />
-              </>
+              <div className='w-full h-60'>
+                <img  className="object-cover overflow-hidden" src={question?.pictureQuestion?.secure_url} alt="" />
+              </div>
             ) : (
               <>{question?.question}</>
             )}

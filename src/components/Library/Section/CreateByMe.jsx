@@ -83,7 +83,7 @@ const CreateByMe = () => {
                 <button type="button" className="w-full">
                   <div className="quiz-card flex flex-col items-start min-w-82 bg-light-3 p-2 rounded hover:bg-light-2">
                     <div className="flex flex-row w-full">
-                      <div className="h-full w-18 bg-lilac rounded-sm overflow-hidden">
+                      <div className="h-40 w-80 bg-lilac rounded-sm overflow-hidden flex justify-center items-center">
                         <img
                           src={item?.image ?item?.image:"/Quizizz.jpeg"}
                           className="w-full h-full object-contain"

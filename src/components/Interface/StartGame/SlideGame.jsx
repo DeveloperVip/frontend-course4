@@ -35,7 +35,7 @@ const SlideGame = () => {
                   style={{ fontSize: 32 }}
                 >
                   <div className="text-container w-full">
-                    <div className="resizeable gap-x-2 question-text-color text-ds-light-500">
+                    <div className="resizeable gap-x-2 question-text-color text-white">
                       <p style={{ display: "inline" }}>
                         {currentQuestion?.question}
                       </p>
