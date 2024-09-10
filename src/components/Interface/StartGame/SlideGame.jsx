@@ -36,9 +36,20 @@ const SlideGame = () => {
                 >
                   <div className="text-container w-full">
                     <div className="resizeable gap-x-2 question-text-color text-white">
-                      <p style={{ display: "inline" }}>
-                        {currentQuestion?.question}
-                      </p>
+                      {currentQuestion?.pictureQuestion?.secure_url ? (
+                        <div className="w-full h-full">
+                          <img
+                            className="object-cover overflow-hidden"
+                            src={currentQuestion?.pictureQuestion?.secure_url}
+                            alt=""
+                          />
+                        </div>
+                      ) : (
+                        // <p>{text}</p>
+                        <p style={{ display: "inline" }}>
+                          {currentQuestion?.question}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
