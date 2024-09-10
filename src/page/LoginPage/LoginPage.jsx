@@ -15,7 +15,7 @@ import { AccountNameContext } from "../../contexts/user/AccountName.jsx";
 // import LoginEmail from "./LoginEmail";
 const LoginPage = () => {
   const navigate = useNavigate();
-  const {setIsAuthenticated} = useContext(AuthContext);
+  const { setIsAuthenticated } = useContext(AuthContext);
   const handleLogin = (provider) => {
     // console.log(`Logging in with ${provider}`);
     navigate(provider);
@@ -23,16 +23,16 @@ const LoginPage = () => {
   const { activateAccountName } = useContext(AccountNameContext);
   const urlParams = new URLSearchParams(window.location.search);
   // console.log("🚀 ~ MainPage ~ urlParams:", urlParams)
-  const token = urlParams.get("token") 
+  const token = urlParams.get("token");
 
   useEffect(() => {
     if (token) {
-      toast.success("Đăng nhập thành công ")
-      activateAccountName()
+      toast.success("Đăng nhập thành công ");
+      activateAccountName();
       // Save the token to local storage or context
-      localStorage.setItem("userName",urlParams.get("userName"))
+      localStorage.setItem("userName", urlParams.get("userName"));
       localStorage.setItem("token", token);
-      setIsAuthenticated(true)
+      setIsAuthenticated(true);
       navigate("/");
     } else {
       // Handle the case where there is no token (optional)
@@ -42,7 +42,9 @@ const LoginPage = () => {
 
   return (
     <div className="topa h-screen gap-5 flex-col">
-      <div className="h-14 header-login p-3"><img src="/1a.png" alt="logo Visual" className="h-full text-white" /></div>
+      <div className="h-14 header-login p-3">
+        <img src="/1a.png" alt="logo Visual" className="h-full text-white" />
+      </div>
 
       <div className="flex items-center justify-center h-full">
       <div className="login-container">
@@ -114,7 +116,6 @@ const LoginPage = () => {
       </div>
       </div>
     </div>
-
   );
 };
 
