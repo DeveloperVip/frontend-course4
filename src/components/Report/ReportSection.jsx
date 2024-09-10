@@ -70,7 +70,7 @@ const ReportSection = () => {
             {allHistory &&
               currentItems.map((item, index) => {
                 const minutes = Math.round(
-                  (item.time % (1000 * 60 * 60)) / (1000 * 60)
+                  (item?.time % (1000 * 60 * 60)) / (1000 * 60)
                 );
                 const seconds = Math.round((item.time % (1000 * 60)) / 1000);
                 const precision = Math.round(
@@ -117,7 +117,7 @@ const ReportSection = () => {
                         <div className="flex flex-col ml-3 py-2">
                           <div className="flex flex-row">
                             <span className="text-xs text-dark-1 font-semibold text-ellipsis">
-                              {item.quiz.name}
+                              {item?.quiz?.name}
                             </span>
                           </div>
                           <div className="flex">
@@ -175,12 +175,12 @@ const ReportSection = () => {
                       </td>
                       <td>
                         <div className="flex justify-center text-xs text-dark-1 font-semibold px-3">
-                          <span>{item.correctAnswer}</span>
+                          <span>{item?.correctAnswer}</span>
                         </div>
                       </td>
                       <td>
                         <div className="flex justify-center text-xs text-dark-1 font-semibold px-3">
-                          <span>{item.quiz.question.length}</span>
+                          <span>{item?.quiz?.question?.length}</span>
                         </div>
                       </td>
                       <td>
