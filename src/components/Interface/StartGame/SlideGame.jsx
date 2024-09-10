@@ -7,10 +7,10 @@ const SlideGame = () => {
     useContext(DisplayQuizContext);
   // console.log("🚀 ~ SlideGame ~ currentQuestion:", displayQuiz);
   const currentQuestion = displayQuiz?.currentQuestion;
-  // console.log(
-  //   "🚀 ~ SlideGame ~ displayQuiz?.currentQuestion:",
-  //   displayQuiz?.currentQuestion
-  // );
+  console.log(
+    "🚀 ~ SlideGame ~ displayQuiz?.currentQuestion:",
+    displayQuiz?.currentQuestion
+  );
   const answersCorrect = displayQuiz?.answersCorrect;
   //   console.log("🚀 ~ SlideGame ~ answers:", answers,selectedOptions)
   //   const answersCorrect = displayQuiz?.currentQuestion?.answersCorrect
@@ -102,7 +102,14 @@ const SlideGame = () => {
                     } option-inner w-full h-full `}
                   >
                     <span className="bpl-content-container flex justify-center items-center h-full">
-                      <p style={{ fontSize: 32 }}>{option.content}</p>
+                      {option?.relatedPictures?.secure_url ? (
+                        <>
+                          <img src={option?.relatedPictures?.secure_url} />
+                        </>
+                      ) : (
+                        <p style={{ fontSize: 32 }}>{option.content}</p>
+                      )}
+                     
                     </span>
                   </div>
                 </div>
