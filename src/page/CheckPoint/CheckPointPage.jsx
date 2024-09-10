@@ -29,10 +29,10 @@ const CheckPointPage = () => {
         />
       ))}
       <div className="flex gap-7 m-auto mb-10" style={{ width: "fit-content" }}>
-        <button className="bg-green-500 text-white uppercase px-4 py-2">
+        <button className="bg-green-500 text-white uppercase px-4 py-2" onClick={()=>navigate(-1)}>
           Làm lại
         </button>
-        <button className="bg-green-500 text-white uppercase px-4 py-2" onClick={()=>navigate(-1)}>
+        <button className="bg-green-500 text-white uppercase px-4 py-2" onClick={()=>navigate("/")}>
           Thoát
         </button>
       </div>
