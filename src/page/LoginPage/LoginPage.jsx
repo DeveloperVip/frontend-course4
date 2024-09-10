@@ -47,75 +47,73 @@ const LoginPage = () => {
       </div>
 
       <div className="flex items-center justify-center h-full">
-        <div className="login-container">
-          <div className="login-box">
-            <h2>Đăng nhập vào Quizizz</h2>
-            <Link
-              to="https://backend-course-4.vercel.app/user/auth/google"
-              className="login-button google flex justify-start gap-10 items-center hover:text-slate-300"
+      <div className="login-container">
+        <div className="login-box">
+          <h2>Đăng nhập vào Quizizz</h2>
+          <Link
+            to="http://localhost:8000/user/auth/google"
+            className="login-button google flex justify-start gap-10 items-center hover:text-slate-300"
+          >
+            <FaGoogle />
+            Tiếp tục với Google
+          </Link>
+          <button
+            onClick={() => handleLogin("/login/email")}
+            className="login-button email flex justify-start gap-10 items-center"
+          >
+            <MdEmail />
+            Tiếp tục với Email
+          </button>
+          <button
+            onClick={() => handleLogin("/login/email")}
+            className="login-button facebook flex justify-start gap-10 items-center"
+          >
+            <FaFacebook />
+            Tiếp tục với Facebook
+          </button>
+          <div className="login-divider">hoặc tiếp tục với</div>
+          <div className="w-full flex justify-center">
+          <div className="other-login-options justify-evenly w-fit px-10 gap-4">
+            <div className=""><button
+              onClick={() => handleLogin("/login/email")}
+              className="login-button microsoft w-fit"
             >
-              <FaGoogle />
-              Tiếp tục với Google
-            </Link>
+              <BsMicrosoft />
+            </button></div>
+            <div className="">
             <button
               onClick={() => handleLogin("/login/email")}
-              className="login-button email flex justify-start gap-10 items-center"
+              className="login-button phone w-fit"
             >
-              <MdEmail />
-              Tiếp tục với Email
+              <FaPhoneSquareAlt />
             </button>
+            </div>
+            <div className="">
             <button
               onClick={() => handleLogin("/login/email")}
-              className="login-button facebook flex justify-start gap-10 items-center"
+              className="login-button apple w-fit"
             >
-              <FaFacebook />
-              Tiếp tục với Facebook
+              <SiApple />
             </button>
-            <div className="login-divider">hoặc tiếp tục với</div>
-            <div className="w-full flex justify-center">
-              <div className="other-login-options justify-evenly w-fit px-10 gap-4">
-                <div className="">
-                  <button
-                    onClick={() => handleLogin("/login/email")}
-                    className="login-button microsoft w-fit"
-                  >
-                    <BsMicrosoft />
-                  </button>
-                </div>
-                <div className="">
-                  <button
-                    onClick={() => handleLogin("/login/email")}
-                    className="login-button phone w-fit"
-                  >
-                    <FaPhoneSquareAlt />
-                  </button>
-                </div>
-                <div className="">
-                  <button
-                    onClick={() => handleLogin("/login/email")}
-                    className="login-button apple w-fit"
-                  >
-                    <SiApple />
-                  </button>
-                </div>
-                <div className="">
-                  <button
-                    onClick={() => handleLogin("/login/email")}
-                    className="login-button others w-fit"
-                  >
-                    Others
-                  </button>
-                </div>
-              </div>
             </div>
-            <div className="register-link">
-              Không có tài khoản? <Link to="/register">Đăng ký</Link>
-            </div>
+           <div className="">
+           <button
+              onClick={() => handleLogin("/login/email")}
+              className="login-button others w-fit"
+            >
+              Others
+            </button>
+           </div>
           </div>
-          <div className="login-image-container">
-            <img src="/teack.png" alt="Login Visual" className="login-image" />
+          </div>
+          <div className="register-link">
+            Không có tài khoản? <Link to="/register">Đăng ký</Link>
           </div>
         </div>
+        <div className="login-image-container">
+          <img src="/teack.png" alt="Login Visual" className="login-image" />
+        </div>
+      </div>
       </div>
     </div>
   );
