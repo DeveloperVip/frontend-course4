@@ -4,12 +4,13 @@ import HeaderSlider from "./HeaderSlider.jsx";
 import Slider from "./Slider.jsx";
 
 const LessonSection = ({ lesson = {} }) => {
+  console.log("🚀 ~ LessonSection ~ lesson:", lesson)
   // const { grade = 'N/A', topic = {}, imageUrl = '', name = 'N/A', userId = {} } = lesson ;
   // console.log("🚀 ~ LessonSection ~ lesson:", lesson?.question);
   const questions = lesson?.question;
   return (
     <div className="w-full">
-      <StartOrAssign />
+      <StartOrAssign idLesson = {lesson?._id}/>
       <HeaderSlider amountQuestion={questions?.length} idLesson={lesson?._id} />
 
       {questions?.map((item, index) => {

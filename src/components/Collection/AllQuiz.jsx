@@ -12,7 +12,7 @@ const AllQuiz = () => {
       Lựa chọn để xem chi tiết và chỉnh sửa
       {questions?.map((item, index) => {
         return (
-          <div key={index}>
+          <div key={index} className="pb-5">
             <button
               className="w-full"
               type="button"

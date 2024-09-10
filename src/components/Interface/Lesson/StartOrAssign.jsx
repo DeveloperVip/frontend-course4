@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { FaChalkboardTeacher, FaClock } from 'react-icons/fa';
 import SetTimeLesson from './SetTimeLesson.jsx'; // Import SetTimeLesson component
+import { useNavigate } from 'react-router-dom';
 
-const StartOrAssign = () => {
+const StartOrAssign = ({idLesson}) => {
   const [selectedLesson, setSelectedLesson] = useState(null);
-
+const navigate = useNavigate()
   const handleLessonSelect = (lessonType) => {
     setSelectedLesson(lessonType);
   };
@@ -29,11 +30,14 @@ const StartOrAssign = () => {
 
           <div className="w-full">
             <button
-              onClick={() => handleLessonSelect('ASYNCHRONOUS LEARNING')}
+              onClick={() => {
+                // handleLessonSelect('ASYNCHRONOUS LEARNING')
+                navigate(`/startGame/${idLesson}`)
+              }}
               className="transition-colors duration-200 ease-in-out flex items-center px-4 py-2.5 text-lg font-semibold bg-purple-700 text-light-3 hover:bg-purple-500 active:bg-purple rounded-lg special w-full justify-center"
             >
               <FaClock className="mr-2" style={{ fontSize: 16 }} />
-              <span>Hạn nộp bài </span>
+              <span>Bắt đầu làm bài  </span>
             </button>
           </div>
         </div>
