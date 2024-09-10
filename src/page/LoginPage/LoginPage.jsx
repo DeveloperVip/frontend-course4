@@ -49,7 +49,7 @@ const LoginPage = () => {
         <div className="login-box">
           <h2>Đăng nhập vào Quizizz</h2>
           <Link
-            to="http://localhost:8000/user/auth/google"
+            to="https://backend-course-4.vercel.app/user/auth/google"
             className="login-button google flex justify-start gap-10 items-center hover:text-slate-300"
           >
             <FaGoogle />
